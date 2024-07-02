@@ -1,5 +1,4 @@
-import React from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 import Image from "next/image";
 
 const Navbar = () => {
@@ -28,12 +27,15 @@ const Navbar = () => {
       </div>
       <div className="flex items-center gap-7">
         <Image src="/assets/icons/search.svg" width={20} height={20} alt="" />
-        <Image
-          src="/assets/icons/notification.svg"
-          width={20}
-          height={20}
-          alt=""
-        />
+        <div className="relative">
+          <Image
+            src="/assets/icons/notification.svg"
+            width={20}
+            height={20}
+            alt=""
+          />
+          <div className="absolute top-0 right-0 bg-verido-blue rounded-full w-2 h-2"></div>
+        </div>
         <Image src="/assets/icons/memoji.svg" width={30} height={30} alt="" />
       </div>
     </header>

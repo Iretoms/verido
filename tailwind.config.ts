@@ -17,6 +17,8 @@ const config: Config = {
         "light-gray": "#AEAEB2",
         "verido-orange": "#FF9500",
         "gray-body": "#F0F3F5",
+        "active-green": "#EBFAFA",
+        "verido-blue": "#0010F7",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
