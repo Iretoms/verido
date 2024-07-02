@@ -13,7 +13,7 @@ const Sidebar = () => {
   };
   const items = [
     {
-      path: "/dashboard",
+      path: "/",
       label: "Dashboard",
       icon: "/assets/icons/dashboard.svg",
     },
