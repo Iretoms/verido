@@ -136,7 +136,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
-        <div>
+        <div className="mt-5">
           <Link className="text-gray-text" href="">
             Privacy Policy
           </Link>

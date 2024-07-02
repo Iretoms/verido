@@ -16,6 +16,7 @@ const config: Config = {
         danger: "#FF0022",
         "light-gray": "#AEAEB2",
         "verido-orange": "#FF9500",
+        "gray-body": "#F0F3F5",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

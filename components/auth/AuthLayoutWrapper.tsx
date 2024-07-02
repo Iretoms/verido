@@ -31,7 +31,7 @@ export const AuthLayoutWrapper = ({ children }: Props) => {
           <h1 className="text-verido-green text-2xl">
             Very good works are waiting for you 🤞
           </h1>
-          <p className="text-gray-text text-sm text-center">
+          <p className="text-gray-text text-md text-center">
             Lorem Ipsum is simply dummy text of the printing and typesetting{" "}
             <br />
             industry. Lorem Ipsum has been the industry's standard dummy text
