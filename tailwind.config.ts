@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "verido-green": "#08A730",
+        "gray-text": "#636E72",
+        "light-green": "#EBFAEE",
+        "black-light": "#2D3436",
+        danger: "#FF0022",
+        "light-gray": "#AEAEB2",
+        "verido-orange": "#FF9500",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
