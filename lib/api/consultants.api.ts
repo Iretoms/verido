@@ -5,3 +5,8 @@ export const fetchConsultants = async () => {
 
   return data;
 };
+
+export const fetchConsultantById = async (id: number) => {
+  const { data } = await VeridoAPI.get(`/consultants/${id}`);
+  return data;
+};

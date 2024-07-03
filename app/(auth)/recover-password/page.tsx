@@ -7,12 +7,12 @@ import { useRouter } from "next/navigation";
 type IUsers = {
   email: string;
 };
-// const router = useRouter()
 
-const onSubmit = async (data: IUsers) => {
-    // router.push('reset-password' , {scroll:false})
-};
 const RecoverPassword = () => {
+  const router = useRouter();
+  const onSubmit = async (data: IUsers) => {
+    router.push("/reset-password", { scroll: false });
+  };
   const {
     register,
     handleSubmit,
@@ -31,9 +31,9 @@ const RecoverPassword = () => {
         className="w-[60%] flex flex-col gap-2"
       >
         <div className="flex flex-col gap-1">
-          <h2 className="text-[3rem]">Login🖐🏻</h2>
+          <h2 className="text-[2.5rem]">Recover Password 👀</h2>
           <p className="text-gray-text font-extralight text-[14px]">
-            Welcome back, please login to your account.
+            We’ll e-mail you instructions on how to reset your password.
           </p>
         </div>
 
@@ -64,7 +64,7 @@ const RecoverPassword = () => {
             Go back to{" "}
             <Link
               className="text-verido-green text-sm font-bold"
-              href="/reset-password"
+              href="/signin"
             >
               Login
             </Link>

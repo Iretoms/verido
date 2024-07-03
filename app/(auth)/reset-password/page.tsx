@@ -29,9 +29,9 @@ const ResetPassword = () => {
         className="w-[60%] flex flex-col gap-2"
       >
         <div className="flex flex-col gap-1">
-          <h2 className="text-[3rem]">Login🖐🏻</h2>
+          <h2 className="text-[2.8rem]">Reset Password ✍🏻</h2>
           <p className="text-gray-text font-extralight text-[14px]">
-            Welcome back, please login to your account.
+            Email verification is done. Please choose another password.
           </p>
         </div>
 
@@ -40,6 +40,7 @@ const ResetPassword = () => {
             Password:
           </label>
           <input
+            placeholder="At least 6 characters"
             type="password"
             {...register("password", { required: true, minLength: 6 })}
             className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
@@ -57,6 +58,7 @@ const ResetPassword = () => {
             Confirm Password:
           </label>
           <input
+            placeholder="At least 6 characters"
             type="password"
             {...register("confirmPassword", { required: true, minLength: 6 })}
             className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
@@ -74,19 +76,8 @@ const ResetPassword = () => {
           type="submit"
           className="text-white bg-verido-green mt-10   py-4 rounded-md w-full hover:bg-green-600"
         >
-          Sign in
+          Reset Password
         </button>
-        <div>
-          <p className="font-bold text-gray-text text-sm">
-            Do you have an account?{" "}
-            <Link
-              className="text-verido-green text-sm font-bold"
-              href="/signup"
-            >
-              Create an account
-            </Link>
-          </p>
-        </div>
       </form>
     </div>
   );

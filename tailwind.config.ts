@@ -24,15 +24,16 @@ const config = {
         "light-green": "#EBFAEE",
         "black-light": "#2D3436",
         danger: "#FF0022",
-        "light-danger":'#FCE8EC',
+        "light-danger": "#FCE8EC",
         "light-gray": "#AEAEB2",
         "verido-orange": "#FF9500",
-        "light-orange":'#FCF6E8',
+        "light-orange": "#FCF6E8",
         "gray-body": "#F0F3F5",
         "active-green": "#EBFAFA",
         "verido-blue": "#0010F7",
         "verido-white": "#FFFFFF",
         "verido-light-blue": "#F7FAFC",
+        "verido-border": "#DFE6E9",
       },
       keyframes: {
         "accordion-down": {
