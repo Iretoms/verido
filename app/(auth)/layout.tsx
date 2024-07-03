@@ -1,7 +1,10 @@
 import { AuthLayoutWrapper } from "@/components/auth/AuthLayoutWrapper";
+import { QueryProvider } from "../QueryProvider";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <AuthLayoutWrapper>{children}</AuthLayoutWrapper>
+    <AuthLayoutWrapper>
+      <QueryProvider>{children}</QueryProvider>
+    </AuthLayoutWrapper>
   );
 }

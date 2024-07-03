@@ -4,6 +4,7 @@ import Navbar from "@/components/common/Navbar";
 import type { Metadata } from "next";
 import { Manrope as Inter } from "next/font/google";
 import "../../app/globals.css";
+import { QueryProvider } from "@/app/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="p-5">
             <Navbar />
           </div>
-          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body p-6">
-            {children}
+          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body px-6">
+            <QueryProvider>{children}</QueryProvider>
           </main>
         </div>
       </body>
