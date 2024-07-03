@@ -1,4 +1,5 @@
 export interface Product {
+  id:number
   name: string;
   cost_price: number;
   selling_price: number;
@@ -7,6 +8,7 @@ export interface Product {
 }
 
 export interface BusinessOwner {
+  id:number
   enterprise_name: string;
   name: string;
   institution: string;
@@ -25,6 +27,7 @@ export interface BusinessOwner {
 }
 
 export interface Consultant {
+  id:number
   enterprise_name: string;
   name: string;
   institution: string;

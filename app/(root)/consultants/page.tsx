@@ -18,7 +18,7 @@ const Consultants = () => {
         Home <span>/</span>{" "}
         <span className="text-gray-text">{pathname.substring(1)}</span>
       </div>
-      <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 h-[40rem]">
+      <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 h-[42rem]">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">Consultants</h2>
           <p className="text-[14px] text-black">

@@ -3,9 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Consultant } from "@/types";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-
 export const columns: ColumnDef<Consultant>[] = [
   {
     accessorKey: "enterprise_name",
@@ -26,5 +23,9 @@ export const columns: ColumnDef<Consultant>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    cell: ({ getValue }) => {
+      const status = getValue<string>();
+ 
+    },
   },
 ];
