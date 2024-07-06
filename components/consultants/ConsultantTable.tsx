@@ -1,10 +1,19 @@
+import React from "react";
 import {
   ColumnDef,
   flexRender,
+  SortingState,
+  getSortedRowModel,
   getCoreRowModel,
+  getPaginationRowModel,
+  ColumnFiltersState,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import Image from "next/image";
 
 import {
   Table,
@@ -21,7 +30,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function ConsultantTable<TData extends Consultant , TValue>({
+export function ConsultantTable<TData extends Consultant, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -59,15 +68,59 @@ export function ConsultantTable<TData extends Consultant , TValue>({
       );
     };
   }
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      columnFilters,
+      sorting,
+    },
   });
 
   return (
     <div className="rounded-md">
+      <div className="flex justify-between mb-6">
+        <div className="flex flex-col items-start gap-2">
+          <h2 className="text-[20px]">Consultants</h2>
+          <p className="text-[14px] text-black">
+            List of consultants available
+          </p>
+        </div>
+        <div className="flex items-center p-2 justify-between border border-text-gray rounded-lg h-[2.5rem]">
+          <Image
+            className="object-contain"
+            src="/assets/icons/person.svg"
+            alt="search icon"
+            width={15}
+            height={15}
+          />
+          <Input
+            placeholder="Search"
+            value={
+              (table
+                .getColumn("enterprise_name")
+                ?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table
+                .getColumn("enterprise_name")
+                ?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm h-full"
+          />
+        </div>
+      </div>
       <Table className="border-0">
         <TableHeader className="bg-verido-light-blue">
           {table.getHeaderGroups().map((headerGroup) => (
@@ -110,6 +163,24 @@ export function ConsultantTable<TData extends Consultant , TValue>({
           )}
         </TableBody>
       </Table>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

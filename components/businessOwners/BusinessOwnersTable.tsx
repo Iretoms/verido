@@ -1,11 +1,14 @@
+import React from "react";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
+  ColumnFiltersState,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
-
 import {
   Table,
   TableBody,
@@ -15,6 +18,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { BusinessOwner } from "@/types";
+import Image from "next/image";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,43 +37,65 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
     router.push(`/business-owners/${id}`);
   };
 
-  const getStatusStyles = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "active":
-        return "bg-light-green border border-verido-green text-verido-green";
-      case "suspended":
-        return "bg-light-danger text-danger border border-danger";
-      case "pending approval":
-        return "bg-light-orange text-verido-orange border border-verido-orange";
-      default:
-        return "text-sm font-light text-gray-text";
-    }
-  };
-
-  const statusColumn = columns.find((col) => col.cell);
-  if (statusColumn) {
-    statusColumn.cell = ({ getValue }) => {
-      const status = getValue() as string;
-      return (
-        <span
-          className={`px-6 py-1 rounded-lg text-xs font-medium ${getStatusStyles(
-            status
-          )}`}
-        >
-          {status}
-        </span>
-      );
-    };
-  }
-
+  const [rowSelection, setRowSelection] = React.useState({});
+   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+     []
+   );
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onRowSelectionChange: setRowSelection,
+    onColumnFiltersChange:setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      rowSelection,
+      columnFilters,
+    },
   });
 
   return (
     <div className="rounded-md">
+      <div className="flex justify-between mb-6">
+        <div className="flex flex-col items-start gap-2">
+          <h2 className="text-[20px]">Business Owners</h2>
+          <p className="text-[14px] text-black">
+            List of Business owners available
+          </p>
+        </div>
+        <div className="flex items-center p-2 justify-between border border-text-gray rounded-lg h-[2.5rem]">
+          <Image
+            className="object-contain"
+            src="/assets/icons/person.svg"
+            alt="search icon"
+            width={15}
+            height={15}
+          />
+          <Input
+            placeholder="Search"
+            value={
+              (table
+                .getColumn("enterprise_name")
+                ?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table
+                .getColumn("enterprise_name")
+                ?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm h-full"
+          />
+        </div>
+        <div className="flex justify-between">
+          <Button
+            size={"sm"}
+            variant={"outline"}
+            className="text-verido-green border border-verido-green  rounded-lg  text-sm"
+          >
+            Change Consultant
+          </Button>
+        </div>
+      </div>
       <Table className="border-0">
         <TableHeader className="bg-verido-light-blue">
           {table.getHeaderGroups().map((headerGroup) => (
@@ -104,12 +132,30 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                You don't have Business associatet yet.
+                You don't have Business associates yet.
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

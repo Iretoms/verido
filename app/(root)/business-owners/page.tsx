@@ -20,17 +20,7 @@ const BusinessOwners = () => {
         <span className="text-gray-text">{pathname.substring(1)}</span>
       </div>
       <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 h-[42rem]">
-        <div className="flex justify-between">
-          <div className="flex flex-col items-start gap-2">
-            <h2 className="text-[20px]">Business Owners</h2>
-            <p className="text-[14px] text-black">
-              List of business owners available
-            </p>
-          </div>
-          <Button size={'sm'} variant={'outline'} className="text-verido-green border border-verido-green  rounded-lg  text-sm">
-            Change Consultant
-          </Button>
-        </div>
+      
         <BusinessOwnerTable data={businessOwner} columns={columns} />
       </div>
     </div>
