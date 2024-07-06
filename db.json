@@ -389,6 +389,7 @@
       "dob": "1978-03-22",
       "address": "456 Future Ave, Innovation City, 67890",
       "expires": "2025-12-31",
+      "sector": "Technology",
       "products": [
         {
           "id": 1,
@@ -430,6 +431,7 @@
       "dob": "1980-02-19",
       "address": "123 Future Lane, Tech City, 78901",
       "expires": "2024-05-30",
+      "sector": "Technology",
       "products": [
         {
           "id": 3,
@@ -471,6 +473,7 @@
       "dob": "1985-10-31",
       "address": "123 Magic Street, Wizard City, 78945",
       "expires": "2026-01-15",
+      "sector": "Digital Solutions",
       "products": [
         {
           "id": 5,
@@ -512,6 +515,7 @@
       "dob": "1970-05-29",
       "address": "456 Innovation Road, Tech City, 67890",
       "expires": "2023-12-31",
+      "sector": "Technology",
       "products": [
         {
           "id": 7,
@@ -553,6 +557,7 @@
       "dob": "1982-05-28",
       "address": "456 Wellness Blvd, Health City, 56789",
       "expires": "2024-07-31",
+      "sector": "Health",
       "products": [
         {
           "id": 9,
@@ -594,6 +599,7 @@
       "dob": "1985-01-15",
       "address": "123 Greenway, Eco City, 56789",
       "expires": "2025-05-31",
+      "sector": "Environmental",
       "products": [
         {
           "id": 11,
@@ -625,38 +631,39 @@
       "name": "Diana Prince",
       "institution": "Wonder University",
       "date_joined": "2019-09-22",
-      "status": "Pending Approval",
+      "status": "Active",
       "admin": "Steve Trevor",
       "email": "diana.prince@smartlearning.com",
-      "phone": "789-456-1230",
-      "about": "Leader in smart learning technologies.",
-      "company_info": "Smart Learning focuses on developing smart learning solutions.",
+      "phone": "789-654-3210",
+      "about": "Expert in smart learning technologies.",
+      "company_info": "Smart Learning provides innovative learning solutions.",
       "rating": 4.7,
-      "dob": "1987-06-04",
-      "address": "123 Learning Blvd, Knowledge City, 67890",
-      "expires": "2024-11-30",
+      "dob": "1986-03-12",
+      "address": "456 Learning Blvd, Education City, 67890",
+      "expires": "2024-12-31",
+      "sector": "Education",
       "products": [
         {
           "id": 13,
-          "name": "E-learning Platform",
-          "cost_price": 100,
-          "selling_price": 150,
-          "forecast_month": "2023-08",
-          "units": 600
+          "name": "Smart Classroom",
+          "cost_price": 500,
+          "selling_price": 1000,
+          "forecast_month": "2023-10",
+          "units": 150
         },
         {
           "id": 14,
-          "name": "Smart Classroom Kit",
-          "cost_price": 500,
-          "selling_price": 800,
-          "forecast_month": "2023-10",
+          "name": "AI Tutor",
+          "cost_price": 300,
+          "selling_price": 600,
+          "forecast_month": "2023-11",
           "units": 200
         }
       ],
       "consultants": [
         {
           "id": 7,
-          "name": "Clark Kent"
+          "name": "Peter Parker"
         }
       ]
     }

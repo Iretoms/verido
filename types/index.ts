@@ -12,6 +12,8 @@ export interface BusinessOwner {
   enterprise_name: string;
   name: string;
   institution: string;
+  sector: string;
+  currency: string;
   date_joined: string;
   status: string;
   admin: string;

@@ -11,7 +11,7 @@ export const useBusiness = () => {
     },
   });
 };
-export const useConsultantById = (id: number) => {
+export const useBusinessById = (id: number) => {
   return useQuery<BusinessOwner, Error>({
     queryKey: ["business"],
     queryFn: async () => {
