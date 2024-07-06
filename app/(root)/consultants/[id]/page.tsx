@@ -16,7 +16,7 @@ const page = () => {
           {pathname.substring(1)}
         </span>
       </div>
-      <div className=" rounded-lg py-8">
+      <div className=" rounded-lg ">
         <ConsultantsInfo />
       </div>
 

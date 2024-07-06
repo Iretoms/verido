@@ -21,7 +21,7 @@ const ConsultantsInfo = () => {
       {consultant && (
         <div className="flex flex-col gap-10">
           <ConsultantInfoCard consultant={consultant} />
-          <div className=" p-10 flex flex-col gap-10 w-full bg-white rounded-lg">
+          <div className=" p-10 flex flex-col gap-10 w-full bg-white rounded-lg mb-8">
             <div className="flex justify-between gap-2">
               <div>
                 <h2 className="text-[20px]">Business Owners</h2>

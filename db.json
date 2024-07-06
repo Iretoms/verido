@@ -12,7 +12,7 @@
       "phone": "123-456-7890",
       "about": "Expert in tech innovation and development.",
       "company_info": "Tech Innovators is a leading firm in technology solutions.",
-      "rating": 4.5,
+      "rating": 3.5,
       "dob": "1985-08-15",
       "address": "123 Tech Street, Innovation City, 12345",
       "business_owners": [
@@ -65,7 +65,7 @@
       "phone": "321-654-0987",
       "about": "Specialist in business strategies and management.",
       "company_info": "Innovative Solutions provides cutting-edge business strategies.",
-      "rating": 4.7,
+      "rating": 3.7,
       "dob": "1990-04-12",
       "address": "789 Strategy Blvd, Business City, 23456",
       "business_owners": [
@@ -171,7 +171,7 @@
       "phone": "789-654-3210",
       "about": "Global business strategist with extensive experience.",
       "company_info": "Global Enterprises is a leader in global business strategies.",
-      "rating": 4.8,
+      "rating": 2.8,
       "dob": "1975-06-25",
       "address": "789 Global Blvd, Business City, 23456",
       "business_owners": [
@@ -277,7 +277,7 @@
       "phone": "321-123-4567",
       "about": "Expert in environmental solutions and sustainability.",
       "company_info": "Eco Solutions specializes in sustainable environmental solutions.",
-      "rating": 4.9,
+      "rating": 3.9,
       "dob": "1978-12-02",
       "address": "789 Green Lane, Eco City, 56789",
       "business_owners": [
@@ -330,7 +330,7 @@
       "phone": "654-789-1234",
       "about": "Specialist in educational technologies and innovations.",
       "company_info": "EduTech Solutions provides innovative educational solutions.",
-      "rating": 4.6,
+      "rating": 2.6,
       "dob": "1992-08-20",
       "address": "456 Education Blvd, Knowledge City, 67890",
       "business_owners": [
@@ -390,6 +390,7 @@
       "address": "456 Future Ave, Innovation City, 67890",
       "expires": "2025-12-31",
       "sector": "Technology",
+      "currency": "Dollar",
       "products": [
         {
           "id": 1,
@@ -432,6 +433,7 @@
       "address": "123 Future Lane, Tech City, 78901",
       "expires": "2024-05-30",
       "sector": "Technology",
+      "currency": "Pounds",
       "products": [
         {
           "id": 3,
@@ -474,6 +476,7 @@
       "address": "123 Magic Street, Wizard City, 78945",
       "expires": "2026-01-15",
       "sector": "Digital Solutions",
+      "currency": "Naira",
       "products": [
         {
           "id": 5,
@@ -516,6 +519,7 @@
       "address": "456 Innovation Road, Tech City, 67890",
       "expires": "2023-12-31",
       "sector": "Technology",
+      "currency": "Yen",
       "products": [
         {
           "id": 7,
@@ -558,6 +562,7 @@
       "address": "456 Wellness Blvd, Health City, 56789",
       "expires": "2024-07-31",
       "sector": "Health",
+      "currency": "Dollar",
       "products": [
         {
           "id": 9,
@@ -600,6 +605,7 @@
       "address": "123 Greenway, Eco City, 56789",
       "expires": "2025-05-31",
       "sector": "Environmental",
+      "currency": "Naira",
       "products": [
         {
           "id": 11,
@@ -642,6 +648,7 @@
       "address": "456 Learning Blvd, Education City, 67890",
       "expires": "2024-12-31",
       "sector": "Education",
+      "currency": "Yen",
       "products": [
         {
           "id": 13,

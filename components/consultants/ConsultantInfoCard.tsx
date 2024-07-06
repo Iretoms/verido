@@ -22,7 +22,13 @@ interface ConsultantInfoCardProps {
 const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
   consultant,
 }) => {
-  const [showDialog, setShowDialog] = useState(false);
+  const renderStars = (rating: number) => {
+    return Array.from({ length: rating }, (_, index) => {
+      return index < rating && (
+        <Image src='/assets/icons/Rate.svg' alt="rating" width={20} height={20} className="object-contain"/>
+      )
+    });
+  };
 
   return (
     <div className="flex gap-5 h-full p-10 w-full bg-white rounded-lg">
@@ -92,8 +98,12 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="border border-verido-green text-verido-green">No</AlertDialogCancel>
-                  <AlertDialogAction className="text-white bg-verido-orange">Yes</AlertDialogAction>
+                  <AlertDialogCancel className="border border-verido-green text-verido-green">
+                    No
+                  </AlertDialogCancel>
+                  <AlertDialogAction className="text-white bg-verido-orange">
+                    Yes
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -105,40 +115,41 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
         </div>
         <div className="border-t border-verido-border py-4 flex flex-col gap-5 w-full">
           <h3 className="text-2xl">Contact</h3>
-          <ul className="text-gray-text text-[12px] flex flex-col gap-5">
-            <li>
-              <span className="mr-10">Enterprise Name</span>{" "}
-              {consultant.enterprise_name}
-            </li>
-            <li>
-              <span className="mr-8">Institution</span> {consultant.institution}
-            </li>
-            <li>
-              <span className="mr-8">Admin Name</span> {consultant.admin}
-            </li>
-            <li>
-              <span className="mr-8">Email</span> {consultant.email}
-            </li>
-            <li>
-              <span className="mr-8">Phone</span> {consultant.phone}
-            </li>
-            <li>
-              <span className="mr-8">Date of Birth</span> {consultant.dob}
-            </li>
-            <li>
-              <span className="mr-8">Address</span> {consultant.address}
-            </li>
-          </ul>
+          <div className="flex gap-10">
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>Enterprise Name</li>
+              <li>Institution</li>
+              <li>Admin Name</li>
+              <li>Email</li>
+              <li>Phone</li>
+              <li>Date of Birth</li>
+              <li>Address</li>
+            </ul>
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>{consultant.enterprise_name}</li>
+              <li>{consultant.institution}</li>
+              <li>{consultant.admin}</li>
+              <li>{consultant.email}</li>
+              <li>{consultant.phone}</li>
+              <li>{consultant.dob}</li>
+              <li>{consultant.address}</li>
+            </ul>
+          </div>
+          <ul className="text-gray-text text-[12px] flex items-start justify-center flex-col gap-5"></ul>
         </div>
         <div className="border-t border-verido-border flex flex-col gap-5 py-4 w-full">
           <h3 className="text-2xl">Status</h3>
-          <p className="text-gray-text text-sm">
-            Status
-            <span className="ml-12">{consultant.status}</span>
-          </p>
-          <p className="text-gray-text text-sm">
-            Rating <span className="ml-12">⭐⭐⭐⭐⭐</span>
-          </p>{" "}
+
+          <div className="flex gap-24">
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>Status</li>
+              <li>Rating</li>
+            </ul>
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>{consultant.date_joined}</li>
+              <li className="flex">{renderStars(consultant.rating)}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

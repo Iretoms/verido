@@ -104,51 +104,45 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
         </div>
         <div className="border-t border-verido-border py-4 flex flex-col gap-5 w-full">
           <h3 className="text-2xl">Contact</h3>
-          <ul className="text-gray-text text-[12px] flex flex-col gap-5">
-            <li>
-              <span className="mr-10">Enterprise Name</span>{" "}
-              {business.enterprise_name}
-            </li>
-            <li>
-              <span className="mr-8">Institution</span> {business.institution}
-            </li>
-            <li>
-              <span className="mr-8">Sector</span> {business.sector}
-            </li>
-            <li>
-              <span className="mr-8">Currency</span> {business.currency}
-            </li>
-            <li>
-              <span className="mr-8">Admin Name</span> {business.admin}
-            </li>
-            <li>
-              <span className="mr-8">Email</span> {business.email}
-            </li>
-            <li>
-              <span className="mr-8">Phone</span> {business.phone}
-            </li>
-            <li>
-              <span className="mr-8">Date of Birth</span> {business.dob}
-            </li>
-            <li>
-              <span className="mr-8">Address</span> {business.address}
-            </li>
-          </ul>
+          <div className="flex gap-10">
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>Enterprise Name</li>
+              <li>Institution</li>
+              <li>Sector</li>
+              <li>Currency</li>
+              <li>Admin Name</li>
+              <li>Email</li>
+              <li>Phone</li>
+              <li>Date of Birth</li>
+              <li>Address</li>
+            </ul>
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>{business.enterprise_name}</li>
+              <li>{business.institution}</li>
+              <li>{business.sector}</li>
+              <li>{business.currency}</li>
+              <li>{business.admin}</li>
+              <li>{business.email}</li>
+              <li>{business.phone}</li>
+              <li>{business.dob}</li>
+              <li>{business.address}</li>
+            </ul>
+          </div>
         </div>
         <div className="border-t border-verido-border flex flex-col gap-5 py-4 w-full">
           <h3 className="text-2xl">Registration</h3>
-          <p className="text-gray-text text-sm">
-            Date Joined
-            <span className="ml-12">{business.date_joined}</span>
-          </p>
-          <p className="text-gray-text text-sm">
-            Status
-            <span className="ml-12">{business.status}</span>
-          </p>
-          <p className="text-gray-text text-sm">
-            Business Subscription
-            <span className="ml-12">{business.expires}</span>
-          </p>
+          <div className="flex gap-10">
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>Date Joined</li>
+              <li>Status</li>
+              <li>Subscription Expires</li>
+            </ul>
+            <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
+              <li>{business.date_joined}</li>
+              <li>{business.status}</li>
+              <li>{business.expires}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
