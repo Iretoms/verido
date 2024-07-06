@@ -7,7 +7,12 @@ import { usePathname } from "next/navigation";
 const Sidebar = () => {
   const pathName = usePathname();
   const isActive = (href: string) => {
-    return pathName === href
+    if (href === "/") {
+      return pathName === href
+        ? "bg-active-green rounded-lg text-verido-green"
+        : "text-gray-text";
+    }
+    return pathName.startsWith(href)
       ? "bg-active-green rounded-lg text-verido-green"
       : "text-gray-text";
   };

@@ -21,13 +21,10 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function ProductTable<TData extends Product, TValue>({
+export function ProductTable<TData, TValue>({
   columns,
-  data,
+  data = [],
 }: DataTableProps<TData, TValue>) {
-
-
-
   const table = useReactTable({
     data,
     columns,
@@ -54,7 +51,7 @@ export function ProductTable<TData extends Product, TValue>({
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {table.getRowModel().rows?.length ? (
+          {data.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}

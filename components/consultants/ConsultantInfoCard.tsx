@@ -1,6 +1,19 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Consultant } from "@/types";
 import Image from "next/image";
+import { Button } from "../ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface ConsultantInfoCardProps {
   consultant: Consultant;
@@ -9,6 +22,8 @@ interface ConsultantInfoCardProps {
 const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
   consultant,
 }) => {
+  const [showDialog, setShowDialog] = useState(false);
+
   return (
     <div className="flex gap-5 h-full p-10 w-full bg-white rounded-lg">
       <div className="flex flex-col flex-1 justify-between items-center border-r px-10 border-r-verido-border">
@@ -23,9 +38,12 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
           <div className="flex flex-col justify-center items-center gap-1">
             <h2 className="text-lg">{consultant.name}</h2>
             <p className="text-gray-text text-[10px] ">{consultant.email}</p>
-            <button className="bg-verido-green text-white px-3 py-2 text-[13px] rounded-md">
+            <Button
+              size={"sm"}
+              className="bg-verido-green text-white px-3 py-2 text-[13px] rounded-md"
+            >
               Delete Consultant
-            </button>
+            </Button>
           </div>
         </div>
         <div>
@@ -48,9 +66,37 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
             </p>
           </div>
           <div className="">
-            <button className="bg-verido-orange text-white px-8 py-3 text-[13px] rounded-md">
-              Suspend
-            </button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  size={"sm"}
+                  className="bg-verido-orange text-white px-8 py-3 text-[13px] rounded-md"
+                >
+                  Suspend
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="w-[26rem]">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="flex  justify-between gap-1 font-normal text-[15px]">
+                    <Image
+                      src="/assets/icons/caution.svg"
+                      width={20}
+                      height={20}
+                      alt="caution"
+                    />
+                    Are you sure you want to suspend this account?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="text-light-gray text-sm font-light">
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="border border-verido-green text-verido-green">No</AlertDialogCancel>
+                  <AlertDialogAction className="text-white bg-verido-orange">Yes</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
         <div className="border-t border-verido-border w-full py-4">

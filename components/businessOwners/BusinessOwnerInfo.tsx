@@ -49,7 +49,7 @@ const BusinessOwnerInfo = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-5 p-10 w-full bg-white rounded-lg">
+          <div className="flex flex-col gap-5 p-10 w-full bg-white mb-10 rounded-lg">
             <div className="flex justify-between gap-2">
               <div>
                 <h2 className="text-[20px]">Products</h2>

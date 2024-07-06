@@ -2,6 +2,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type IUsers = {
   fullName: string;
@@ -11,11 +12,12 @@ type IUsers = {
   confirmPassword: string;
 };
 
-const onSubmit = async (data: IUsers) => {};
 const Register = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
+    watch,
     formState: { isSubmitting, errors },
   } = useForm<IUsers>({
     mode: "onBlur",
@@ -28,6 +30,15 @@ const Register = () => {
       confirmPassword: "",
     },
   });
+
+  const password = watch("password");
+
+  const onSubmit = async (data: IUsers) => {
+    // Perform your form submission logic here
+    // After successful submission, navigate to the home page
+    router.push("/");
+  };
+
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <form
@@ -42,7 +53,7 @@ const Register = () => {
           </p>
         </div>
         <div className="">
-          <label className=" text-sm font-medium text-black-light">
+          <label className="text-sm font-medium text-black-light">
             Full Name:
           </label>
           <input
@@ -56,12 +67,10 @@ const Register = () => {
           )}
         </div>
         <div className="">
-          <label className=" text-sm font-medium text-black-light">
-            Email:
-          </label>
+          <label className="text-sm font-medium text-black-light">Email:</label>
           <input
             {...register("email", { required: true })}
-            className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
+            className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
               errors.email ? "border-danger" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
@@ -70,12 +79,12 @@ const Register = () => {
           )}
         </div>
         <div className="">
-          <label className=" text-sm font-medium text-black-light">
+          <label className="text-sm font-medium text-black-light">
             Phone Number:
           </label>
           <input
             {...register("phoneNumber", { required: true })}
-            className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
+            className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
               errors.phoneNumber ? "border-danger" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
@@ -84,13 +93,13 @@ const Register = () => {
           )}
         </div>
         <div className="">
-          <label className=" text-sm font-medium text-black-light">
+          <label className="text-sm font-medium text-black-light">
             Password:
           </label>
           <input
             type="password"
             {...register("password", { required: true, minLength: 6 })}
-            className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
+            className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
               errors.password ? "border-verido-orange" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
@@ -101,12 +110,16 @@ const Register = () => {
           )}
         </div>
         <div className="">
-          <label className=" text-sm font-medium text-black-light">
+          <label className="text-sm font-medium text-black-light">
             Confirm Password:
           </label>
           <input
             type="password"
-            {...register("confirmPassword", { required: true })}
+            {...register("confirmPassword", {
+              required: true,
+              validate: (value) =>
+                value === password || "Passwords must match",
+            })}
             className={`mt-1 text-sm text-gray-text w-full px-2 py-2 border ${
               errors.confirmPassword
                 ? "border-verido-orange"
@@ -114,14 +127,15 @@ const Register = () => {
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
           {errors.confirmPassword && (
-            <p className="text-verido-oborder-verido-orange text-xs mt-1">
-              This area is required
+            <p className="text-verido-orange text-xs mt-1">
+              {errors.confirmPassword.message}
             </p>
           )}
         </div>
         <button
           type="submit"
-          className="text-white bg-verido-green mt-10   py-4 rounded-md w-full hover:bg-green-600"
+          className="text-white bg-verido-green mt-10 py-4 rounded-md w-full hover:bg-green-600"
+          disabled={isSubmitting}
         >
           Sign up
         </button>
@@ -139,8 +153,8 @@ const Register = () => {
         <div className="mt-5">
           <Link className="text-gray-text" href="">
             Privacy Policy
-          </Link>
-          {""} .
+          </Link>{" "}
+          .
           <Link className="text-gray-text" href="">
             Term of use
           </Link>

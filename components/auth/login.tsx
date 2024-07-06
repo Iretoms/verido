@@ -2,6 +2,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type IUsers = {
   email: string;
@@ -9,8 +10,12 @@ type IUsers = {
   rememberMe: boolean;
 };
 
-const onSubmit = async (data: IUsers) => {};
 const Login = () => {
+  const router = useRouter();
+  const onSubmit = async (data: IUsers) => {
+    console.log("Form Data:");
+    router.push("/");
+  };
   const {
     register,
     handleSubmit,
@@ -78,10 +83,7 @@ const Login = () => {
             />
             <span className="ml-2 text-black-light text-sm">Remember me</span>
           </label>
-          <Link
-            href="/recover-password"
-            className="text-sm  text-gray-text"
-          >
+          <Link href="/recover-password" className="text-sm  text-gray-text">
             Forgot Password?
           </Link>
         </div>
@@ -89,6 +91,7 @@ const Login = () => {
         <button
           type="submit"
           className="text-white bg-verido-green mt-10   py-4 rounded-md w-full hover:bg-green-600"
+          onClick={() => console.log('Finito')}
         >
           Sign in
         </button>

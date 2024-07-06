@@ -1,17 +1,17 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type IUsers = {
   password: string;
   confirmPassword: string;
 };
 
-const onSubmit = async (data: IUsers) => {};
 const ResetPassword = () => {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { isSubmitting, errors },
   } = useForm<IUsers>({
@@ -22,6 +22,12 @@ const ResetPassword = () => {
       confirmPassword: "",
     },
   });
+  const password = watch("password");
+  const router = useRouter()
+  const onSubmit = async (data: IUsers) => {
+    router.push('/signin')
+
+  };
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <form
@@ -60,14 +66,18 @@ const ResetPassword = () => {
           <input
             placeholder="At least 6 characters"
             type="password"
-            {...register("confirmPassword", { required: true, minLength: 6 })}
+            {...register("confirmPassword", {
+              required: true,
+              minLength: 6,
+              validate: (value) => value === password || "Passwords must match",
+            })}
             className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
               errors.password ? "border-verido-orange" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
           {errors.confirmPassword && (
             <p className="text-verido-orange text-xs mt-1">
-              Please enter at least 6 characters
+              {errors.confirmPassword.message}
             </p>
           )}
         </div>
