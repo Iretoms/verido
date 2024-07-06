@@ -371,5 +371,294 @@
         }
       ]
     }
+  ],
+  "businessOwners": [
+    {
+      "id": 1,
+      "enterprise_name": "Future Enterprises",
+      "name": "Alice Johnson",
+      "institution": "Business School",
+      "date_joined": "2020-10-12",
+      "status": "Pending Approval",
+      "admin": "John Manager",
+      "email": "alice.johnson@futureenterprises.com",
+      "phone": "987-654-3210",
+      "about": "Experienced business owner with a focus on future technologies.",
+      "company_info": "Future Enterprises focuses on developing futuristic products.",
+      "rating": 4.8,
+      "dob": "1978-03-22",
+      "address": "456 Future Ave, Innovation City, 67890",
+      "expires": "2025-12-31",
+      "products": [
+        {
+          "id": 1,
+          "name": "Smart Home Hub",
+          "cost_price": 100,
+          "selling_price": 150,
+          "forecast_month": "2023-07",
+          "units": 500
+        },
+        {
+          "id": 2,
+          "name": "AI Assistant",
+          "cost_price": 200,
+          "selling_price": 300,
+          "forecast_month": "2023-08",
+          "units": 300
+        }
+      ],
+      "consultants": [
+        {
+          "id": 1,
+          "name": "John Doe"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "enterprise_name": "NextGen Tech",
+      "name": "Bruce Wayne",
+      "institution": "Tech University",
+      "date_joined": "2018-08-20",
+      "status": "Active",
+      "admin": "Clark Kent",
+      "email": "bruce.wayne@nextgentech.com",
+      "phone": "456-789-0123",
+      "about": "Expert in next-generation technologies.",
+      "company_info": "NextGen Tech is focused on innovative tech solutions.",
+      "rating": 4.9,
+      "dob": "1980-02-19",
+      "address": "123 Future Lane, Tech City, 78901",
+      "expires": "2024-05-30",
+      "products": [
+        {
+          "id": 3,
+          "name": "Quantum Processor",
+          "cost_price": 300,
+          "selling_price": 500,
+          "forecast_month": "2023-09",
+          "units": 200
+        },
+        {
+          "id": 4,
+          "name": "Nano Tech Gadget",
+          "cost_price": 150,
+          "selling_price": 250,
+          "forecast_month": "2023-10",
+          "units": 400
+        }
+      ],
+      "consultants": [
+        {
+          "id": 2,
+          "name": "Mary Jane"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "enterprise_name": "Digital Solutions",
+      "name": "Harry Potter",
+      "institution": "Magic School",
+      "date_joined": "2019-11-11",
+      "status": "Suspended",
+      "admin": "Hermione Granger",
+      "email": "harry.potter@digitalsolutions.com",
+      "phone": "789-012-3456",
+      "about": "Digital solutions expert with a focus on magical technologies.",
+      "company_info": "Digital Solutions provides magical digital solutions.",
+      "rating": 4.9,
+      "dob": "1985-10-31",
+      "address": "123 Magic Street, Wizard City, 78945",
+      "expires": "2026-01-15",
+      "products": [
+        {
+          "id": 5,
+          "name": "Magic Wand",
+          "cost_price": 100,
+          "selling_price": 200,
+          "forecast_month": "2023-11",
+          "units": 1000
+        },
+        {
+          "id": 6,
+          "name": "Invisibility Cloak",
+          "cost_price": 500,
+          "selling_price": 800,
+          "forecast_month": "2023-12",
+          "units": 100
+        }
+      ],
+      "consultants": [
+        {
+          "id": 3,
+          "name": "Anna Smith"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "enterprise_name": "Tech Pioneers",
+      "name": "Tony Stark",
+      "institution": "MIT",
+      "date_joined": "2017-05-01",
+      "status": "Active",
+      "admin": "Pepper Potts",
+      "email": "tony.stark@techpioneers.com",
+      "phone": "123-987-6540",
+      "about": "Pioneer in technology and innovation.",
+      "company_info": "Tech Pioneers is at the forefront of technological innovation.",
+      "rating": 5.0,
+      "dob": "1970-05-29",
+      "address": "456 Innovation Road, Tech City, 67890",
+      "expires": "2023-12-31",
+      "products": [
+        {
+          "id": 7,
+          "name": "Arc Reactor",
+          "cost_price": 1000,
+          "selling_price": 2000,
+          "forecast_month": "2023-06",
+          "units": 50
+        },
+        {
+          "id": 8,
+          "name": "Iron Man Suit",
+          "cost_price": 5000,
+          "selling_price": 10000,
+          "forecast_month": "2023-07",
+          "units": 10
+        }
+      ],
+      "consultants": [
+        {
+          "id": 4,
+          "name": "Michael Johnson"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "enterprise_name": "Wellness Enterprises",
+      "name": "Jessica Alba",
+      "institution": "Health School",
+      "date_joined": "2020-01-12",
+      "status": "Suspended",
+      "admin": "Chris Evans",
+      "email": "jessica.alba@wellnessenterprises.com",
+      "phone": "654-987-3210",
+      "about": "Health and wellness expert with a focus on innovative solutions.",
+      "company_info": "Wellness Enterprises focuses on innovative health solutions.",
+      "rating": 4.8,
+      "dob": "1982-05-28",
+      "address": "456 Wellness Blvd, Health City, 56789",
+      "expires": "2024-07-31",
+      "products": [
+        {
+          "id": 9,
+          "name": "Health Tracker",
+          "cost_price": 50,
+          "selling_price": 100,
+          "forecast_month": "2023-07",
+          "units": 800
+        },
+        {
+          "id": 10,
+          "name": "Smart Weighing Scale",
+          "cost_price": 30,
+          "selling_price": 60,
+          "forecast_month": "2023-08",
+          "units": 1000
+        }
+      ],
+      "consultants": [
+        {
+          "id": 5,
+          "name": "Laura Wilson"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "enterprise_name": "Green Enterprises",
+      "name": "Oliver Queen",
+      "institution": "Green University",
+      "date_joined": "2016-07-11",
+      "status": "Pending Approval",
+      "admin": "Felicity Smoak",
+      "email": "oliver.queen@greenenterprises.com",
+      "phone": "987-321-1234",
+      "about": "Leader in green technologies and sustainable solutions.",
+      "company_info": "Green Enterprises is a pioneer in green tech solutions.",
+      "rating": 4.9,
+      "dob": "1985-01-15",
+      "address": "123 Greenway, Eco City, 56789",
+      "expires": "2025-05-31",
+      "products": [
+        {
+          "id": 11,
+          "name": "Solar Panel",
+          "cost_price": 200,
+          "selling_price": 400,
+          "forecast_month": "2023-06",
+          "units": 300
+        },
+        {
+          "id": 12,
+          "name": "Wind Turbine",
+          "cost_price": 1500,
+          "selling_price": 3000,
+          "forecast_month": "2023-09",
+          "units": 50
+        }
+      ],
+      "consultants": [
+        {
+          "id": 6,
+          "name": "George Green"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "enterprise_name": "Smart Learning",
+      "name": "Diana Prince",
+      "institution": "Wonder University",
+      "date_joined": "2019-09-22",
+      "status": "Pending Approval",
+      "admin": "Steve Trevor",
+      "email": "diana.prince@smartlearning.com",
+      "phone": "789-456-1230",
+      "about": "Leader in smart learning technologies.",
+      "company_info": "Smart Learning focuses on developing smart learning solutions.",
+      "rating": 4.7,
+      "dob": "1987-06-04",
+      "address": "123 Learning Blvd, Knowledge City, 67890",
+      "expires": "2024-11-30",
+      "products": [
+        {
+          "id": 13,
+          "name": "E-learning Platform",
+          "cost_price": 100,
+          "selling_price": 150,
+          "forecast_month": "2023-08",
+          "units": 600
+        },
+        {
+          "id": 14,
+          "name": "Smart Classroom Kit",
+          "cost_price": 500,
+          "selling_price": 800,
+          "forecast_month": "2023-10",
+          "units": 200
+        }
+      ],
+      "consultants": [
+        {
+          "id": 7,
+          "name": "Clark Kent"
+        }
+      ]
+    }
   ]
 }

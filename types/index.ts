@@ -24,6 +24,7 @@ export interface BusinessOwner {
   address: string;
   expires: string;
   products: Product[];
+  consultants: Consultant[]
 }
 
 export interface Consultant {

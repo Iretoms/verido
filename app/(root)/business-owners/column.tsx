@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { BusinessOwner } from "@/types";
+import Image from "next/image";
 
 export const columns: ColumnDef<BusinessOwner>[] = [
   {
@@ -28,7 +29,12 @@ export const columns: ColumnDef<BusinessOwner>[] = [
     header: "Expires",
   },
   {
-    accessorKey: "institution",
+    accessorKey: "action",
     header: "Action",
+    cell: ({ row }) => (
+      <div className="flex space-x-2">
+        <Image src='/assets/icons/chat_fill.svg' alt="action" width={20} height={20}/>
+      </div>
+    ),
   },
 ];

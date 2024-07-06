@@ -16,12 +16,10 @@ const page = () => {
           {pathname.substring(1)}
         </span>
       </div>
-      <div className="bg-verido-white rounded-lg  h-[43rem]">
+      <div className=" rounded-lg  h-[43rem]">
         <ConsultantsInfo />
       </div>
-      <div className="bg-verido-white rounded-lg  h-[43rem]">
-        <ConsultantsInfo />
-      </div>
+
     </div>
   );
 };

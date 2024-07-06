@@ -1,9 +1,13 @@
 import React from 'react'
-
-const BusinessToConsultantCard = () => {
-  return (
-    <div>BusinessToConsultantCard</div>
-  )
+import { Consultant } from '@/types'
+interface ConsultantInfoCardProps {
+  consultant: Consultant;
 }
+
+const BusinessToConsultantCard: React.FC<ConsultantInfoCardProps> = ({
+  consultant,
+}) => {
+  return <div>BusinessToConsultantCard</div>;
+};
 
 export default BusinessToConsultantCard
