@@ -43,7 +43,7 @@ const Register = () => {
     <div className="flex items-center justify-center h-screen w-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[60%] flex flex-col gap-2"
+        className="w-[90%] md:w-[60%] flex flex-col gap-2"
       >
         <div className="flex flex-col gap-1">
           <h2 className="text-[3rem]">Create Account✌️</h2>
