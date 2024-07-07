@@ -22,19 +22,6 @@ const ConsultantsInfo = () => {
         <div className="flex flex-col gap-10">
           <ConsultantInfoCard consultant={consultant} />
           <div className=" p-10 flex flex-col gap-10 w-full bg-white rounded-lg mb-8">
-            <div className="flex justify-between gap-2">
-              <div>
-                <h2 className="text-[20px]">Business Owners</h2>
-                <p className="text-[14px] text-black">
-                  List of Business Owners available
-                </p>
-              </div>
-              <Button
-                size={"sm"}
-                variant={"outline"}
-                className="text-verido-green border border-verido-green  rounded-lg  text-sm"
-              >Change Consultant</Button>
-            </div>
             <BusinessOwnerTable
               data={consultant.business_owners}
               columns={columns}

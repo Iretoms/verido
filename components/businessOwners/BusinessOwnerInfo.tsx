@@ -50,27 +50,6 @@ const BusinessOwnerInfo = () => {
             </div>
           </div>
           <div className="flex flex-col gap-5 p-10 w-full bg-white mb-10 rounded-lg">
-            <div className="flex justify-between gap-2">
-              <div>
-                <h2 className="text-[20px]">Products</h2>
-                <p className="text-[14px] text-black">
-                  List of Products available
-                </p>
-              </div>
-              <Button
-                size={"sm"}
-                className="text-verido-white bg-verido-green  rounded-lg  text-sm flex items-center"
-              >
-                <Image
-                  src="/assets/icons/add-box.svg"
-                  alt="add"
-                  width={20}
-                  height={20}
-                />
-                Add New Products
-              </Button>
-            </div>
-
             <ProductTable data={business.products} columns={columns} />
           </div>
         </div>

@@ -4,6 +4,8 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  SortingState,
+  getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
   useReactTable,
@@ -21,6 +23,13 @@ import { BusinessOwner } from "@/types";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,21 +47,29 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
   };
 
   const [rowSelection, setRowSelection] = React.useState({});
-   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-     []
-   );
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     onRowSelectionChange: setRowSelection,
-    onColumnFiltersChange:setColumnFilters,
+    onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     state: {
       rowSelection,
       columnFilters,
+      sorting,
     },
   });
+  const handleSortChange = (sortOrder: "asc" | "desc") => {
+    setSorting([{ id: "enterprise_name", desc: sortOrder === "desc" }]);
+  };
 
   return (
     <div className="rounded-md">
@@ -63,37 +80,53 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
             List of Business owners available
           </p>
         </div>
-        <div className="flex items-center p-2 justify-between border border-text-gray rounded-lg h-[2.5rem]">
-          <Image
-            className="object-contain"
-            src="/assets/icons/person.svg"
-            alt="search icon"
-            width={15}
-            height={15}
-          />
-          <Input
-            placeholder="Search"
-            value={
-              (table
-                .getColumn("enterprise_name")
-                ?.getFilterValue() as string) ?? ""
-            }
-            onChange={(event) =>
-              table
-                .getColumn("enterprise_name")
-                ?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm h-full"
-          />
-        </div>
-        <div className="flex justify-between">
-          <Button
-            size={"sm"}
-            variant={"outline"}
-            className="text-verido-green border border-verido-green  rounded-lg  text-sm"
-          >
-            Change Consultant
-          </Button>
+        <div className="flex gap-2">
+          <Select onValueChange={handleSortChange}>
+            <SelectTrigger className="w-[100px] text-light-gray">
+              <SelectValue placeholder="Filter" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem className="text-sm text-light-gray" value="desc">
+                Descending
+              </SelectItem>
+              <SelectItem className="text-sm text-light-gray" value="asc">
+                Asecending
+              </SelectItem>
+            </SelectContent>
+          </Select>
+          <div className="flex items-center p-2 justify-between border border-text-gray rounded-lg h-[2.5rem]">
+            <Image
+              className="object-contain"
+              src="/assets/icons/person.svg"
+              alt="search icon"
+              width={15}
+              height={15}
+            />
+            <Input
+              placeholder="Search"
+              value={
+                (table
+                  .getColumn("enterprise_name")
+                  ?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table
+                  .getColumn("enterprise_name")
+                  ?.setFilterValue(event.target.value)
+              }
+              className="max-w-sm h-full"
+            />
+          </div>
+
+          <div className="flex justify-between">
+            <Button
+              size={"sm"}
+              variant={"outline"}
+              className="text-verido-green border border-verido-green  rounded-lg  text-sm"
+            >
+              Change Consultant
+            </Button>
+          </div>
         </div>
       </div>
       <Table className="border-0">
