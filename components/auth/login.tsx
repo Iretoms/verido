@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type IUsers = {
   email: string;
@@ -29,6 +30,7 @@ const Login = () => {
       rememberMe: false,
     },
   });
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <form
@@ -57,17 +59,32 @@ const Login = () => {
           )}
         </div>
 
-        <div className="">
+        <div className="relative">
           <label className=" text-sm font-medium text-black-light">
             Password:
           </label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             {...register("password", { required: true, minLength: 6 })}
             className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
               errors.password ? "border-verido-orange" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
+          <div
+            className="absolute right-3 top-10 cursor-pointer"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            <Image
+              src={
+                showPassword
+                  ? "/assets/icons/eye-off.svg"
+                  : "/assets/icons/eye-off.svg"
+              }
+              alt="toggle password visibility"
+              width={15}
+              height={15}
+            />
+          </div>
           {errors.password && (
             <p className="text-verido-orange text-xs mt-1">
               Please enter at least 6 characters
@@ -91,7 +108,7 @@ const Login = () => {
         <button
           type="submit"
           className="text-white bg-verido-green mt-10   py-4 rounded-md w-full hover:bg-green-600"
-          onClick={() => console.log('Finito')}
+          onClick={() => console.log("Finito")}
         >
           Sign in
         </button>

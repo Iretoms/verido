@@ -113,7 +113,7 @@ export function ProductTable<TData, TValue>({
         </TableHeader>
         <TableBody className="border-none">
           {data.length ? (
-            table.getRowModel().rows.map((row , index) => (
+            table.getRowModel().rows.map((row, index) => (
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
@@ -143,6 +143,7 @@ export function ProductTable<TData, TValue>({
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          className="border border-verido-green disabled:border-gray-text"
         >
           Previous
         </Button>
@@ -151,6 +152,7 @@ export function ProductTable<TData, TValue>({
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          className="border border-verido-green disabled:border-gray-text"
         >
           Next
         </Button>

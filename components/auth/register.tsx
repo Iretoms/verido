@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type IUsers = {
   fullName: string;
@@ -13,6 +14,8 @@ type IUsers = {
 };
 
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -34,8 +37,6 @@ const Register = () => {
   const password = watch("password");
 
   const onSubmit = async (data: IUsers) => {
-    // Perform your form submission logic here
-    // After successful submission, navigate to the home page
     router.push("/");
   };
 
@@ -92,33 +93,47 @@ const Register = () => {
             <p className="text-danger text-xs mt-1">This area is required</p>
           )}
         </div>
-        <div className="">
+        <div className="relative">
           <label className="text-sm font-medium text-black-light">
             Password:
           </label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             {...register("password", { required: true, minLength: 6 })}
             className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
               errors.password ? "border-verido-orange" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
+          <div
+            className="absolute right-3 top-10 cursor-pointer"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            <Image
+              src={
+                showPassword
+                  ? "/assets/icons/eye-off.svg"
+                  : "/assets/icons/eye-off.svg"
+              }
+              alt="toggle password visibility"
+              width={15}
+              height={15}
+            />
+          </div>
           {errors.password && (
             <p className="text-verido-orange text-xs mt-1">
               Please enter at least 6 characters
             </p>
           )}
         </div>
-        <div className="">
+        <div className="relative">
           <label className="text-sm font-medium text-black-light">
             Confirm Password:
           </label>
           <input
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             {...register("confirmPassword", {
               required: true,
-              validate: (value) =>
-                value === password || "Passwords must match",
+              validate: (value) => value === password || "Passwords must match",
             })}
             className={`mt-1 text-sm text-gray-text w-full px-2 py-2 border ${
               errors.confirmPassword
@@ -126,6 +141,21 @@ const Register = () => {
                 : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
+          <div
+            className="absolute right-3 top-10 cursor-pointer"
+            onClick={() => setShowConfirmPassword((prev) => !prev)}
+          >
+            <Image
+              src={
+                showConfirmPassword
+                  ? "/assets/icons/eye-off.svg"
+                  : "/assets/icons/eye-off.svg"
+              }
+              alt="toggle confirm password visibility"
+              width={15}
+              height={15}
+            />
+          </div>
           {errors.confirmPassword && (
             <p className="text-verido-orange text-xs mt-1">
               {errors.confirmPassword.message}

@@ -171,9 +171,10 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end space-x-2 py-4 mt-8">
         <Button
           variant="outline"
+          className="border border-verido-green disabled:border-gray-text"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -181,6 +182,7 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
           Previous
         </Button>
         <Button
+          className="border border-verido-green disabled:border-gray-text"
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}

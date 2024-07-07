@@ -195,6 +195,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          className="border border-verido-green disabled:border-gray-text text-gray-text"
         >
           Previous
         </Button>
@@ -203,6 +204,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          className="border border-verido-green disabled:border-gray-text text-gray-text"
         >
           Next
         </Button>
