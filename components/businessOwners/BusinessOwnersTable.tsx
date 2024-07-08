@@ -114,7 +114,7 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
                   .getColumn("enterprise_name")
                   ?.setFilterValue(event.target.value)
               }
-              className="max-w-sm h-full"
+              className="max-w-sm h-full outline-none"
             />
           </div>
 
