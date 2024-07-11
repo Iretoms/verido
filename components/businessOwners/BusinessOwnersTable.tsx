@@ -165,7 +165,7 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                You don't have Business associates yet.
+                You don&apos;t have Business associates yet.
               </TableCell>
             </TableRow>
           )}

@@ -131,7 +131,7 @@ export function ProductTable<TData, TValue>({
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                You don't have Products yet.
+                You don&apos;t have Products yet.
               </TableCell>
             </TableRow>
           )}

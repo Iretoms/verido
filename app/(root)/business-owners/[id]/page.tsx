@@ -3,7 +3,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import BusinessOwnerInfo from "@/components/businessOwners/BusinessOwnerInfo";
 
-const page = () => {
+const Page = () => {
   const pathname = usePathname();
   return (
     <div className="flex flex-col gap-6">
@@ -22,4 +22,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
