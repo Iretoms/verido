@@ -66,7 +66,7 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
       <div className="flex flex-col items-start justify-start gap-3 w-full ">
         <div className="flex justify-between items-start w-full">
           <div className="flex flex-col flex-1 gap-2 ">
-            <h3 className="text-2xl">Company's Informations</h3>
+            <h3 className="text-2xl">Company&apos;s Informations</h3>
             <p className="text-gray-text text-[12px] w-[70%]">
               {consultant.company_info}
             </p>
