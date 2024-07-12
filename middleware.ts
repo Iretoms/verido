@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export function middleware(request:any) {
-  const user = "true";
+export function middleware(request: NextRequest) {
+  const accessToken = request.cookies.get("access_token");
 
-  if (!user) {
+  if (!accessToken) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 
@@ -11,5 +12,11 @@ export function middleware(request:any) {
 }
 
 export const config = {
-  matcher: ["/" , '/business-owners','/consultants'],
+  matcher: [
+    "/",
+    "/business-owners",
+    "/consultants",
+    "/business-owners/:id",
+    "/consultants/:id",
+  ],
 };
