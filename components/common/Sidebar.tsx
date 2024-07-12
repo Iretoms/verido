@@ -32,6 +32,16 @@ const Sidebar = () => {
       label: "Consultants",
       icon: "/assets/icons/userSet.svg",
     },
+    {
+      path: "/partners",
+      label: "Partners",
+      icon: "/assets/icons/user_partner.svg",
+    },
+    {
+      path: "/all-users",
+      label: "All Users",
+      icon: "/assets/icons/group-user.svg",
+    },
   ];
   return (
     <div className="bg-white w-64 hidden  h-full md:flex flex-col justify-between">
