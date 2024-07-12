@@ -18,7 +18,7 @@ const getStatusStyles = (status: string) => {
   }
 };
 
-export const columns: ColumnDef<BusinessOwner>[] = [
+export const columnsBusiness: ColumnDef<BusinessOwner>[] = [
   {
     accessorKey: "",
     id: "select",

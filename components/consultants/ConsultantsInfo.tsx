@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useConsultantById } from "@/lib/react-query/query/useConsultant";
 import ConsultantInfoCard from "./ConsultantInfoCard";
 import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
-import { columns } from "@/app/(root)/business-owners/column";
+import { columnsBusiness } from "@/app/(root)/business-owners/column";
 
 const ConsultantsInfo = () => {
   const { id } = useParams() as { id: string };
@@ -23,8 +23,8 @@ const ConsultantsInfo = () => {
           <ConsultantInfoCard consultant={consultant} />
           <div className=" p-10 flex flex-col gap-10 w-full bg-white rounded-lg mb-8">
             <BusinessOwnerTable
-              data={consultant.business_owners}
-              columns={columns}
+              data={consultant?.business_owners}
+              columns={columnsBusiness}
             />
           </div>
         </div>

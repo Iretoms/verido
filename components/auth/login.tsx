@@ -2,20 +2,19 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 import Image from "next/image";
-
-type IUsers = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-};
+import { IUsers } from "@/types";
+import useAuth from "@/lib/react-query/mutations/useAuth";
 
 const Login = () => {
-  const router = useRouter();
+  const { loginMutation } = useAuth();
+
   const onSubmit = async (data: IUsers) => {
-    console.log("Form Data:");
-    router.push("/");
+    if (isSubmitting) return;
+    try {
+      await loginMutation.mutateAsync(data);
+    } catch (error) {}
   };
   const {
     register,
@@ -105,13 +104,13 @@ const Login = () => {
           </Link>
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="text-white bg-verido-green mt-10   py-4 rounded-md w-full hover:bg-green-600"
-          onClick={() => console.log("Finito")}
+          className={`text-white bg-verido-green mt-10    py-4 rounded-md w-full hover:bg-green-600`}
+          disabled={isSubmitting}
         >
-          Sign in
-        </button>
+          {isSubmitting ? "Signing in..." : "Sign in"}
+        </Button>
         <div>
           <p className="font-bold text-gray-text text-sm">
             Do you have an account?{" "}

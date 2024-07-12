@@ -4,14 +4,9 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
-type IUsers = {
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  confirmPassword: string;
-};
+import { IUsersReg } from "@/types";
+import useAuth from "@/lib/react-query/mutations/useAuth";
+import { Button } from "../ui/button";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +17,7 @@ const Register = () => {
     handleSubmit,
     watch,
     formState: { isSubmitting, errors },
-  } = useForm<IUsers>({
+  } = useForm<IUsersReg>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
@@ -33,10 +28,15 @@ const Register = () => {
       confirmPassword: "",
     },
   });
+  const { registerMutation } = useAuth();
 
   const password = watch("password");
 
-  const onSubmit = async (data: IUsers) => {
+  const onSubmit = async (data: IUsersReg) => {
+    if (isSubmitting) return;
+    try {
+      await registerMutation.mutateAsync(data);
+    } catch (error) {}
     router.push("/");
   };
 
@@ -162,13 +162,13 @@ const Register = () => {
             </p>
           )}
         </div>
-        <button
+        <Button
           type="submit"
           className="text-white bg-verido-green mt-10 py-4 rounded-md w-full hover:bg-green-600"
           disabled={isSubmitting}
         >
-          Sign up
-        </button>
+          {isSubmitting ? "Signing up..." : "Sign up"}
+        </Button>
         <div>
           <p className="font-bold text-gray-text text-sm">
             Already have an account?{" "}

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { columns } from "./column";
+import { columnsBusiness } from "./column";
 import React, { useEffect } from "react";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
@@ -21,7 +21,7 @@ const BusinessOwners = () => {
       </div>
       <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 h-[42rem]">
       
-        <BusinessOwnerTable data={businessOwner} columns={columns} />
+        <BusinessOwnerTable data={businessOwner} columns={columnsBusiness} />
       </div>
     </div>
   );

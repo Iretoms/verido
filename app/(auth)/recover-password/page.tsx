@@ -2,28 +2,30 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-
-type IUsers = {
-  email: string;
-};
+import useAuth from "@/lib/react-query/mutations/useAuth";
+import { IRecoverPassword } from "@/types";
+import { Button } from "@/components/ui/button";
 
 const RecoverPassword = () => {
-  const router = useRouter();
-  const onSubmit = async (data: IUsers) => {
-    router.push("/reset-password", { scroll: false });
-  };
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm<IUsers>({
+  } = useForm<IRecoverPassword>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
       email: "",
     },
   });
+  const { recoverPasswordMutation } = useAuth();
+  const onSubmit = async (data: IRecoverPassword) => {
+    console.log(data);
+    if (isSubmitting) return;
+    try {
+      await recoverPasswordMutation.mutateAsync(data);
+    } catch (error) {}
+  };
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <form
@@ -53,12 +55,13 @@ const RecoverPassword = () => {
           )}
         </div>
 
-        <button
+        <Button
           type="submit"
           className="text-white bg-verido-green mt-10   py-4 rounded-md w-full hover:bg-green-600"
+          disabled={isSubmitting}
         >
-          Recover Password
-        </button>
+          {isSubmitting ? "Sending..." : " Recover Password"}
+        </Button>
         <div>
           <p className="font-bold text-gray-text text-sm">
             Go back to{" "}
