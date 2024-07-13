@@ -26,7 +26,6 @@ const Login = () => {
     defaultValues: {
       email: "",
       password: "",
-      rememberMe: false,
     },
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -91,14 +90,14 @@ const Login = () => {
           )}
         </div>
         <div className="flex items-center justify-between mt-4">
-          <label className="inline-flex items-center">
+          {/* <label className="inline-flex items-center">
             <input
               type="checkbox"
               {...register("rememberMe")}
               className="form-checkbox text-verido-green border-light-gray rounded"
             />
             <span className="ml-2 text-black-light text-sm">Remember me</span>
-          </label>
+          </label> */}
           <Link href="/recover-password" className="text-sm  text-gray-text">
             Forgot Password?
           </Link>

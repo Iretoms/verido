@@ -1,7 +1,19 @@
 export interface IUsers {
   email: string;
   password: string;
-  rememberMe: boolean;
+}
+
+export interface CurrentUserProfile {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  role: string;
+  status: boolean;
+  dateJoined: string;
+  __v: number;
+  token: string;
 }
 export interface IUsersReg {
   fullName: string;
@@ -48,9 +60,7 @@ export interface BusinessOwner {
   products: Product[];
   consultants: Consultant[];
 }
-interface Transaction {
-
-}
+interface Transaction {}
 
 export interface SubscriptionStatus {
   _id: string;
@@ -71,60 +81,43 @@ export interface Business {
   currencySymbol: string;
   __v: number;
 }
-export interface Consultant {
-  id: number;
-  enterprise_name: string;
-  name: string;
-  institution: string;
-  date_joined: string;
-  status: string;
-  admin: string;
-  email: string;
-  phone: string;
-  about: string;
-  company_info: string;
-  rating: number;
-  dob: string;
-  address: string;
-  business_owners: BusinessOwner[];
-}
 
-// export interface Consultant {
-//   _id: string;
-//   username: string;
-//   password: string;
-//   email: string;
-//   consultant_id: string;
-//   mobile_number: string;
-//   rating: number;
-//   ratedBy: number;
-//   business: string[];
-//   messages: string[];
-//   __v: number;
-//   token: string;
-//   suspended: boolean;
-//   dateJoined: string;
-//   businessName: string;
-//   institution: string;
-//   status: string;
-//   updatedAt: string;
-// }
+export interface Consultant {
+  _id: string;
+  username: string;
+  password: string;
+  email: string;
+  consultant_id: string;
+  mobile_number: string;
+  rating: number;
+  ratedBy: number;
+  business: string[];
+  messages: string[];
+  __v: number;
+  token: string;
+  suspended: boolean;
+  dateJoined: string;
+  businessName: string;
+  institution: string;
+  status: string;
+  updatedAt: string;
+}
 
 export interface AdminBusinessResponse {
   money_in: {
-    other_transaction: Transaction[];
-    refund: Transaction[];
-    material_assign: Transaction[];
-    labour_assign: Transaction[];
+    other_transaction: any[];
+    refund: any[];
+    material_assign: any[];
+    labour_assign: any[];
   };
   money_out: {
-    direct_material_purchase: Transaction[];
-    credit_purchase: Transaction[];
-    direct_labour: Transaction[];
-    overhead: Transaction[];
-    other_transaction: Transaction[];
-    refund_given: Transaction[];
-    asset_purchase: Transaction[];
+    direct_material_purchase: any[];
+    credit_purchase: any[];
+    direct_labour: any[];
+    overhead: any[];
+    other_transaction: any[];
+    refund_given: any[];
+    asset_purchase: any[];
   };
   market_products: any[];
   _id: string;
@@ -146,7 +139,7 @@ export interface AdminBusinessResponse {
   password: string;
   __v: number;
   stripeCustomerID: string;
-  institution: any[];
+  insitution: any[];
   videos: any[];
   consultant: Consultant[];
   messages: any[];

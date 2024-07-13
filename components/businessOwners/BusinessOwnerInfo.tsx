@@ -11,13 +11,13 @@ import { columns } from "../products/column";
 const BusinessOwnerInfo = () => {
   const { id } = useParams() as { id: string };
 
-  const { data: business, isLoading, isError } = useBusinessById(Number(id));
+  const { data: businessData, isLoading, isError } = useBusinessById(id);
 
   return (
     <div className="w-full h-full">
-      {business && (
+      {businessData && (
         <div className="flex flex-col gap-10">
-          <BusinessInfoCard business={business} />
+          <BusinessInfoCard business={businessData} />
           <div className="flex justify-between">
             <div className="bg-white p-3 rounded-lg flex justify-between w-[60%]">
               <div className=" rounded-lg">
@@ -32,13 +32,13 @@ const BusinessOwnerInfo = () => {
               <div className="flex flex-col gap-3  text-black-light w-[60%]">
                 <p className="text-[18px] mb-14">Consultant</p>
                 <p className="text-[26px] font-semibold">
-                  {business.enterprise_name}
+                  {businessData.consultant?.username}
                 </p>
                 <div className="flex flex-col items-start ">
                   <p className="font-light text-[12px] text-light-gray">
                     owner
                   </p>
-                  <p className="text-[13px]">{business.admin}</p>
+                  <p className="text-[13px]">{businessData.full_name}</p>
                 </div>
                 <Button
                   size={"sm"}
@@ -50,7 +50,7 @@ const BusinessOwnerInfo = () => {
             </div>
           </div>
           <div className="flex flex-col gap-5 p-10 w-full bg-white mb-10 rounded-lg">
-            <ProductTable data={business.products} columns={columns} />
+            <ProductTable data={businessData.product} columns={columns} />
           </div>
         </div>
       )}

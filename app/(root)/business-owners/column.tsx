@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { BusinessOwner } from "@/types";
+import { AdminBusinessResponse } from "@/types";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -18,7 +18,7 @@ const getStatusStyles = (status: string) => {
   }
 };
 
-export const columnsBusiness: ColumnDef<BusinessOwner>[] = [
+export const columnsBusiness: ColumnDef<AdminBusinessResponse>[] = [
   {
     accessorKey: "",
     id: "select",
@@ -41,19 +41,28 @@ export const columnsBusiness: ColumnDef<BusinessOwner>[] = [
     ),
   },
   {
-    accessorKey: "enterprise_name",
+    accessorKey: "full_name",
     header: "Enterprise Name",
   },
   {
-    accessorKey: "name",
+    accessorFn: (row) => row.business?.name,
+    id: "name",
     header: "Name",
   },
   {
-    accessorKey: "date_joined",
+    accessorFn: (row) => row.business?.sector,
+    id: "sector",
+    header: "Sector",
+  },
+  {
+    accessorFn: (row) =>
+      new Date(row.subscription_status?.started).toLocaleDateString(),
+    id: "date_joined",
     header: "Date Joined",
   },
   {
-    accessorKey: "status",
+    accessorFn: (row) =>
+      row.subscription_status?.status ? "Active" : "Inactive",
     id: "status",
     header: "Status",
     cell: ({ getValue }) => {
@@ -70,7 +79,9 @@ export const columnsBusiness: ColumnDef<BusinessOwner>[] = [
     },
   },
   {
-    accessorKey: "expires",
+    accessorFn: (row) =>
+      new Date(row.subscription_status?.expires).toLocaleDateString(),
+    id: "expires",
     header: "Expires",
   },
   {

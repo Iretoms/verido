@@ -1,22 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchBusinessOwners , fetchBusinessById } from "@/lib/api/businessOwners.api";
-import { BusinessOwner } from "@/types";
+import { fetchBusiness , fetchBusinessById } from "@/lib/api/businessOwners.api";
+import { AdminBusinessResponse, BusinessOwner } from "@/types";
 
 export const useBusiness = () => {
-  return useQuery<BusinessOwner[], Error>({
+  return useQuery<AdminBusinessResponse[], Error>({
     queryKey: ["business"],
     queryFn: async () => {
-      const response = await fetchBusinessOwners();
-      return response;
+      const response = await fetchBusiness();
+      return response.response;
     },
   });
 };
-export const useBusinessById = (id: number) => {
-  return useQuery<BusinessOwner, Error>({
+export const useBusinessById = (id: string) => {
+  return useQuery<AdminBusinessResponse, Error>({
     queryKey: ["business"],
     queryFn: async () => {
       const response = await fetchBusinessById(id);
-      return response;
+      return response.response;
     },
   });
 };

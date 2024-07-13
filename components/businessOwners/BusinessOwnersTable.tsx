@@ -19,7 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { BusinessOwner } from "@/types";
+import { AdminBusinessResponse } from "@/types";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -36,13 +36,13 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function BusinessOwnerTable<
+  TData extends AdminBusinessResponse,
+  TValue
+>({ columns, data }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
-  const handleRowSelection = (id: number) => {
+  const handleRowSelection = (id: string) => {
     router.push(`/business-owners/${id}`);
   };
 
@@ -68,7 +68,7 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
     },
   });
   const handleSortChange = (sortOrder: "asc" | "desc") => {
-    setSorting([{ id: "enterprise_name", desc: sortOrder === "desc" }]);
+    setSorting([{ id: "full_name", desc: sortOrder === "desc" }]);
   };
 
   return (
@@ -105,14 +105,10 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
             <Input
               placeholder="Search"
               value={
-                (table
-                  .getColumn("enterprise_name")
-                  ?.getFilterValue() as string) ?? ""
+                (table.getColumn("full_name")?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table
-                  .getColumn("enterprise_name")
-                  ?.setFilterValue(event.target.value)
+                table.getColumn("full_name")?.setFilterValue(event.target.value)
               }
               className="max-w-sm h-full outline-none"
             />
@@ -151,7 +147,7 @@ export function BusinessOwnerTable<TData extends BusinessOwner, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                onClick={() => handleRowSelection(row.original.id)}
+                onClick={() => handleRowSelection(row.original._id)}
                 data-state={row.getIsSelected() && "selected"}
                 className="text-sm font-light text-gray-text"
               >

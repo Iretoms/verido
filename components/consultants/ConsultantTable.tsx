@@ -31,20 +31,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Consultant } from "@/types";
+import { AdminBusinessResponse} from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function ConsultantTable<TData extends Consultant, TValue>({
+export function ConsultantTable<TData extends AdminBusinessResponse, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
-  const handleRowSelection = (id: number) => {
+  const handleRowSelection = (id: string) => {
     router.push(`/consultants/${id}`);
   };
 
@@ -169,7 +169,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                onClick={() => handleRowSelection(row.original.id)}
+                onClick={() => handleRowSelection(row.original._id)}
                 data-state={row.getIsSelected() && "selected"}
                 className="text-sm font-light text-gray-text"
               >

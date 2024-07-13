@@ -2,11 +2,11 @@
 import { ConsultantTable } from "@/components/consultants/ConsultantTable";
 import { columns } from "./column";
 import React, { useEffect } from "react";
-import { useConsultants } from "@/lib/react-query/query/useConsultant";
+import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
 
 const Consultants = () => {
-  const { data: consultantData, isLoading, isError } = useConsultants();
+  const { data: consultantData, isLoading, isError } = useBusiness();
 
   //Come back to correct this line
   const consultants = consultantData || [];

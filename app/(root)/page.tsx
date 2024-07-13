@@ -7,18 +7,21 @@ import { useConsultants } from "@/lib/react-query/query/useConsultant";
 import { columns } from "./consultants/column";
 import { columnsBusiness } from "./business-owners/column";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
+import { useQueryClient } from "@tanstack/react-query";
+import { useCurrentUser } from "@/lib/react-query/query/useUser";
 
 const DashboardContent = () => {
-  const { data: consultantData, isLoading, isError } = useConsultants();
+  const { data: consultantData} = useConsultants();
   const consultants = consultantData || [];
   const { data: businessOwnersData } = useBusiness();
+  const queryClient = useQueryClient();
+  const { data: currentUser } = useCurrentUser();
 
-  //Come back to correct this line
   const businessOwner = businessOwnersData || [];
   return (
     <div className="flex flex-col flex-1 p-6 space-y-6">
       <div>
-        <h1 className="text-2xl">Welcome back, Edward 👋</h1>
+        <h1 className="text-2xl">Welcome back, {currentUser?.name} 👋</h1>
         <p className="text-gray-text text-[12px] font-light">
           Your current status and analytics are here
         </p>
