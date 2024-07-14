@@ -153,7 +153,7 @@ const DashboardContent = () => {
           </div>
         </div>
       </div>
-
+      
       <div className="bg-white p-10 rounded-md">
         <ConsultantTable data={consultants} columns={columns} />
       </div>
