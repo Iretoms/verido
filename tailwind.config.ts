@@ -20,6 +20,7 @@ const config = {
     extend: {
       colors: {
         "verido-green": "#08A730",
+        "verido-red": "#FF3B30",
         "gray-text": "#636E72",
         "light-green": "#EBFAEE",
         "black-light": "#2D3436",
@@ -34,6 +35,8 @@ const config = {
         "verido-white": "#FFFFFF",
         "verido-light-blue": "#F7FAFC",
         "verido-border": "#DFE6E9",
+        "verido-light-green": "#00F7BF",
+        "verido-faint-blue": "#1BE7FF",
       },
       keyframes: {
         "accordion-down": {
