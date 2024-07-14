@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 
 interface DownlinksProps {
-  totalCount: number;
-  businessOwnersCount: number;
-  consultantsCount: number;
+  totalCount: any;
+  businessOwnersCount: any;
+  consultantsCount: any;
 }
 
 const DownLinksGraph: React.FC<DownlinksProps> = ({
@@ -74,7 +74,7 @@ const DownLinksGraph: React.FC<DownlinksProps> = ({
           />
         </svg>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <div className="text-3xl text-light-gray">Total</div>
+          <div className="text-xl text-light-gray">Total</div>
           <div className="text-2xl">{totalCount.toLocaleString()}</div>
         </div>
       </div>

@@ -19,7 +19,6 @@ const DashboardContent = () => {
   const consultants = businessOwnersData
     ? extractConsultants(businessOwnersData)
     : [];
-  const queryClient = useQueryClient();
   const { data: currentUser } = useCurrentUser();
 
   const businessOwner = businessOwnersData || [];
@@ -134,37 +133,8 @@ const DashboardContent = () => {
           <DownLinksGraph
             businessOwnersCount={businessOwnersData?.length}
             consultantsCount={consultants.length}
-            totalCount={businessOwnersData?.length + consultants.length}
+            totalCount={(businessOwnersData?.length || 0) + consultants.length }
           />
-          {/* <div className=" flex flex-col gap-2 items-center justify-center bg-white p-6 rounded-md">
-            <div className="flex justify-between items-center  w-full">
-              <p className="text-sm font-light">Downlinks</p>
-              <Image
-                src="/assets/icons/more-fill.svg"
-                width={20}
-                height={20}
-                alt="more"
-                className="object-contain cursor-pointer"
-              />
-            </div>
-            <Image
-              src="/assets/icons/Chart.svg"
-              width={200}
-              height={200}
-              alt="Illustration"
-            />
-
-            <div className="flex justify-center gap-10 mt-8 items-center w-full">
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-blue-300"></div>
-                <p className="text-[13px]">Business Owners</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-blue-300"></div>
-                <p className="text-[13px]">Consultants</p>
-              </div>
-            </div>
-          </div> */}
           <div className="bg-white p-6 rounded-lg flex items-center justify-between">
             <div className=" flex flex-col items-center justify-center">
               <Image
