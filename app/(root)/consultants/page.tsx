@@ -17,6 +17,7 @@ const Consultants = () => {
   const pathname = usePathname();
 
   const consultants = businessData ? extractConsultants(businessData) : [];
+  console.log(consultants)
 
   if (isLoading) {
     return <div>Loading...</div>;

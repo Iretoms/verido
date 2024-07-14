@@ -31,7 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { AdminBusinessResponse, Consultant} from "@/types";
+import { Consultant } from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -169,12 +169,14 @@ export function ConsultantTable<TData extends Consultant, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                onClick={() => handleRowSelection(row.original._id)}
                 data-state={row.getIsSelected() && "selected"}
                 className="text-sm font-light text-gray-text"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
+                  <TableCell
+                    onClick={() => handleRowSelection(row.original._id)}
+                    key={cell.id}
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
