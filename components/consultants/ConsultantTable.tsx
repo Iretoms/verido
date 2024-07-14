@@ -30,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useConsultantContext } from "@/context/ConsultantContext";
 
 import { Consultant } from "@/types";
 
@@ -44,9 +45,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
-  const handleRowSelection = (id: string) => {
-    router.push(`/consultants/${id}`);
-  };
+
 
   const getStatusStyles = (status: string) => {
     switch (status.toLowerCase()) {
@@ -80,6 +79,11 @@ export function ConsultantTable<TData extends Consultant, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const { setSelectedConsultant } = useConsultantContext();
+    const handleRowSelection = (consultant: Consultant) => {
+      router.push(`/consultants/${consultant._id}`)
+      setSelectedConsultant(consultant);
+    };
 
   const table = useReactTable({
     data,
@@ -169,12 +173,13 @@ export function ConsultantTable<TData extends Consultant, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
+                onClick={() => handleRowSelection(row.original)}
                 data-state={row.getIsSelected() && "selected"}
                 className="text-sm font-light text-gray-text"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
-                    onClick={() => handleRowSelection(row.original._id)}
+                    // onClick={() => handleRowSelection(row.original._id)}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

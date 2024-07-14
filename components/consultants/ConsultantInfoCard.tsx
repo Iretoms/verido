@@ -38,11 +38,11 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
             src="/assets/icons/memoji.svg"
             width={30}
             height={30}
-            alt={consultant.name}
+            alt={consultant.email}
             className="w-16 h-16 rounded-full object-contain"
           />
           <div className="flex flex-col justify-center items-center gap-1">
-            <h2 className="text-lg">{consultant.name}</h2>
+            <h2 className="text-lg">{consultant.username}</h2>
             <p className="text-gray-text text-[10px] ">{consultant.email}</p>
             <Button
               size={"sm"}
@@ -68,7 +68,7 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
           <div className="flex flex-col flex-1 gap-2 ">
             <h3 className="text-2xl">Company&apos;s Informations</h3>
             <p className="text-gray-text text-[12px] w-[70%]">
-              {consultant.company_info}
+              {consultant.email}
             </p>
           </div>
           <div className="">
@@ -111,7 +111,7 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
         </div>
         <div className="border-t border-verido-border w-full py-4">
           <h3 className="text-2xl">About</h3>
-          <p className="text-gray-text text-[12px]">{consultant.about}</p>
+          <p className="text-gray-text text-[12px]">{consultant.email}</p>
         </div>
         <div className="border-t border-verido-border py-4 flex flex-col gap-5 w-full">
           <h3 className="text-2xl">Contact</h3>
@@ -126,13 +126,13 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
               <li>Address</li>
             </ul>
             <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
-              <li>{consultant.enterprise_name}</li>
-              <li>{consultant.institution}</li>
-              <li>{consultant.admin}</li>
               <li>{consultant.email}</li>
-              <li>{consultant.phone}</li>
-              <li>{consultant.dob}</li>
-              <li>{consultant.address}</li>
+              <li>{consultant.institution}</li>
+              <li>{consultant.email}</li>
+              <li>{consultant.email}</li>
+              <li>{consultant.email}</li>
+              <li>{consultant.email}</li>
+              <li>{consultant.email}</li>
             </ul>
           </div>
           <ul className="text-gray-text text-[12px] flex items-start justify-center flex-col gap-5"></ul>
@@ -146,7 +146,7 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
               <li>Rating</li>
             </ul>
             <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
-              <li>{consultant.date_joined}</li>
+              <li>{consultant.email}</li>
               <li className="flex">{renderStars(consultant.rating)}</li>
             </ul>
           </div>
