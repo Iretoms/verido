@@ -32,7 +32,7 @@ const BusinessOwnerInfo = () => {
               <div className="flex flex-col gap-3  text-black-light w-[60%]">
                 <p className="text-[18px] mb-14">Consultant</p>
                 <p className="text-[26px] font-semibold">
-                  {businessData.consultant?.username}
+                  {businessData.full_name}
                 </p>
                 <div className="flex flex-col items-start ">
                   <p className="font-light text-[12px] text-light-gray">
