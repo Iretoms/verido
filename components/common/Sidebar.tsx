@@ -38,9 +38,19 @@ const Sidebar = () => {
       icon: "/assets/icons/user_partner.svg",
     },
     {
+      path: "/experts",
+      label: "Expert",
+      icon: "/assets/icons/user-follow.svg",
+    },
+    {
       path: "/all-users",
       label: "All Users",
       icon: "/assets/icons/group-user.svg",
+    },
+    {
+      path: "/chats",
+      label: "Chats",
+      icon: "/assets/icons/chat.svg",
     },
   ];
   return (

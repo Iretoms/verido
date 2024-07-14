@@ -1,9 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Consultant } from "@/types";
-import Image from "next/image";
+import { Partners } from "@/types";
 
 const getStatusStyles = (status: string) => {
-  switch (status.toLowerCase()) {
+  switch (status) {
     case "active":
       return "bg-light-green border border-verido-green text-verido-green";
     case "inactive":
@@ -16,17 +15,17 @@ const getStatusStyles = (status: string) => {
   }
 };
 
-export const columns: ColumnDef<Consultant>[] = [
+export const columns: ColumnDef<Partners>[] = [
   {
     accessorKey: "username",
-    header: "Consultant Name",
+    header: "Partner Name",
   },
   {
     accessorKey: "email",
     header: "Email",
   },
   {
-    accessorKey: "institution",
+    accessorKey: "name",
     header: "Institution",
   },
   {

@@ -102,6 +102,26 @@ export interface Consultant {
   status: string;
   updatedAt: string;
 }
+export interface Partners {
+  _id: string;
+  username: string;
+  password: string;
+  email: string;
+  consultant_id: string;
+  mobile_number: string;
+  rating: number;
+  ratedBy: number;
+  business: string[];
+  messages: string[];
+  __v: number;
+  token: string;
+  suspended: boolean;
+  dateJoined: string;
+  businessName: string;
+  institution: string;
+  status: string;
+  updatedAt: string;
+}
 
 export interface AdminBusinessResponse {
   money_in: {
@@ -139,7 +159,7 @@ export interface AdminBusinessResponse {
   password: string;
   __v: number;
   stripeCustomerID: string;
-  insitution: any[];
+  institution: Partners[];
   videos: any[];
   consultant: Consultant[];
   messages: any[];

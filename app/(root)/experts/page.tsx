@@ -6,17 +6,16 @@ import React from "react";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
 import { AdminBusinessResponse, Consultant } from "@/types";
-
-
-const extractConsultants = (data: AdminBusinessResponse[]): Consultant[] => {
-  return data.flatMap((business) => business.consultant || []);
+import { ExpertsTable } from "@/components/experts/ExpertTable";
+const extractExperts = (data: AdminBusinessResponse[]): any[] => {
+  return data.flatMap((business) => business.customer || []);
 };
 
-const Consultants = () => {
+const Experts = () => {
   const { data: businessData, isLoading, isError } = useBusiness();
   const pathname = usePathname();
 
-  const consultants = businessData ? extractConsultants(businessData) : [];
+  const experts = businessData ? extractExperts(businessData) : [];
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -33,10 +32,10 @@ const Consultants = () => {
         <span className="text-gray-text">{pathname.substring(1)}</span>
       </div>
       <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 min-h-[42rem]">
-        <ConsultantTable data={consultants} columns={columns} />
+        <ExpertsTable data={experts} columns={columns} />
       </div>
     </div>
   );
 };
 
-export default Consultants;
+export default Experts;

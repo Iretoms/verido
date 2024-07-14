@@ -3,17 +3,22 @@ import React from "react";
 import Image from "next/image";
 import { ConsultantTable } from "@/components/consultants/ConsultantTable";
 import { BusinessOwnerTable } from "@/components/businessOwners/BusinessOwnersTable";
-import { useConsultants } from "@/lib/react-query/query/useConsultant";
 import { columns } from "./consultants/column";
 import { columnsBusiness } from "./business-owners/column";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCurrentUser } from "@/lib/react-query/query/useUser";
+import { AdminBusinessResponse, Consultant } from "@/types";
+import DownLinksGraph from "@/components/common/DownLinksGraph";
 
 const DashboardContent = () => {
-  const { data: consultantData} = useConsultants();
-  const consultants = consultantData || [];
   const { data: businessOwnersData } = useBusiness();
+  const extractConsultants = (data: AdminBusinessResponse[]): Consultant[] => {
+    return data.flatMap((business) => business.consultant || []);
+  };
+  const consultants = businessOwnersData
+    ? extractConsultants(businessOwnersData)
+    : [];
   const queryClient = useQueryClient();
   const { data: currentUser } = useCurrentUser();
 
@@ -38,7 +43,7 @@ const DashboardContent = () => {
                 height={100}
                 className="object-contain w-full"
               />
-              <p className="text-[18px]">1,346</p>
+              <p className="text-[18px]">{businessOwnersData?.length}</p>
               <p className="font-light text-[12px] text-gray-text">
                 Business Owners
               </p>
@@ -51,7 +56,7 @@ const DashboardContent = () => {
                 height={100}
                 className="object-contain w-full"
               />
-              <p className="text-[18px]">133</p>
+              <p className="text-[18px]">{consultants?.length}</p>
               <p className="font-light text-[12px] text-gray-text">
                 Consultants
               </p>
@@ -64,7 +69,7 @@ const DashboardContent = () => {
                 height={100}
                 className="object-contain w-full"
               />
-              <p className="text-[18px]">346</p>
+              <p className="text-[18px]">0</p>
               <p className="font-light text-[12px] text-gray-text">
                 Active Suscribers
               </p>
@@ -77,7 +82,7 @@ const DashboardContent = () => {
                 height={100}
                 className="object-contain w-full"
               />
-              <p className="text-[18px]">75</p>
+              <p className="text-[18px]">0</p>
               <p className="font-light text-[12px] text-gray-text">
                 Active Consultants
               </p>
@@ -89,7 +94,7 @@ const DashboardContent = () => {
               <p className="text-gray-text text-[13px] font-extralight">
                 Total
               </p>
-              <p>$6.340.42</p>
+              <p>$0</p>
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
@@ -126,7 +131,12 @@ const DashboardContent = () => {
           </div>
         </div>
         <div className="flex flex-col gap-10">
-          <div className=" flex flex-col gap-2 items-center justify-center bg-white p-6 rounded-md">
+          <DownLinksGraph
+            businessOwnersCount={businessOwnersData?.length}
+            consultantsCount={consultants.length}
+            totalCount={businessOwnersData?.length + consultants.length}
+          />
+          {/* <div className=" flex flex-col gap-2 items-center justify-center bg-white p-6 rounded-md">
             <div className="flex justify-between items-center  w-full">
               <p className="text-sm font-light">Downlinks</p>
               <Image
@@ -154,7 +164,7 @@ const DashboardContent = () => {
                 <p className="text-[13px]">Consultants</p>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="bg-white p-6 rounded-lg flex items-center justify-between">
             <div className=" flex flex-col items-center justify-center">
               <Image

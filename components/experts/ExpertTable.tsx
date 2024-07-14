@@ -31,25 +31,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { AdminBusinessResponse, Consultant} from "@/types";
+import { Partners } from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function ConsultantTable<TData extends Consultant, TValue>({
+export function ExpertsTable<TData extends any, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
   const handleRowSelection = (id: string) => {
-    router.push(`/consultants/${id}`);
+    router.push(`/partners/${id}`);
   };
 
   const getStatusStyles = (status: string) => {
-    switch (status.toLowerCase()) {
+    switch (status) {
       case "active":
         return "bg-light-green border border-verido-green text-verido-green";
       case "suspended":
@@ -61,21 +61,6 @@ export function ConsultantTable<TData extends Consultant, TValue>({
     }
   };
 
-  const statusColumn = columns.find((col) => col.cell);
-  if (statusColumn) {
-    statusColumn.cell = ({ getValue }) => {
-      const status = getValue() as string;
-      return (
-        <span
-          className={`px-6 py-1 rounded-lg text-xs font-medium ${getStatusStyles(
-            status
-          )}`}
-        >
-          {status}
-        </span>
-      );
-    };
-  }
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -95,18 +80,17 @@ export function ConsultantTable<TData extends Consultant, TValue>({
       sorting,
     },
   });
+
   const handleSortChange = (sortOrder: "asc" | "desc") => {
-    setSorting([{ id: "enterprise_name", desc: sortOrder === "desc" }]);
+    setSorting([{ id: "name", desc: sortOrder === "desc" }]);
   };
 
   return (
     <div className="rounded-md">
       <div className="flex justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="text-[20px]">Consultants</h2>
-          <p className="text-[14px] text-black">
-            List of consultants available
-          </p>
+          <h2 className="text-[20px]">Experts</h2>
+          <p className="text-[14px] text-black">List of Experts available</p>
         </div>
         <div className="flex gap-2">
           <Select onValueChange={handleSortChange}>
@@ -118,7 +102,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
                 Descending
               </SelectItem>
               <SelectItem className="text-sm text-light-gray" value="asc">
-                Asecending
+                Ascending
               </SelectItem>
             </SelectContent>
           </Select>
@@ -133,17 +117,22 @@ export function ConsultantTable<TData extends Consultant, TValue>({
             <Input
               placeholder="Search"
               value={
-                (table
-                  .getColumn("enterprise_name")
-                  ?.getFilterValue() as string) ?? ""
+                (table.getColumn("name")?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table
-                  .getColumn("enterprise_name")
-                  ?.setFilterValue(event.target.value)
+                table.getColumn("name")?.setFilterValue(event.target.value)
               }
               className="max-w-sm h-full outline-none"
             />
+          </div>
+          <div className="flex justify-between">
+            <Button
+              size={"sm"}
+              variant={"outline"}
+              className="text-verido-white bg-verido-green rounded-lg text-sm w-[10rem]"
+            >
+              Add Experts
+            </Button>
           </div>
         </div>
       </div>
@@ -165,11 +154,11 @@ export function ConsultantTable<TData extends Consultant, TValue>({
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {table.getRowModel().rows?.length ? (
+          {data.length > 0 ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                onClick={() => handleRowSelection(row.original._id)}
+                // onClick={() => handleRowSelection(row.original._id)}
                 data-state={row.getIsSelected() && "selected"}
                 className="text-sm font-light text-gray-text"
               >
@@ -181,34 +170,36 @@ export function ConsultantTable<TData extends Consultant, TValue>({
               </TableRow>
             ))
           ) : (
-            <TableRow className="text-sm font-bold text-gray-text">
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No Consultants associated to you yet.
+            <TableRow>
+              <TableCell colSpan={columns.length} className="text-center">
+                No Experts data yet.
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-          className="border border-verido-green disabled:border-gray-text text-gray-text"
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-          className="border border-verido-green disabled:border-gray-text text-gray-text"
-        >
-          Next
-        </Button>
-      </div>
+      {data.length > 0 && (
+        <div className="flex items-center justify-end space-x-2 py-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            className="border border-verido-green disabled:border-gray-text text-gray-text"
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            className="border border-verido-green disabled:border-gray-text text-gray-text"
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
