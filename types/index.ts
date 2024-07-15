@@ -207,6 +207,6 @@ export interface IUpdateVideo {
 export interface IVideo {
   _id:string
   title: string;
-  videoID: string;
+  vidoeID: string;
   category: string;
 }

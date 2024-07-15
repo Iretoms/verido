@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -20,6 +20,8 @@ import {
 import CreateVideo from "./CreateVideo";
 import { IVideo } from "@/types";
 import { Button } from "../ui/button";
+import EditVideo from "./EditVideo"; 
+import Image from "next/image";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,10 +32,10 @@ export function VideoTable<TData extends IVideo, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [rowSelection, setRowSelection] = useState({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
   const table = useReactTable({
     data,
@@ -43,12 +45,16 @@ export function VideoTable<TData extends IVideo, TValue>({
     onRowSelectionChange: setRowSelection,
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-
     state: {
       rowSelection,
       columnFilters,
     },
   });
+
+  const handleEditClick = (video: IVideo) => {
+    setSelectedVideo(video);
+    setIsEditDialogOpen(true);
+  };
 
   return (
     <div className="rounded-md">
@@ -93,6 +99,25 @@ export function VideoTable<TData extends IVideo, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
+                <TableCell>
+                  <div className="flex space-x-2">
+                    <Image
+                      src="/assets/icons/editVideo.svg"
+                      alt="edit"
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() => handleEditClick(row.original)}
+                    />
+                    <Image
+                      src="/assets/icons/deleteVideo.svg"
+                      alt="delete"
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                    />
+                  </div>
+                </TableCell>
               </TableRow>
             ))
           ) : (
@@ -124,6 +149,11 @@ export function VideoTable<TData extends IVideo, TValue>({
           Next
         </Button>
       </div>
+      <EditVideo
+        isOpen={isEditDialogOpen}
+        onClose={() => setIsEditDialogOpen(false)}
+        video={selectedVideo}
+      />
     </div>
   );
 }
