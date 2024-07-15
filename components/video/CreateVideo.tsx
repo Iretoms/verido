@@ -21,13 +21,14 @@ const CreateVideo = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting, errors },
   } = useForm<ICreateVideo>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
       title: "",
-      videoId: "",
+      vidoeID: "",
       category: "",
     },
   });
@@ -41,6 +42,7 @@ const CreateVideo = () => {
     } catch (error) {
       console.error(error);
     }
+    reset()
   };
 
   return (
@@ -81,18 +83,18 @@ const CreateVideo = () => {
               )}
             </div>
             <div className="flex flex-col gap-1 items-start">
-              <Label htmlFor="videoId" className="text-[11px]">
+              <Label htmlFor="vidoeID" className="text-[11px]">
                 Video ID:
               </Label>
               <Input
                 id="videoId"
-                {...register("videoId", { required: "Video ID is required" })}
+                {...register("vidoeID", { required: "Video ID is required" })}
                 className={`border ${
-                  errors.videoId ? "border-red-500" : "border-verido-border"
+                  errors.vidoeID ? "border-red-500" : "border-verido-border"
                 } px-3 py-2 focus:outline-none`}
               />
-              {errors.videoId && (
-                <p className="text-red-500 text-xs">{errors.videoId.message}</p>
+              {errors.vidoeID && (
+                <p className="text-red-500 text-xs">{errors.vidoeID.message}</p>
               )}
             </div>
             <div className="flex flex-col gap-1 items-start">

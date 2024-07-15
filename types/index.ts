@@ -197,7 +197,7 @@ export interface ICreatePartner {
 }
 export interface ICreateVideo {
   title: string;
-  videoId: string;
+  vidoeID: string;
   category: string;
 }
 export interface IUpdateVideo {

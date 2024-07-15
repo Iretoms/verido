@@ -1,19 +1,23 @@
-// import { toast  } from "sonner";
-// import { useCallback } from "react";
+import { useToast } from "@chakra-ui/react";
+import { useCallback } from "react";
 
+const useCustomToast = () => {
+  const toast = useToast();
 
-// const useCustomToast = () => {
-//   const showToast = useCallback(
-//     (title: string, description: string, status: "success" | "error") => {
-//       toast[status]({
-//         title: title,
-//         description: description,
-//       });
-//     },
-//     []
-//   );
+  const showToast = useCallback(
+    (title: string, description: string, status: "success" | "error") => {
+      toast({
+        title,
+        description,
+        status,
+        isClosable: true,
+        position: "bottom-right",
+      });
+    },
+    [toast]
+  );
 
-//   return showToast;
-// };
+  return showToast;
+};
 
-// export default useCustomToast;
+export default useCustomToast;

@@ -22,7 +22,7 @@ const DownLinksGraph: React.FC<DownlinksProps> = ({
     circumference - (consultantsPercentage / 100) * circumference;
 
   return (
-    <div className="w-[352px] h-[360px] bg-white rounded-2xl shadow-lg p-6">
+    <div className="w-[352px] h-[21.8rem] bg-white rounded-2xl p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-light">Downlinks</h2>
         <Image

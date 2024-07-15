@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { login, recoverPassword, register } from "@/lib/api/auth.api";
 import { IRecoverPassword, IUsers, IUsersReg } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
+import useCustomToast from "@/lib/hooks/useCustomToast";
 
 const isLoggedIn = () => {
   return (
@@ -15,6 +16,7 @@ const isLoggedIn = () => {
 
 const useAuth = () => {
   const queryClient = useQueryClient();
+  const showToast = useCustomToast();
   const router = useRouter();
 
   const loginMutation = useMutation({
@@ -26,6 +28,7 @@ const useAuth = () => {
       const { token } = data;
       localStorage.setItem("access_token", token);
       Cookies.set("access_token", token);
+      showToast("Success!", "Sign in Successful.", "success");
       router.push("/");
     },
     onError: (error) => {
@@ -36,6 +39,7 @@ const useAuth = () => {
           errDetail = errDetail[0];
         }
       }
+      showToast("Someone went wrong", errDetail, "error");
     },
   });
 
@@ -48,6 +52,7 @@ const useAuth = () => {
       const { token } = data;
       localStorage.setItem("access_token", token);
       Cookies.set("access_token", token, { expires: 1 });
+      showToast("Success!", "Password recovery is Successful.", "success");
 
       router.push("/signin");
     },
@@ -59,6 +64,7 @@ const useAuth = () => {
           errDetail = errDetail[0];
         }
       }
+      showToast("Someone went wrong", errDetail, "error");
     },
   });
 
@@ -68,6 +74,7 @@ const useAuth = () => {
       return response.response;
     },
     onSuccess: (data) => {
+      showToast("Success!", "Registration Successful.", "success");
       router.push("/");
     },
     onError: (error) => {
@@ -78,6 +85,7 @@ const useAuth = () => {
           errDetail = errDetail[0];
         }
       }
+       showToast("Someone went wrong", errDetail, "error");
     },
   });
 

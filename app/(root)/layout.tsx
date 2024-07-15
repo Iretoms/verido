@@ -6,6 +6,7 @@ import { Manrope as Inter } from "next/font/google";
 import "../../app/globals.css";
 import { QueryProvider } from "@/app/QueryProvider";
 import { ConsultantProvider } from "@/context/ConsultantContext";
+import {ChakraProvider} from '@chakra-ui/react'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +25,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <Navbar />
           </div>
           <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body px-6">
-            <ConsultantProvider>
-              <QueryProvider>{children}</QueryProvider>
-            </ConsultantProvider>
+            <ChakraProvider>
+              <ConsultantProvider>
+                <QueryProvider>{children}</QueryProvider>
+              </ConsultantProvider>
+            </ChakraProvider>
           </main>
         </div>
       </body>
