@@ -1,23 +1,24 @@
 "use client";
 
+import { IVideo } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 
-const getStatusColor = (status: string) => {
-  switch (status.toLowerCase()) {
-    case "help":
+const getStatusColor = (category: string) => {
+  switch (category) {
+    case "Setup":
       return "bg-light-green border border-verido-green text-verido-green";
-    case "tutorial":
+    case "Business Success Tip":
       return "bg-light-orange text-verido-orange border border-verido-orange";
     default:
       return "";
   }
 };
 
-export const columnsVideo: ColumnDef<any>[] = [
+export const columnsVideo: ColumnDef<IVideo>[] = [
 
   {
-    accessorKey: "id",
+    accessorKey: "_id",
     header: "ID",
   },
   {
@@ -25,17 +26,17 @@ export const columnsVideo: ColumnDef<any>[] = [
     header: "Title",
   },
   {
-    accessorKey: "youtubeId",
+    accessorKey: "vidoeID",
     header: "Youtube ID",
   },
   {
     accessorKey: "category",
     header: "Category",
     cell: ({ getValue }) => {
-      const status = getValue<string>();
+      const category = getValue<string>();
       return (
         <span className={`px-2 py-1 rounded-lg ${getStatusColor(status)}`}>
-          {status}
+          {category}
         </span>
       );
     },

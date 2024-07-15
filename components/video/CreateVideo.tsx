@@ -14,19 +14,15 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-interface ICreateVideoForm {
-  title: string;
-  videoId: string;
-  category: string;
-}
+import { ICreateVideo } from "@/types";
+import useVideos from "@/lib/react-query/mutations/useVideo";
 
 const CreateVideo = () => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm<ICreateVideoForm>({
+  } = useForm<ICreateVideo>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
@@ -35,15 +31,13 @@ const CreateVideo = () => {
       category: "",
     },
   });
-  const router = useRouter();
+  const {createVideoMutation} = useVideos()
 
-  const onSubmit = async (data: ICreateVideoForm) => {
+  const onSubmit = async (data: ICreateVideo) => {
     if (isSubmitting) return;
     try {
-      // Call your API to create video here
-      // await createVideo(data);
-      console.log(data);
-      router.push("/");
+      await createVideoMutation.mutateAsync(data)
+ 
     } catch (error) {
       console.error(error);
     }

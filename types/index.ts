@@ -19,7 +19,7 @@ export interface IUsersReg {
   name: string;
   email: string;
   phone: string;
-  partner_id:string
+  partner_id: string;
   password: string;
   confirmPassword: string;
 }
@@ -185,7 +185,7 @@ export interface ICreateConsultantCreate {
   email: string;
   phone: string;
   password: string;
-  partner_id:string
+  partner_id: string;
   confirmPassword: string;
 }
 export interface ICreatePartner {
@@ -194,4 +194,19 @@ export interface ICreatePartner {
   phone: string;
   password: string;
   confirmPassword: string;
+}
+export interface ICreateVideo {
+  title: string;
+  videoId: string;
+  category: string;
+}
+export interface IUpdateVideo {
+ payload:IVideo,
+ id:string
+}
+export interface IVideo {
+  _id:string
+  title: string;
+  videoID: string;
+  category: string;
 }

@@ -15,7 +15,7 @@ import CashMovementChart from "@/components/common/CashMovementChart";
 import MoneyInOutStats from "@/components/common/MoneyInOutStats";
 import { VideoTable } from "@/components/video/VideoTable";
 import { videoDummyData } from "@/constant";
-import { Button } from "@/components/ui/button";
+import { useVideos } from "@/lib/react-query/query/useVideo";
 import CreateConsultant from "@/components/consultants/CreateConsultant";
 import CreatePartner from "@/components/partners/CreatePartner";
 
@@ -23,8 +23,10 @@ const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
   const { data: consultantsData, isLoading, isError } = useConsultants();
   const { data: currentUser } = useCurrentUser();
+  const {data:videData} = useVideos()
   const businessOwner = businessOwnersData || [];
   const consultants = consultantsData || [];
+  const videos = videData || []
   const isSuperAdmin = currentUser?.role === "super_admin";
   return (
     <div className="flex flex-col flex-1 p-6 space-y-6">
@@ -123,8 +125,8 @@ const DashboardContent = () => {
               />
             </div>
           </div>
-          <div className="flex justify-between flex-col p-5 rounded-md bg-white">
-            <VideoTable columns={columnsVideo} data={videoDummyData} />
+          <div className="flex justify-between flex-col p-5 rounded-md bg-white max-h-[25rem] overflow-y-auto">
+            <VideoTable columns={columnsVideo} data={videos} />
           </div>
         </div>
         <div className="flex flex-col gap-10">
