@@ -11,7 +11,7 @@ import Image from "next/image";
 const Page = () => {
   const pathname = usePathname();
   return (
-    <div className="flex flex-col gap-6 ">
+    <div className="flex flex-col gap-6 mb-10">
       <div className="text-sm  text-verido-green">
         Home <span>/ </span>{" "}
         <span className="text-gray-text capitalize">
@@ -31,9 +31,9 @@ const Page = () => {
           <Image
             src="/assets/icons/barchart1.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$1,346.00</p>
@@ -44,9 +44,9 @@ const Page = () => {
           <Image
             src="/assets/icons/barchart2.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$13,346.00</p>
@@ -59,9 +59,9 @@ const Page = () => {
           <Image
             src="/assets/icons/barchart3.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$2,345.00</p>
@@ -74,9 +74,9 @@ const Page = () => {
           <Image
             src="/assets/icons/barchart4.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$17,346.00</p>
@@ -110,8 +110,8 @@ const Page = () => {
             <Image
               src="/assets/icons/namecirclechart1.svg"
               alt="chart"
-              width={130}
-              height={130}
+              width={120}
+              height={120}
               className="object-contain"
             />
           </div>
@@ -141,8 +141,8 @@ const Page = () => {
             <Image
               src="/assets/icons/namecirclechart2.svg"
               alt="chart"
-              width={160}
-              height={160}
+              width={150}
+              height={150}
               className="object-contain"
             />
           </div>

@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Partners } from "@/types";
+import { Partner } from "@/types";
 
 const getStatusStyles = (status: string) => {
   switch (status) {
@@ -15,9 +15,9 @@ const getStatusStyles = (status: string) => {
   }
 };
 
-export const columns: ColumnDef<Partners>[] = [
+export const columnsPartner: ColumnDef<Partner>[] = [
   {
-    accessorKey: "username",
+    accessorKey: "name",
     header: "Partner Name",
   },
   {
@@ -28,10 +28,7 @@ export const columns: ColumnDef<Partners>[] = [
     accessorKey: "name",
     header: "Institution",
   },
-  {
-    accessorKey: "mobile_number",
-    header: "Phone Number",
-  },
+
   {
     accessorKey: "dateJoined",
     header: "Date Joined",

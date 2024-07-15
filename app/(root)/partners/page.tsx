@@ -1,24 +1,20 @@
 "use client";
 
 import { PartnersTable } from "@/components/partners/PartnersTable";
-import { columns } from "./column";
+import { columnsPartner } from "./column";
 import React from "react";
-import { useBusiness } from "@/lib/react-query/query/useBusiness";
-import { usePathname } from "next/navigation";
-import { AdminBusinessResponse, Partners } from "@/types";
 
-const extractPartners = (data: AdminBusinessResponse[]): Partners[] => {
-  if (data.length === 0) return [];
-  return data.flatMap((business) => business.institution || []);
-};
+import { usePathname } from "next/navigation";
+import { usePartners } from "@/lib/react-query/query/usePartners";
+
 
 const PartnersComponent = () => {
-  const { data: businessData, isLoading, isError } = useBusiness();
-  console.log(businessData);
+  const {data:partnerData , isLoading , isError} = usePartners()
+   const partners = partnerData || [];
+
   const pathname = usePathname();
 
-  const partners = businessData ? extractPartners(businessData) : [];
-  console.log(partners);
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -35,7 +31,7 @@ const PartnersComponent = () => {
         <span className="text-gray-text">{pathname.substring(1)}</span>
       </div>
       <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 min-h-[42rem]">
-        <PartnersTable data={partners} columns={columns} />
+        <PartnersTable data={partners} columns={columnsPartner} />
       </div>
     </div>
   );

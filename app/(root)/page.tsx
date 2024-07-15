@@ -3,9 +3,10 @@ import React from "react";
 import Image from "next/image";
 import { ConsultantTable } from "@/components/consultants/ConsultantTable";
 import { BusinessOwnerTable } from "@/components/businessOwners/BusinessOwnersTable";
-import { columns } from "./consultants/column";
+import { columnsConsultant } from "./consultants/column";
 import { columnsBusiness } from "./business-owners/column";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
+import { useConsultants } from "@/lib/react-query/query/useConsultant";
 import { columnsVideo } from "@/components/video/column";
 import { useCurrentUser } from "@/lib/react-query/query/useUser";
 import { AdminBusinessResponse, Consultant } from "@/types";
@@ -30,15 +31,12 @@ import { Label } from "@/components/ui/label";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
-  const extractConsultants = (data: AdminBusinessResponse[]): Consultant[] => {
-    return data.flatMap((business) => business.consultant || []);
-  };
-  const consultants = businessOwnersData
-    ? extractConsultants(businessOwnersData)
-    : [];
+  const { data: consultantsData, isLoading, isError } = useConsultants();
+
   const { data: currentUser } = useCurrentUser();
 
   const businessOwner = businessOwnersData || [];
+  const consultants = consultantsData || [];
   return (
     <div className="flex flex-col flex-1 p-6 space-y-6">
       <div>
@@ -310,7 +308,7 @@ const DashboardContent = () => {
       </div>
       <BusinessStatistics />
       <div className="bg-white p-10 rounded-md">
-        <ConsultantTable data={consultants} columns={columns} />
+        <ConsultantTable data={consultants} columns={columnsConsultant} />
       </div>
       <div className="bg-white p-10 rounded-md">
         <BusinessOwnerTable data={businessOwner} columns={columnsBusiness} />
@@ -322,9 +320,9 @@ const DashboardContent = () => {
           <Image
             src="/assets/icons/barchart1.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$1,346.00</p>
@@ -335,9 +333,9 @@ const DashboardContent = () => {
           <Image
             src="/assets/icons/barchart2.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$13,346.00</p>
@@ -350,9 +348,9 @@ const DashboardContent = () => {
           <Image
             src="/assets/icons/barchart3.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$2,345.00</p>
@@ -365,9 +363,9 @@ const DashboardContent = () => {
           <Image
             src="/assets/icons/barchart4.svg"
             alt="chart"
-            width={90}
-            height={90}
-            className="object-contain w-full"
+            width={60}
+            height={60}
+            className="object-contain"
           />
           <div>
             <p className="text-[18px]">$17,346.00</p>
@@ -401,8 +399,8 @@ const DashboardContent = () => {
             <Image
               src="/assets/icons/namecirclechart1.svg"
               alt="chart"
-              width={130}
-              height={130}
+              width={120}
+              height={120}
               className="object-contain"
             />
           </div>
@@ -432,8 +430,8 @@ const DashboardContent = () => {
             <Image
               src="/assets/icons/namecirclechart2.svg"
               alt="chart"
-              width={160}
-              height={160}
+              width={150}
+              height={150}
               className="object-contain"
             />
           </div>

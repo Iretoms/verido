@@ -122,6 +122,19 @@ export interface Partners {
   status: string;
   updatedAt: string;
 }
+export interface Partner {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  role: string;
+  status: boolean;
+  consultants: string[];
+  dateJoined: string;
+  __v: number;
+  token: string;
+}
 
 export interface AdminBusinessResponse {
   money_in: {

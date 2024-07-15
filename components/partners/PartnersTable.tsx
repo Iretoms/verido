@@ -31,22 +31,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Partners } from "@/types";
+import { Partner } from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function PartnersTable<TData extends Partners, TValue>({
+export function PartnersTable<TData extends Partner, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
-
-  const handleRowSelection = (id: string) => {
-    router.push(`/partners/${id}`);
-  };
 
   const getStatusStyles = (status: string) => {
     switch (status) {
@@ -61,10 +57,28 @@ export function PartnersTable<TData extends Partners, TValue>({
     }
   };
 
+  const statusColumn = columns.find((col) => col.cell);
+  if (statusColumn) {
+    statusColumn.cell = ({ getValue }) => {
+      const status = getValue() as string;
+      return (
+        <span
+          className={`px-6 py-1 rounded-lg text-xs font-medium ${getStatusStyles(
+            status
+          )}`}
+        >
+          {status}
+        </span>
+      );
+    };
+  }
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const handleRowSelection = (id: string) => {
+    router.push(`/partners/${id}`);
+  };
 
   const table = useReactTable({
     data,
@@ -80,9 +94,8 @@ export function PartnersTable<TData extends Partners, TValue>({
       sorting,
     },
   });
-
   const handleSortChange = (sortOrder: "asc" | "desc") => {
-    setSorting([{ id: "name", desc: sortOrder === "desc" }]);
+    setSorting([{ id: "username", desc: sortOrder === "desc" }]);
   };
 
   return (
@@ -102,7 +115,7 @@ export function PartnersTable<TData extends Partners, TValue>({
                 Descending
               </SelectItem>
               <SelectItem className="text-sm text-light-gray" value="asc">
-                Ascending
+                Asecending
               </SelectItem>
             </SelectContent>
           </Select>
@@ -117,10 +130,10 @@ export function PartnersTable<TData extends Partners, TValue>({
             <Input
               placeholder="Search"
               value={
-                (table.getColumn("name")?.getFilterValue() as string) ?? ""
+                (table.getColumn("username")?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table.getColumn("name")?.setFilterValue(event.target.value)
+                table.getColumn("username")?.setFilterValue(event.target.value)
               }
               className="max-w-sm h-full outline-none"
             />
@@ -128,7 +141,6 @@ export function PartnersTable<TData extends Partners, TValue>({
           <div className="flex justify-between">
             <Button
               size={"sm"}
-              variant={"outline"}
               className="text-verido-white bg-verido-green rounded-lg text-sm w-[10rem]"
             >
               Add Partner
@@ -154,7 +166,7 @@ export function PartnersTable<TData extends Partners, TValue>({
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {data.length > 0 ? (
+          {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
@@ -163,43 +175,44 @@ export function PartnersTable<TData extends Partners, TValue>({
                 className="text-sm font-light text-gray-text"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
+                  <TableCell
+                    // onClick={() => handleRowSelection(row.original._id)}
+                    key={cell.id}
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
               </TableRow>
             ))
           ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="text-center">
-                No partner data yet.
+            <TableRow className="text-sm font-bold text-gray-text">
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                No Partners yet.
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
-      {data.length > 0 && (
-        <div className="flex items-center justify-end space-x-2 py-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            className="border border-verido-green disabled:border-gray-text text-gray-text"
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            className="border border-verido-green disabled:border-gray-text text-gray-text"
-          >
-            Next
-          </Button>
-        </div>
-      )}
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+          className="border border-verido-green disabled:border-gray-text text-gray-text"
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+          className="border border-verido-green disabled:border-gray-text text-gray-text"
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

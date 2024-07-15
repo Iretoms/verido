@@ -1,26 +1,16 @@
 "use client";
-
-import Image from "next/image";
 import { ConsultantTable } from "@/components/consultants/ConsultantTable";
-import { columns } from "./column";
+import { columnsConsultant } from "./column";
 import React from "react";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
-import { AdminBusinessResponse, Consultant } from "@/types";
-import BusinessStatistics from "@/components/common/BusinessStatistics";
-import CashMovementChart from "@/components/common/CashMovementChart";
-import MoneyInOutStats from "@/components/common/MoneyInOutStats";
-
-const extractConsultants = (data: AdminBusinessResponse[]): Consultant[] => {
-  return data.flatMap((business) => business.consultant || []);
-};
+import { useConsultants } from "@/lib/react-query/query/useConsultant";
 
 const Consultants = () => {
-  const { data: businessData, isLoading, isError } = useBusiness();
+  const { data: consultantsData, isLoading, isError } = useConsultants();
   const pathname = usePathname();
-
-  const consultants = businessData ? extractConsultants(businessData) : [];
-  console.log(consultants);
+  const consultantData = consultantsData || [];
+ 
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -36,9 +26,9 @@ const Consultants = () => {
         Home <span>/</span>{" "}
         <span className="text-gray-text">{pathname.substring(1)}</span>
       </div>
-    
+
       <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 min-h-[42rem]">
-        <ConsultantTable data={consultants} columns={columns} />
+        <ConsultantTable data={consultantData} columns={columnsConsultant} />
       </div>
     </div>
   );

@@ -30,7 +30,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useConsultantContext } from "@/context/ConsultantContext";
 
 import { Consultant } from "@/types";
 
@@ -48,7 +47,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
 
 
   const getStatusStyles = (status: string) => {
-    switch (status.toLowerCase()) {
+    switch (status) {
       case "active":
         return "bg-light-green border border-verido-green text-verido-green";
       case "suspended":
@@ -79,10 +78,9 @@ export function ConsultantTable<TData extends Consultant, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const { setSelectedConsultant } = useConsultantContext();
-    const handleRowSelection = (consultant: Consultant) => {
-      router.push(`/consultants/${consultant._id}`)
-      setSelectedConsultant(consultant);
+    const handleRowSelection = (id:string) => {
+      router.push(`/consultants/${id}`)
+      
     };
 
   const table = useReactTable({
@@ -100,7 +98,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
     },
   });
   const handleSortChange = (sortOrder: "asc" | "desc") => {
-    setSorting([{ id: "enterprise_name", desc: sortOrder === "desc" }]);
+    setSorting([{ id: "username", desc: sortOrder === "desc" }]);
   };
 
   return (
@@ -138,12 +136,12 @@ export function ConsultantTable<TData extends Consultant, TValue>({
               placeholder="Search"
               value={
                 (table
-                  .getColumn("enterprise_name")
+                  .getColumn("username")
                   ?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
                 table
-                  .getColumn("enterprise_name")
+                  .getColumn("username")
                   ?.setFilterValue(event.target.value)
               }
               className="max-w-sm h-full outline-none"
@@ -173,7 +171,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                onClick={() => handleRowSelection(row.original)}
+                onClick={() => handleRowSelection(row.original._id)}
                 data-state={row.getIsSelected() && "selected"}
                 className="text-sm font-light text-gray-text"
               >

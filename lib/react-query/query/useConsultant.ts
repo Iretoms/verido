@@ -7,16 +7,16 @@ export const useConsultants = () => {
     queryKey: ['consultants'],
     queryFn: async () => {
       const response = await fetchConsultants();
-      return response;
+      return response.response;
     },
   });
 };
-export const useConsultantById = (id:number) => {
+export const useConsultantById = (id:string) => {
   return useQuery<Consultant, Error>({
     queryKey: ['consultant'],
     queryFn: async () => {
       const response = await fetchConsultantById(id);
-      return response;
+      return response.response;
     },
   });
 };

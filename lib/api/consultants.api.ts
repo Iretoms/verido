@@ -1,12 +1,12 @@
 import { VeridoAPI } from "./axios";
 
 export const fetchConsultants = async () => {
-  const { data } = await VeridoAPI.get("/consultants");
+  const { data } = await VeridoAPI.get("/admin/consultants");
 
   return data;
 };
 
-export const fetchConsultantById = async (id: number) => {
-  const { data } = await VeridoAPI.get(`/consultants/${id}`);
+export const fetchConsultantById = async (id: string) => {
+  const { data } = await VeridoAPI.get(`/admin/consultants/${id}`);
   return data;
 };
