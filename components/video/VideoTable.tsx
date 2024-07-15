@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import CreateVideo from "./CreateVideo";
 import { IVideo } from "@/types";
+import { Button } from "../ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -103,6 +104,26 @@ export function VideoTable<TData extends IVideo, TValue>({
           )}
         </TableBody>
       </Table>
+      <div className="flex items-center justify-end space-x-2 py-4 mt-6">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+          className="border border-verido-green disabled:border-gray-text"
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+          className="border border-verido-green disabled:border-gray-text"
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }
