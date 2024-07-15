@@ -24,6 +24,7 @@ const Register = () => {
       fullName: "",
       email: "",
       phoneNumber: "",
+      partnerId: "",
       password: "",
       confirmPassword: "",
     },
@@ -41,7 +42,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen w-full">
+    <div className="flex items-center justify-center mih-h-screen w-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-[90%] md:w-[60%] flex flex-col gap-2"
@@ -90,6 +91,20 @@ const Register = () => {
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
           {errors.phoneNumber && (
+            <p className="text-danger text-xs mt-1">This area is required</p>
+          )}
+        </div>
+        <div className="">
+          <label className="text-sm font-medium text-black-light">
+            Paertner ID:
+          </label>
+          <input
+            {...register("partnerId", { required: true })}
+            className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
+              errors.partnerId ? "border-danger" : "border-light-gray"
+            } rounded-md focus:outline-none focus:border-light-gray`}
+          />
+          {errors.partnerId && (
             <p className="text-danger text-xs mt-1">This area is required</p>
           )}
         </div>

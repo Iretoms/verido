@@ -9,7 +9,6 @@ import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { useConsultants } from "@/lib/react-query/query/useConsultant";
 import { columnsVideo } from "@/components/video/column";
 import { useCurrentUser } from "@/lib/react-query/query/useUser";
-import { AdminBusinessResponse, Consultant } from "@/types";
 import DownLinksGraph from "@/components/common/DownLinksGraph";
 import BusinessStatistics from "@/components/common/BusinessStatistics";
 import CashMovementChart from "@/components/common/CashMovementChart";
@@ -155,7 +154,7 @@ const DashboardContent = () => {
               <h2 className="text-[15px] text-center">
                 Create New Partner/Consultant Account
               </h2>
-              <div className="flex items-center gap-6 justify-between bg-red-400 mt-10">
+              <div className="flex items-center gap-6 justify-between mt-10">
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button

@@ -18,7 +18,7 @@ interface Props {
 export const AuthLayoutWrapper = ({ children }: Props) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex h-screen`}>
+      <body className={`${inter.className} flex min-h-screen`}>
         <div className="hidden md:flex flex-col bg-light-green flex-1 items-center gap-10 p-14">
           <div className="flex items-start w-full">
             <Image

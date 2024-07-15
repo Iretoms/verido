@@ -19,6 +19,7 @@ export interface IUsersReg {
   fullName: string;
   email: string;
   phoneNumber: string;
+  partnerId:string
   password: string;
   confirmPassword: string;
 }

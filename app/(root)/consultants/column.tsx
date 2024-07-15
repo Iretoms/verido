@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Consultant } from "@/types";
 const getStatusStyles = (status: string) => {
-  switch (status.toLowerCase()) {
+  switch (status) {
     case "active":
       return "bg-light-green border border-verido-green text-verido-green";
     case "inactive":
