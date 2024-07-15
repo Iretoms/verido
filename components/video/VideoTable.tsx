@@ -58,7 +58,7 @@ export function VideoTable<TData extends IVideo, TValue>({
         </div>
         <div className="flex gap-2">
           <div className="">
-            <CreateVideo/>
+            <CreateVideo />
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@ export function VideoTable<TData extends IVideo, TValue>({
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                You don't have videos yet.
+                You don&apos;t have videos yet.
               </TableCell>
             </TableRow>
           )}
