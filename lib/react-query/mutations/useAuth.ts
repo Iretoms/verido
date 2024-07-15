@@ -28,8 +28,8 @@ const useAuth = () => {
       const { token } = data;
       localStorage.setItem("access_token", token);
       Cookies.set("access_token", token);
-      showToast("Success!", "Sign in Successful.", "success");
       router.push("/");
+      showToast("Success!", "Sign in Successful.", "success");
     },
     onError: (error) => {
       let errDetail = error.message;
