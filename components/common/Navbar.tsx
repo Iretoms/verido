@@ -36,7 +36,7 @@ const Navbar = () => {
           />
           <div className="absolute top-0 right-0 bg-verido-blue rounded-full w-2 h-2"></div>
         </div>
-        <Image src="/assets/icons/memoji.svg" width={30} height={30} alt="" />
+        <Image src="/assets/icons/winkface.svg" width={30} height={30} alt="" />
       </div>
     </header>
   );

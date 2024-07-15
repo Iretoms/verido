@@ -24,7 +24,7 @@ const PartnerInfoCard: React.FC<BusinessInfoCardProps> = ({ partners }) => {
       <div className="flex flex-col flex-1 justify-between items-center border-r px-10 border-r-verido-border">
         <div className="flex items-center justify-center flex-col gap-2">
           <Image
-            src="/assets/icons/memoji.svg"
+            src="/assets/icons/winkface.svg"
             width={30}
             height={30}
             alt={partners.name}
@@ -37,7 +37,7 @@ const PartnerInfoCard: React.FC<BusinessInfoCardProps> = ({ partners }) => {
               size={"sm"}
               className="bg-verido-green text-white px-3 py-2 text-[13px] rounded-md"
             >
-              Message Business Owner
+              Message Partner
             </Button>
           </div>
         </div>
@@ -55,7 +55,7 @@ const PartnerInfoCard: React.FC<BusinessInfoCardProps> = ({ partners }) => {
       <div className="flex flex-col items-start justify-start gap-3 w-full ">
         <div className="flex justify-between items-start w-full">
           <div className="flex flex-col flex-1 gap-2 ">
-            <h3 className="text-2xl">Business Owner&apos;s Informations</h3>
+            <h3 className="text-2xl">Partner&apos;s Informations</h3>
             <p className="text-gray-text text-[12px] w-[70%]">
               {partners.name}
             </p>

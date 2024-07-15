@@ -92,7 +92,7 @@ const Sidebar = () => {
 
       <div className="p-4 flex items-center">
         <Image
-          src="/assets/icons/memoji.svg"
+          src="/assets/icons/winkface.svg"
           width={40}
           height={40}
           alt="User avatar"

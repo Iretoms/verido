@@ -24,7 +24,7 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
       <div className="flex flex-col flex-1 justify-between items-center border-r px-10 border-r-verido-border">
         <div className="flex items-center justify-center flex-col gap-2">
           <Image
-            src="/assets/icons/memoji.svg"
+            src="/assets/icons/winkface.svg"
             width={30}
             height={30}
             alt={business.full_name}
