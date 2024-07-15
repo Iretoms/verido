@@ -21,10 +21,10 @@ const Register = () => {
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
-      phoneNumber: "",
-      partnerId: "",
+      phone: "",
+      partner_id: "",
       password: "",
       confirmPassword: "",
     },
@@ -59,12 +59,12 @@ const Register = () => {
             Full Name:
           </label>
           <input
-            {...register("fullName", { required: true })}
+            {...register("name", { required: true })}
             className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
-              errors.fullName ? "border-danger" : "border-light-gray"
+              errors.name ? "border-danger" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
-          {errors.fullName && (
+          {errors.name && (
             <p className="text-danger text-xs mt-1">This area is required</p>
           )}
         </div>
@@ -85,26 +85,26 @@ const Register = () => {
             Phone Number:
           </label>
           <input
-            {...register("phoneNumber", { required: true })}
+            {...register("phone", { required: true })}
             className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
-              errors.phoneNumber ? "border-danger" : "border-light-gray"
+              errors.phone ? "border-danger" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
-          {errors.phoneNumber && (
+          {errors.phone && (
             <p className="text-danger text-xs mt-1">This area is required</p>
           )}
         </div>
         <div className="">
           <label className="text-sm font-medium text-black-light">
-            Paertner ID:
+            Partner ID:
           </label>
           <input
-            {...register("partnerId", { required: true })}
+            {...register("partner_id", { required: true })}
             className={`mt-1 text-sm text-gray-text w-full px-3 py-2 border ${
-              errors.partnerId ? "border-danger" : "border-light-gray"
+              errors.partner_id ? "border-danger" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
-          {errors.partnerId && (
+          {errors.partner_id && (
             <p className="text-danger text-xs mt-1">This area is required</p>
           )}
         </div>

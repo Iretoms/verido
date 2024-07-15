@@ -15,28 +15,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-
-interface ICreateConsultantForm {
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  confirmPassword: string;
-}
+import { ICreateConsultantCreate } from "@/types";
+import useConsultant from "@/lib/react-query/mutations/useConsultant";
 
 const CreateConsultant = () => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { isSubmitting, errors },
-  } = useForm<ICreateConsultantForm>({
+  } = useForm<ICreateConsultantCreate>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
-      phoneNumber: "",
+      phone: "",
+      partner_id: "",
       password: "",
       confirmPassword: "",
     },
@@ -46,14 +42,14 @@ const CreateConsultant = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const password = watch("password");
+  const { createConsultantMutation } = useConsultant();
 
-  const onSubmit = async (data: ICreateConsultantForm) => {
+  const onSubmit = async (data: ICreateConsultantCreate) => {
     if (isSubmitting) return;
     try {
-      // Call your API to create consultant here
-      // await createConsultant(data);
+      await createConsultantMutation.mutateAsync(data);
+      reset();
       console.log(data);
-      router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -77,18 +73,18 @@ const CreateConsultant = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="fullName" className="text-[11px]">
+            <Label htmlFor="name" className="text-[11px]">
               Full Name:
             </Label>
             <Input
-              id="fullName"
-              {...register("fullName", { required: "Full name is required" })}
+              id="name"
+              {...register("name", { required: "Full name is required" })}
               className={`border ${
-                errors.fullName ? "border-red-500" : "border-verido-border"
+                errors.name ? "border-red-500" : "border-verido-border"
               } px-3 py-2 focus:outline-none`}
             />
-            {errors.fullName && (
-              <p className="text-red-500 text-xs">{errors.fullName.message}</p>
+            {errors.name && (
+              <p className="text-red-500 text-xs">{errors.name.message}</p>
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
@@ -107,21 +103,38 @@ const CreateConsultant = () => {
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="phoneNumber" className="text-[11px]">
+            <Label htmlFor="phone" className="text-[11px]">
               Phone Number:
             </Label>
             <Input
-              id="phoneNumber"
-              {...register("phoneNumber", {
-                required: "Phone number is required",
+              id="phone"
+              {...register("phone", {
+                required: "Phone phone is required",
               })}
               className={`border ${
-                errors.phoneNumber ? "border-red-500" : "border-verido-border"
+                errors.phone ? "border-red-500" : "border-verido-border"
               } px-3 py-2 focus:outline-none`}
             />
-            {errors.phoneNumber && (
+            {errors.phone && (
+              <p className="text-red-500 text-xs">{errors.phone.message}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-1 items-start">
+            <Label htmlFor="partner_id" className="text-[11px]">
+              Partner ID:
+            </Label>
+            <Input
+              id="partner_id"
+              {...register("partner_id", {
+                required: "Partner_id is required",
+              })}
+              className={`border ${
+                errors.partner_id ? "border-red-500" : "border-verido-border"
+              } px-3 py-2 focus:outline-none`}
+            />
+            {errors.partner_id && (
               <p className="text-red-500 text-xs">
-                {errors.phoneNumber.message}
+                {errors.partner_id.message}
               </p>
             )}
           </div>

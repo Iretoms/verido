@@ -16,10 +16,10 @@ export interface CurrentUserProfile {
   token: string;
 }
 export interface IUsersReg {
-  fullName: string;
+  name: string;
   email: string;
-  phoneNumber: string;
-  partnerId:string
+  phone: string;
+  partner_id:string
   password: string;
   confirmPassword: string;
 }
@@ -178,4 +178,20 @@ export interface AdminBusinessResponse {
   consultant: Consultant[];
   messages: any[];
   suspended: boolean;
+}
+
+export interface ICreateConsultantCreate {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  partner_id:string
+  confirmPassword: string;
+}
+export interface ICreatePartner {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
 }

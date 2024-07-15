@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 import { login, recoverPassword, register } from "@/lib/api/auth.api";
 import { IRecoverPassword, IUsers, IUsersReg } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,7 +25,7 @@ const useAuth = () => {
     onSuccess: (data) => {
       const { token } = data;
       localStorage.setItem("access_token", token);
-      Cookies.set("access_token", token, { expires: 1 });
+      Cookies.set("access_token", token);
       router.push("/");
     },
     onError: (error) => {
@@ -45,6 +45,10 @@ const useAuth = () => {
       return response.response;
     },
     onSuccess: (data) => {
+      const { token } = data;
+      localStorage.setItem("access_token", token);
+      Cookies.set("access_token", token, { expires: 1 });
+
       router.push("/signin");
     },
     onError: (error) => {

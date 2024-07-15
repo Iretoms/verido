@@ -15,28 +15,23 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-interface ICreatePartnerForm {
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  confirmPassword: string;
-}
+import { ICreatePartner } from "@/types";
+import usePartner from "@/lib/react-query/mutations/usePartner";
 
 const CreatePartner = () => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { isSubmitting, errors },
-  } = useForm<ICreatePartnerForm>({
+  } = useForm<ICreatePartner>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
-      phoneNumber: "",
+      phone: "",
       password: "",
       confirmPassword: "",
     },
@@ -46,16 +41,17 @@ const CreatePartner = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const password = watch("password");
+  const {createPartnerMutation} = usePartner()
 
-  const onSubmit = async (data: ICreatePartnerForm) => {
+  const onSubmit = async (data: ICreatePartner) => {
     if (isSubmitting) return;
-    try {
-   
-      console.log(data);
-      router.push("/");
-    } catch (error) {
-      console.error(error);
-    }
+   try {
+     await createPartnerMutation.mutateAsync(data);
+     reset();
+     console.log(data);
+   } catch (error) {
+     console.error(error);
+   }
   };
 
   return (
@@ -76,18 +72,18 @@ const CreatePartner = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="fullName" className="text-[11px]">
+            <Label htmlFor="name" className="text-[11px]">
               Full Name:
             </Label>
             <Input
-              id="fullName"
-              {...register("fullName", { required: "Full name is required" })}
+              id="name"
+              {...register("name", { required: "Full name is required" })}
               className={`border ${
-                errors.fullName ? "border-red-500" : "border-verido-border"
+                errors.name ? "border-red-500" : "border-verido-border"
               } px-3 py-2 focus:outline-none`}
             />
-            {errors.fullName && (
-              <p className="text-red-500 text-xs">{errors.fullName.message}</p>
+            {errors.name && (
+              <p className="text-red-500 text-xs">{errors.name.message}</p>
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
@@ -106,21 +102,21 @@ const CreatePartner = () => {
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="phoneNumber" className="text-[11px]">
+            <Label htmlFor="phone" className="text-[11px]">
               Phone Number:
             </Label>
             <Input
-              id="phoneNumber"
-              {...register("phoneNumber", {
+              id="phone"
+              {...register("phone", {
                 required: "Phone number is required",
               })}
               className={`border ${
-                errors.phoneNumber ? "border-red-500" : "border-verido-border"
+                errors.phone ? "border-red-500" : "border-verido-border"
               } px-3 py-2 focus:outline-none`}
             />
-            {errors.phoneNumber && (
+            {errors.phone && (
               <p className="text-red-500 text-xs">
-                {errors.phoneNumber.message}
+                {errors.phone.message}
               </p>
             )}
           </div>
