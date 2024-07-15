@@ -20,7 +20,6 @@ const RecoverPassword = () => {
   });
   const { recoverPasswordMutation } = useAuth();
   const onSubmit = async (data: IRecoverPassword) => {
-    console.log(data);
     if (isSubmitting) return;
     try {
       await recoverPasswordMutation.mutateAsync(data);
