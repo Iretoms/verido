@@ -14,7 +14,6 @@ import BusinessStatistics from "@/components/common/BusinessStatistics";
 import CashMovementChart from "@/components/common/CashMovementChart";
 import MoneyInOutStats from "@/components/common/MoneyInOutStats";
 import { VideoTable } from "@/components/video/VideoTable";
-import { videoDummyData } from "@/constant";
 import { useVideos } from "@/lib/react-query/query/useVideo";
 import CreateConsultant from "@/components/consultants/CreateConsultant";
 import CreatePartner from "@/components/partners/CreatePartner";
