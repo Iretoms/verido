@@ -8,7 +8,7 @@ const Navbar = () => {
         <Image
           width={30}
           height={30}
-          src="/assets/icons/document.svg"
+          src="/assets/icons/add-box.svg"
           alt="documents"
         />
         <p className="font-semibold text-[14px] text-black-light">
@@ -20,7 +20,7 @@ const Navbar = () => {
         <Image
           width={20}
           height={20}
-          src="/assets/icons/upload.svg"
+          src="/assets/icons/add-box.svg"
           alt="share"
           className="-ml-5"
         />
