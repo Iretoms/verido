@@ -15,11 +15,6 @@ const PartnersComponent = () => {
   const pathname = usePathname();
 
 
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (isError) {
     return <div>Error loading consultant data</div>;
   }

@@ -11,11 +11,6 @@ const Consultants = () => {
   const pathname = usePathname();
   const consultantData = consultantsData || [];
  
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (isError) {
     return <div>Error loading consultant data</div>;
   }

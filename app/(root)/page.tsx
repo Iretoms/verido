@@ -16,26 +16,16 @@ import MoneyInOutStats from "@/components/common/MoneyInOutStats";
 import { VideoTable } from "@/components/video/VideoTable";
 import { videoDummyData } from "@/constant";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import CreateConsultant from "@/components/consultants/CreateConsultant";
+import CreatePartner from "@/components/partners/CreatePartner";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
   const { data: consultantsData, isLoading, isError } = useConsultants();
-
   const { data: currentUser } = useCurrentUser();
-
   const businessOwner = businessOwnersData || [];
   const consultants = consultantsData || [];
+  const isSuperAdmin = currentUser?.role === "super_admin";
   return (
     <div className="flex flex-col flex-1 p-6 space-y-6">
       <div>
@@ -155,151 +145,8 @@ const DashboardContent = () => {
                 Create New Partner/Consultant Account
               </h2>
               <div className="flex items-center gap-6 justify-between mt-10">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button
-                      size={"sm"}
-                      className="bg-verido-green text-verido-white"
-                    >
-                      Partner
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                      <DialogTitle className="text-3xl font-light">
-                        Create Partner✌🏻️
-                      </DialogTitle>
-                      <DialogDescription className="text-gray-text font-light text-sm">
-                        Please provide the consultant’s info.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="name" className="text-[11px]">
-                          Full Name:
-                        </Label>
-                        <Input
-                          id="name"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="name" className="text-[11px]">
-                          Email:
-                        </Label>
-                        <Input
-                          id="name"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="username" className="text-[11px]">
-                          Phone Number:
-                        </Label>
-                        <Input
-                          id="username"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="username" className="text-[11px]">
-                          Password:
-                        </Label>
-                        <Input
-                          id="username"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="username" className="text-[11px]">
-                          Confirm Password:
-                        </Label>
-                        <Input
-                          id="username"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                    </div>
-                    <DialogFooter>
-                      <Button className="w-full bg-verido-green" type="submit">
-                        Create Account
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button
-                      size={"sm"}
-                      className="bg-verido-green text-verido-white"
-                      variant="outline"
-                    >
-                      Consultant
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                      <DialogTitle className="text-3xl font-light">
-                        Create Consultant
-                      </DialogTitle>
-                      <DialogDescription className="text-gray-text font-light text-sm">
-                        Please provide the consultant info.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="name" className="text-[11px]">
-                          Full Name:
-                        </Label>
-                        <Input
-                          id="name"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="name" className="text-[11px]">
-                          Email:
-                        </Label>
-                        <Input
-                          id="name"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="username" className="text-[11px]">
-                          Phone Number:
-                        </Label>
-                        <Input
-                          id="username"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="username" className="text-[11px]">
-                          Password:
-                        </Label>
-                        <Input
-                          id="username"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 items-start">
-                        <Label htmlFor="username" className="text-[11px]">
-                          Confirm Password:
-                        </Label>
-                        <Input
-                          id="username"
-                          className="border border-verido-border px-3 py-2 focus:outline-none"
-                        />
-                      </div>
-                    </div>
-                    <DialogFooter>
-                      <Button className="w-full bg-verido-green" type="submit">
-                        Create Account
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+                {isSuperAdmin && <CreatePartner />}
+                <CreateConsultant />
               </div>
             </div>
           </div>

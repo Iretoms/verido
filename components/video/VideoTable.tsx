@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import CreateVideo from "./CreateVideo";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -68,56 +69,7 @@ export function VideoTable<TData extends any, TValue>({
         </div>
         <div className="flex gap-2">
           <div className="">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button size={'sm'} className="bg-verido-green text-verido-white" variant="outline">Add Video</Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle className="text-3xl font-light">Create Video</DialogTitle>
-                  <DialogDescription className="text-gray-text font-light text-sm">
-                    Please provide the video info.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-1 items-start">
-                    <Label htmlFor="name" className="text-[11px]">
-                      Title:
-                    </Label>
-                    <Input
-                      id="name"
-                      className="border border-verido-border px-3 py-2 focus:outline-none"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 items-start">
-                    <Label htmlFor="name" className="text-[11px]">
-                      Video ID:
-                    </Label>
-                    <Input
-                      id="name"
-                      className="border border-verido-border px-3 py-2 focus:outline-none"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 items-start">
-                    <Label htmlFor="username" className="text-[11px]">
-                      Category:
-                    </Label>
-                    <Input
-                      id="username"
-                      className="border border-verido-border px-3 py-2 focus:outline-none"
-                    />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button
-                    className="w-full bg-verido-green mt-[6rem]"
-                    type="submit"
-                  >
-                    Create
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+            <CreateVideo/>
           </div>
         </div>
       </div>
