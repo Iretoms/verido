@@ -6,13 +6,27 @@ import { BusinessOwnerTable } from "@/components/businessOwners/BusinessOwnersTa
 import { columns } from "./consultants/column";
 import { columnsBusiness } from "./business-owners/column";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
-import { useQueryClient } from "@tanstack/react-query";
+import { columnsVideo } from "@/components/video/column";
 import { useCurrentUser } from "@/lib/react-query/query/useUser";
 import { AdminBusinessResponse, Consultant } from "@/types";
 import DownLinksGraph from "@/components/common/DownLinksGraph";
 import BusinessStatistics from "@/components/common/BusinessStatistics";
 import CashMovementChart from "@/components/common/CashMovementChart";
 import MoneyInOutStats from "@/components/common/MoneyInOutStats";
+import { VideoTable } from "@/components/video/VideoTable";
+import { videoDummyData } from "@/constant";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
@@ -123,13 +137,7 @@ const DashboardContent = () => {
             </div>
           </div>
           <div className="flex justify-between flex-col p-5 rounded-md bg-white">
-            <div className="flex justify-between items-center">
-              <h2 className="text-[13px] font-light">Recent Subscriptions</h2>
-              <p className="text-[13px] font-light">View all</p>
-            </div>
-            <div className="mt-5">
-              <SubscriptionTable />
-            </div>
+            <VideoTable columns={columnsVideo} data={videoDummyData} />
           </div>
         </div>
         <div className="flex flex-col gap-10">
@@ -147,11 +155,155 @@ const DashboardContent = () => {
                 alt="Illustration"
               />
               <h2 className="text-[15px] text-center">
-                Create New Business Account or Consultants
+                Create New Partner/Consultant Account
               </h2>
-              <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg">
-                Create Account Now
-              </button>
+              <div className="flex items-center gap-6 justify-between bg-red-400 mt-10">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      size={"sm"}
+                      className="bg-verido-green text-verido-white"
+                    >
+                      Partner
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle className="text-3xl font-light">
+                        Create Partner✌🏻️
+                      </DialogTitle>
+                      <DialogDescription className="text-gray-text font-light text-sm">
+                        Please provide the consultant’s info.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="name" className="text-[11px]">
+                          Full Name:
+                        </Label>
+                        <Input
+                          id="name"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="name" className="text-[11px]">
+                          Email:
+                        </Label>
+                        <Input
+                          id="name"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="username" className="text-[11px]">
+                          Phone Number:
+                        </Label>
+                        <Input
+                          id="username"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="username" className="text-[11px]">
+                          Password:
+                        </Label>
+                        <Input
+                          id="username"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="username" className="text-[11px]">
+                          Confirm Password:
+                        </Label>
+                        <Input
+                          id="username"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button className="w-full bg-verido-green" type="submit">
+                        Create Account
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      size={"sm"}
+                      className="bg-verido-green text-verido-white"
+                      variant="outline"
+                    >
+                      Consultant
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle className="text-3xl font-light">
+                        Create Consultant
+                      </DialogTitle>
+                      <DialogDescription className="text-gray-text font-light text-sm">
+                        Please provide the consultant info.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="name" className="text-[11px]">
+                          Full Name:
+                        </Label>
+                        <Input
+                          id="name"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="name" className="text-[11px]">
+                          Email:
+                        </Label>
+                        <Input
+                          id="name"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="username" className="text-[11px]">
+                          Phone Number:
+                        </Label>
+                        <Input
+                          id="username"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="username" className="text-[11px]">
+                          Password:
+                        </Label>
+                        <Input
+                          id="username"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start">
+                        <Label htmlFor="username" className="text-[11px]">
+                          Confirm Password:
+                        </Label>
+                        <Input
+                          id="username"
+                          className="border border-verido-border px-3 py-2 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button className="w-full bg-verido-green" type="submit">
+                        Create Account
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </div>
           </div>
         </div>
@@ -289,81 +441,6 @@ const DashboardContent = () => {
       </div>
     </div>
   );
-};
-
-const SubscriptionTable = () => (
-  <table className="w-full text-left">
-    <thead>
-      <tr className="text-[12px] text-gray-300">
-        <th>Date</th>
-        <th>Business Owners</th>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {[
-        {
-          date: "June 9, 2020",
-          owner: "Elon Musk",
-          amount: "$1,322.45",
-          status: "Active",
-        },
-        {
-          date: "June 9, 2020",
-          owner: "Christiano Ronaldo",
-          amount: "$733.32",
-          status: "Active",
-        },
-        {
-          date: "June 10, 2020",
-          owner: "Jeff Bezos",
-          amount: "$1,923.32",
-          status: "Suspended",
-        },
-        {
-          date: "June 9, 2020",
-          owner: "Richard Hamilton",
-          amount: "$922.12",
-          status: "Active",
-        },
-        {
-          date: "June 10, 2020",
-          owner: "Lebron James",
-          amount: "$323.98",
-          status: "Expired",
-        },
-      ].map((sub, index) => (
-        <tr key={index} className="border-b ">
-          <td className="py-5 text-[12px]">{sub.date}</td>
-          <td className="py-5 text-[12px] ">{sub.owner}</td>
-          <td className="py-5 text-[12px] ">{sub.amount}</td>
-          <td className="py-5 text-[12px] ">
-            <span
-              className={`px-2 py-1 rounded-lg ${getStatusColor(sub.status)}`}
-            >
-              {sub.status}
-            </span>
-          </td>
-          <td></td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
-
-const getStatusColor = (status: any) => {
-  switch (status) {
-    case "Active":
-      return "bg-light-green border border-verido-green text-verido-green";
-    case "Suspended":
-      return "bg-light-danger text-danger border border-danger";
-    case "Expired":
-      return "bg-light-orange text-verido-orange border border-verido-orange";
-    default:
-      return "";
-  }
 };
 
 export default DashboardContent;
