@@ -1,3 +1,4 @@
+import { ICountry } from "@/types";
 export const videoDummyData = [
   {
     id: "01",
@@ -28,5 +29,50 @@ export const videoDummyData = [
     title: "Verido Help Video",
     youtubeId: "qwertyuio",
     category: "Help",
+  },
+];
+
+export const countryData: ICountry[] = [
+  {
+    country: "Nigeria",
+    partners: 56,
+    consultants: 1003,
+    businesses: 2693,
+    subscribers: 723,
+  },
+  {
+    country: "Kenya",
+    partners: 56,
+    consultants: 1003,
+    businesses: 2693,
+    subscribers: 723,
+  },
+  {
+    country: "Uganda",
+    partners: 56,
+    consultants: 1003,
+    businesses: 2693,
+    subscribers: 723,
+  },
+  {
+    country: "Mozambique",
+    partners: 56,
+    consultants: 1003,
+    businesses: 2693,
+    subscribers: 723,
+  },
+  {
+    country: "Ghana",
+    partners: 56,
+    consultants: 1003,
+    businesses: 2693,
+    subscribers: 723,
+  },
+  {
+    country: "South Africa",
+    partners: 56,
+    consultants: 1003,
+    businesses: 2693,
+    subscribers: 723,
   },
 ];

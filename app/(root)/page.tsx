@@ -8,6 +8,7 @@ import { columnsBusiness } from "./business-owners/column";
 import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { useConsultants } from "@/lib/react-query/query/useConsultant";
 import { columnsVideo } from "@/components/video/column";
+import { columnsCountry } from "@/components/countries/column";
 import { useCurrentUser } from "@/lib/react-query/query/useUser";
 import DownLinksGraph from "@/components/common/DownLinksGraph";
 import BusinessStatistics from "@/components/common/BusinessStatistics";
@@ -17,6 +18,8 @@ import { VideoTable } from "@/components/video/VideoTable";
 import { useVideos } from "@/lib/react-query/query/useVideo";
 import CreateConsultant from "@/components/consultants/CreateConsultant";
 import CreatePartner from "@/components/partners/CreatePartner";
+import { CountryTable } from "@/components/countries/CountryTable";
+import { countryData } from "@/constant";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
@@ -363,6 +366,9 @@ const DashboardContent = () => {
             <p className="font-light text-[12px] text-gray-text">Overhead</p>
           </div>
         </div>
+      </div>
+      <div className="bg-white p-10 rounded-md">
+        <CountryTable data={countryData} columns={columnsCountry} />
       </div>
     </div>
   );

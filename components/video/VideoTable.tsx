@@ -20,7 +20,7 @@ import {
 import CreateVideo from "./CreateVideo";
 import { IVideo } from "@/types";
 import { Button } from "../ui/button";
-import EditVideo from "./EditVideo"; 
+import EditVideo from "./EditVideo";
 import Image from "next/image";
 
 interface DataTableProps<TData, TValue> {
@@ -60,7 +60,10 @@ export function VideoTable<TData extends IVideo, TValue>({
     <div className="rounded-md">
       <div className="flex justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="text-[20px]">Videos</h2>
+          <h2 className="text-[20px]">
+            Videos (
+            <span className="font-bold text-gray-text">{data?.length}</span>)
+          </h2>
           <p className="text-[14px] text-black">List of videos available</p>
         </div>
         <div className="flex gap-2">

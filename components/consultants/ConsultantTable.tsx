@@ -44,8 +44,6 @@ export function ConsultantTable<TData extends Consultant, TValue>({
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
-
-
   const getStatusStyles = (status: string) => {
     switch (status) {
       case "active":
@@ -78,10 +76,9 @@ export function ConsultantTable<TData extends Consultant, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-    const handleRowSelection = (id:string) => {
-      router.push(`/consultants/${id}`)
-      
-    };
+  const handleRowSelection = (id: string) => {
+    router.push(`/consultants/${id}`);
+  };
 
   const table = useReactTable({
     data,
@@ -105,9 +102,12 @@ export function ConsultantTable<TData extends Consultant, TValue>({
     <div className="rounded-md">
       <div className="flex justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="text-[20px]">Consultants</h2>
+          <h2 className="text-[20px]">
+            Consultants (
+            <span className="font-bold text-gray-text">{data?.length}</span>)
+          </h2>
           <p className="text-[14px] text-black">
-            List of consultants available
+            List of consultants available{"   "}
           </p>
         </div>
         <div className="flex gap-2">
@@ -135,14 +135,10 @@ export function ConsultantTable<TData extends Consultant, TValue>({
             <Input
               placeholder="Search"
               value={
-                (table
-                  .getColumn("username")
-                  ?.getFilterValue() as string) ?? ""
+                (table.getColumn("username")?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table
-                  .getColumn("username")
-                  ?.setFilterValue(event.target.value)
+                table.getColumn("username")?.setFilterValue(event.target.value)
               }
               className="max-w-sm h-full outline-none"
             />

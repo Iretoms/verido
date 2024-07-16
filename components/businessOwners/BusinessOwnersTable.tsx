@@ -75,7 +75,10 @@ export function BusinessOwnerTable<
     <div className="rounded-md">
       <div className="flex justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="text-[20px]">Business Owners</h2>
+          <h2 className="text-[20px]">
+            Business Owners (
+            <span className="font-bold text-gray-text">{data?.length}</span>)
+          </h2>
           <p className="text-[14px] text-black">
             List of Business owners available
           </p>

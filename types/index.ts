@@ -201,12 +201,20 @@ export interface ICreateVideo {
   category: string;
 }
 export interface IUpdateVideo {
- payload:IVideo,
- id:string
+  payload: IVideo;
+  id: string;
 }
 export interface IVideo {
-  _id:string
+  _id: string;
   title: string;
   vidoeID: string;
   category: string;
+}
+
+export interface ICountry {
+  country: string;
+  partners: number;
+  consultants: number;
+  businesses: number;
+  subscribers: number;
 }
