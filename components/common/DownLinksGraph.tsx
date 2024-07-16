@@ -22,7 +22,7 @@ const DownLinksGraph: React.FC<DownlinksProps> = ({
     circumference - (consultantsPercentage / 100) * circumference;
 
   return (
-    <div className="w-[352px] h-[21.8rem] bg-white rounded-2xl p-6">
+    <div className="w-[352px] h-[22rem] bg-white rounded-2xl p-5">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-light">Downlinks</h2>
         <Image
@@ -78,14 +78,18 @@ const DownLinksGraph: React.FC<DownlinksProps> = ({
           <div className="text-2xl">{totalCount.toLocaleString()}</div>
         </div>
       </div>
-      <div className="flex justify-center space-x-8 mt-4">
+      <div className="flex justify-center gap-5 mt-4">
         <div className="flex items-center">
-          <div className="w-3 h-3 rounded-full bg-verido-green mr-2"></div>
-          <span>Business Owners</span>
+          <div className="w-2 h-2 rounded-full bg-verido-green mr-2"></div>
+          <span className="text-[12px]">Business Owners</span>
         </div>
         <div className="flex items-center">
-          <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-          <span>Consultants</span>
+          <div className="w-2 h-2 rounded-full bg-verido-orange mr-2"></div>
+          <span className="text-[12px]">Partners</span>
+        </div>
+        <div className="flex items-center">
+          <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+          <span className="text-[12px]">Consultants</span>
         </div>
       </div>
     </div>
