@@ -1,7 +1,27 @@
-import React, { useState } from "react";
+"use client";
+import React from "react";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    Cookies.remove("access_token");
+    router.push("/signin");
+    console.log("Logged out");
+  };
+
   return (
     <header className="bg-white rounded-lg flex items-center justify-between p-1 md:p-5">
       <div className="flex items-center gap-2 md:gap-5">
@@ -36,7 +56,26 @@ const Navbar = () => {
           />
           <div className="absolute top-0 right-0 bg-verido-blue rounded-full w-2 h-2"></div>
         </div>
-        <Image src="/assets/icons/winkface.svg" width={30} height={30} alt="" />
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Image
+              src="/assets/icons/winkface.svg"
+              width={30}
+              height={30}
+              alt="user avatar"
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuItem>Team</DropdownMenuItem>
+            <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="font-bold" onClick={handleLogout}>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
