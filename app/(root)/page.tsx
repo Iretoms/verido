@@ -28,7 +28,7 @@ const DashboardContent = () => {
   const videos = videData || []
   const isSuperAdmin = currentUser?.role === "super_admin";
   return (
-    <div className="flex flex-col flex-1 p-6 space-y-6">
+    <div className="w-full flex flex-col flex-1 p-6 space-y-6">
       <div>
         <h1 className="text-2xl">Welcome back, {currentUser?.name} 👋</h1>
         <p className="text-gray-text text-[12px] font-light">
@@ -36,9 +36,22 @@ const DashboardContent = () => {
         </p>
       </div>
 
-      <div className="flex justify-between gap-7">
-        <div className="flex flex-col gap-10">
+      <div className="w-full flex justify-between gap-7">
+        <div className="w-3/5 flex flex-col gap-10">
           <div className="grid grid-cols-4 gap-6">
+            <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart2.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">{businessOwnersData?.length}</p>
+              <p className="font-light text-[12px] text-gray-text">
+                All Partners
+              </p>
+            </div>
             <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
               <Image
                 src="/assets/icons/bar-chart.svg"
@@ -47,9 +60,87 @@ const DashboardContent = () => {
                 height={100}
                 className="object-contain w-full"
               />
-              <p className="text-[18px]">{businessOwnersData?.length}</p>
+              <p className="text-[18px]">{consultants?.length}</p>
               <p className="font-light text-[12px] text-gray-text">
-                Business Owners
+                All Business
+              </p>
+            </div>
+            <div className="bg-white rounded-lg flex gap-2 flex-col items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart2.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="font-light text-[12px] text-gray-text">
+                All Consultants
+              </p>
+            </div>
+            <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart3.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="font-light text-[12px] text-gray-text">
+                All Subscribers
+              </p>
+            </div>
+            <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart2.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="text-verido-green">VERIDO</p>
+              <p className="font-light text-[12px] text-gray-text">Partners</p>
+            </div>
+            <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="text-verido-green">VERIDO</p>
+              <p className="font-light text-[12px] text-gray-text">Business</p>
+            </div>
+            <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart2.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="text-verido-green">VERIDO</p>
+              <p className="font-light text-[12px] text-gray-text">
+                Consultants
+              </p>
+            </div>
+            <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart3.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="text-verido-green">VERIDO</p>
+              <p className="font-light text-[12px] text-gray-text">
+                Subscribers
               </p>
             </div>
             <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
@@ -60,12 +151,38 @@ const DashboardContent = () => {
                 height={100}
                 className="object-contain w-full"
               />
-              <p className="text-[18px]">{consultants?.length}</p>
+              <p className="text-[18px]">0</p>
               <p className="font-light text-[12px] text-gray-text">
-                Consultants
+                Independent Partners
               </p>
             </div>
-            <div className="bg-white rounded-lg flex gap-2 flex-col gap-2 items-center p-5">
+            <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="font-light text-[12px] text-gray-text">
+                Independent Business
+              </p>
+            </div>
+            <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+              <Image
+                src="/assets/icons/bar-chart2.svg"
+                alt="chart"
+                width={100}
+                height={100}
+                className="object-contain w-full"
+              />
+              <p className="text-[18px]">0</p>
+              <p className="font-light text-[12px] text-gray-text">
+                Independent Consultants
+              </p>
+            </div>
+            <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
               <Image
                 src="/assets/icons/bar-chart3.svg"
                 alt="chart"
@@ -75,20 +192,7 @@ const DashboardContent = () => {
               />
               <p className="text-[18px]">0</p>
               <p className="font-light text-[12px] text-gray-text">
-                Active Suscribers
-              </p>
-            </div>
-            <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
-              <Image
-                src="/assets/icons/bar-chart4.svg"
-                alt="chart"
-                width={100}
-                height={100}
-                className="object-contain w-full"
-              />
-              <p className="text-[18px]">0</p>
-              <p className="font-light text-[12px] text-gray-text">
-                Active Consultants
+                Independent Subscribers
               </p>
             </div>
           </div>
@@ -128,7 +232,7 @@ const DashboardContent = () => {
             <VideoTable columns={columnsVideo} data={videos} />
           </div>
         </div>
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-1 flex-col gap-8">
           <DownLinksGraph
             businessOwnersCount={businessOwnersData?.length}
             consultantsCount={consultants.length}
@@ -148,6 +252,46 @@ const DashboardContent = () => {
               <div className="flex items-center gap-6 justify-between mt-10">
                 {isSuperAdmin && <CreatePartner />}
                 <CreateConsultant />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-white p-6 rounded-lg flex flex-col justify-between gap-3">
+              <div className="flex justify-between items-center">
+                <p className="flex gap-2 items-center">
+                  <span className="font-light">Cash Flow</span>
+                  <span className="text-gray-text text-[13px] font-extralight">
+                    Last 6 months
+                  </span>
+                </p>
+                <p className="">
+                  <Image
+                    src="/assets/icons/3dots.svg"
+                    alt="percent"
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                  />
+                </p>
+              </div>
+              <div className="self-center">
+                <Image
+                  src="/assets/icons/hexagonchart.svg"
+                  alt="percent"
+                  width={270}
+                  height={270}
+                  className="object-contain"
+                />
+              </div>
+              <div className="flex items-center gap-5 self-center">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-verido-green"></div>
+                  <p className="text-[13px]">Money In</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full  bg-verido-red"></div>
+                  <p className="text-[13px]">Money Out</p>
+                </div>
               </div>
             </div>
           </div>
@@ -217,70 +361,6 @@ const DashboardContent = () => {
           <div>
             <p className="text-[18px]">$17,346.00</p>
             <p className="font-light text-[12px] text-gray-text">Overhead</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-4">
-        <div className="bg-white rounded-lg flex gap-4 items-end p-5">
-          <div className="flex flex-col gap-7">
-            <p>Labour</p>
-            <div className="flex flex-col gap-5">
-              <p className="flex gap-2 items-center">
-                <span className="h-2 w-2 rounded-full  bg-verido-faint-blue"></span>
-                <span className="text-[13px]">John Doe</span>
-                <span className="text-gray-text text-[9px]">%35</span>
-              </p>
-              <p className="flex gap-2 items-center">
-                <span className="h-2 w-2 rounded-full  bg-verido-blue"></span>
-                <span className="text-[13px]">Mary Ann</span>
-                <span className="text-gray-text text-[9px]">%25</span>
-              </p>
-              <p className="flex gap-2 items-center">
-                <span className="h-2 w-2 rounded-full  bg-verido-light-green"></span>
-                <span className="text-[13px]">Oluwatobi</span>
-                <span className="text-gray-text text-[9px]">%45</span>
-              </p>
-            </div>
-          </div>
-          <div>
-            <Image
-              src="/assets/icons/namecirclechart1.svg"
-              alt="chart"
-              width={120}
-              height={120}
-              className="object-contain"
-            />
-          </div>
-        </div>
-        <div className="bg-white rounded-lg flex gap-4 items-end p-5">
-          <div className="flex flex-col gap-7">
-            <p>Materials</p>
-            <div className="flex flex-col gap-5">
-              <p className="flex gap-2 items-center">
-                <span className="h-2 w-2 rounded-full  bg-verido-faint-blue"></span>
-                <span className="text-[13px]">Pencils</span>
-                <span className="text-gray-text text-[9px]">%35</span>
-              </p>
-              <p className="flex gap-2 items-center">
-                <span className="h-2 w-2 rounded-full  bg-verido-blue"></span>
-                <span className="text-[13px]">Biro</span>
-                <span className="text-gray-text text-[9px]">%25</span>
-              </p>
-              <p className="flex gap-2 items-center">
-                <span className="h-2 w-2 rounded-full  bg-verido-light-green"></span>
-                <span className="text-[13px]">Notebooks</span>
-                <span className="text-gray-text text-[9px]">%45</span>
-              </p>
-            </div>
-          </div>
-          <div>
-            <Image
-              src="/assets/icons/namecirclechart2.svg"
-              alt="chart"
-              width={150}
-              height={150}
-              className="object-contain"
-            />
           </div>
         </div>
       </div>
