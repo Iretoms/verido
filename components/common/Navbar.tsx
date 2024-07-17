@@ -11,15 +11,19 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import useAuth from "@/lib/react-query/mutations/useAuth";
 
 const Navbar = () => {
   const router = useRouter();
+  const {logout} = useAuth()
 
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    Cookies.remove("access_token");
-    router.push("/signin");
-    console.log("Logged out");
+    logout()
+
+    // localStorage.removeItem("access_token");
+    // Cookies.remove("access_token");
+    // router.push("/signin");
+    // console.log("Logged out");
   };
 
   return (
