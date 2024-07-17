@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { AdminBusinessResponse } from "@/types";
 import Image from "next/image";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "../../../components/ui/checkbox";
 
 const getStatusStyles = (status: string) => {
   switch (status.toLowerCase()) {

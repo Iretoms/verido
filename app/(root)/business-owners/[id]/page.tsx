@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
-import BusinessOwnerInfo from "@/components/businessOwners/BusinessOwnerInfo";
+import BusinessOwnerInfo from "../../../../components/businessOwners/BusinessOwnerInfo";
 
 const Page = () => {
   const pathname = usePathname();

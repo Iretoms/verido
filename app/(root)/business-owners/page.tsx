@@ -2,9 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { columnsBusiness } from "./column";
 import React, { useEffect } from "react";
-import { useBusiness } from "@/lib/react-query/query/useBusiness";
+import { useBusiness } from "../../../lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
-import { BusinessOwnerTable } from "@/components/businessOwners/BusinessOwnersTable";
+import { BusinessOwnerTable } from "../../../components/businessOwners/BusinessOwnersTable";
 
 const BusinessOwners = () => {
   const { data: businessData, isLoading, isError } = useBusiness();
