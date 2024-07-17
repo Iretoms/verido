@@ -3,10 +3,10 @@
 import ConsultantsInfo from "@/components/consultants/ConsultantsInfo";
 import React from "react";
 import { usePathname } from "next/navigation";
-import BusinessStatistics from "@/components/common/BusinessStatistics";
 import CashMovementChart from "@/components/common/CashMovementChart";
 import MoneyInOutStats from "@/components/common/MoneyInOutStats";
 import Image from "next/image";
+import ConsultantBusinessStat from "@/components/common/ConsultantBusinessStat";
 
 const Page = () => {
   const pathname = usePathname();
@@ -23,7 +23,7 @@ const Page = () => {
       <div className=" rounded-lg ">
         <ConsultantsInfo />
       </div>
-      <BusinessStatistics />
+      <ConsultantBusinessStat />
       <CashMovementChart />
       <MoneyInOutStats />
       <div className="flex gap-4 items-center">
