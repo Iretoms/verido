@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import useAuth from "@/lib/react-query/mutations/useAuth";
 import { IRecoverPassword } from "@/types";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
 const RecoverPassword = () => {
   const {
@@ -54,13 +54,13 @@ const RecoverPassword = () => {
           )}
         </div>
 
-        <Button
+        <button
           type="submit"
           className="text-white bg-verido-green mt-10   py-4 rounded-md w-full hover:bg-green-600"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Sending..." : " Recover Password"}
-        </Button>
+        </button>
         <div>
           <p className="font-bold text-gray-text text-sm">
             Go back to{" "}
