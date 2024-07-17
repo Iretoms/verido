@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Cookies from "js-cookie";
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -19,11 +19,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout()
-
-    // localStorage.removeItem("access_token");
-    // Cookies.remove("access_token");
-    // router.push("/signin");
-    // console.log("Logged out");
   };
 
   return (
