@@ -1,12 +1,10 @@
 "use client";
-
-import { ConsultantTable } from "@/components/consultants/ConsultantTable";
 import { columns } from "./column";
 import React from "react";
-import { useBusiness } from "@/lib/react-query/query/useBusiness";
+import { useBusiness } from "../../../lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
-import { AdminBusinessResponse, Consultant } from "@/types";
-import { ExpertsTable } from "@/components/experts/ExpertTable";
+import { AdminBusinessResponse } from "@/types";
+import { ExpertsTable } from "../../../components/experts/ExpertTable";
 const extractExperts = (data: AdminBusinessResponse[]): any[] => {
   return data.flatMap((business) => business.customer || []);
 };

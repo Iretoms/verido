@@ -1,10 +1,9 @@
 "use client";
-import { ConsultantTable } from "@/components/consultants/ConsultantTable";
+import { ConsultantTable } from "../../../components/consultants/ConsultantTable";
 import { columnsConsultant } from "./column";
 import React from "react";
-import { useBusiness } from "@/lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
-import { useConsultants } from "@/lib/react-query/query/useConsultant";
+import { useConsultants } from "../../../lib/react-query/query/useConsultant";
 
 const Consultants = () => {
   const { data: consultantsData, isLoading, isError } = useConsultants();
