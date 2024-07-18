@@ -26,7 +26,7 @@ const useVideos = () => {
           errDetail = errDetail[0];
         }
       }
-      showToast("Someone went wrong", errDetail, "error");
+      showToast("Something went wrong", errDetail, "error");
     },
     onSettled: () => {
       queryClient.invalidateQueries({

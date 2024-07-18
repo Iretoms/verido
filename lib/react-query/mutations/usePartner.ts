@@ -16,7 +16,7 @@ const usePartner = () => {
       return response.response;
     },
     onSuccess: (data) => {
-       showToast("Success!", "Consultant Created.", "success");
+       showToast("Success!", "Partner Created.", "success");
     },
     onError: (error) => {
       let errDetail = error.message;
@@ -26,7 +26,7 @@ const usePartner = () => {
           errDetail = errDetail[0];
         }
       }
-       showToast("Someone went wrong", errDetail, "error");
+       showToast("Something went wrong", errDetail, "error");
     },
     onSettled: () => {
       queryClient.invalidateQueries({
