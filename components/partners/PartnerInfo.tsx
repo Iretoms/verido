@@ -14,7 +14,7 @@ const PartnerInfo = () => {
   const { data: businessData } = useBusiness();
 
   const adminBusiness = businessData || [];
-  const { data: PartnerDetails, isLoading, isError } = usePartnerById(id);
+  const { data: PartnerDetails} = usePartnerById(id);
   const { data: consultantsData } = useConsultants();
   const consultantData = consultantsData || [];
 

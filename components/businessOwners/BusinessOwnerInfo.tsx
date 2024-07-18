@@ -11,7 +11,7 @@ import { columns } from "../products/column";
 const BusinessOwnerInfo = () => {
   const { id } = useParams() as { id: string };
 
-  const { data: businessData, isLoading, isError } = useBusinessById(id);
+  const { data: businessData } = useBusinessById(id);
 
   return (
     <div className="w-full h-full">

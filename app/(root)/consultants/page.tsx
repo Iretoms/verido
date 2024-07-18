@@ -6,13 +6,10 @@ import { usePathname } from "next/navigation";
 import { useConsultants } from "../../../lib/react-query/query/useConsultant";
 
 const Consultants = () => {
-  const { data: consultantsData, isLoading, isError } = useConsultants();
+  const { data: consultantsData } = useConsultants();
   const pathname = usePathname();
   const consultantData = consultantsData || [];
  
-  if (isError) {
-    return <div>Error loading consultant data</div>;
-  }
 
   return (
     <div className="flex flex-col gap-6">

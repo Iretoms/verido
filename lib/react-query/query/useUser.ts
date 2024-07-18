@@ -7,7 +7,8 @@ import { CurrentUserProfile } from "@/types";
 
 export const useCurrentUser = () => {
   return useQuery<CurrentUserProfile | null, Error>({
-    queryKey: ['currentUser'],
+    queryKey: ['currentUser' ],
+    
     queryFn: async () => {
       const response = await getMe();
       return response.response;

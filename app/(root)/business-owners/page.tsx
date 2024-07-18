@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { BusinessOwnerTable } from "../../../components/businessOwners/BusinessOwnersTable";
 
 const BusinessOwners = () => {
-  const { data: businessData, isLoading, isError } = useBusiness();
+  const { data: businessData} = useBusiness();
 
   const adminBusiness = businessData || [];
 

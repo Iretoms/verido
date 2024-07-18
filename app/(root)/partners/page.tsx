@@ -9,15 +9,10 @@ import { usePartners } from "../../../lib/react-query/query/usePartners";
 
 
 const PartnersComponent = () => {
-  const {data:partnerData , isLoading , isError} = usePartners()
+  const {data:partnerData } = usePartners()
    const partners = partnerData || [];
 
   const pathname = usePathname();
-
-
-  if (isError) {
-    return <div>Error loading consultant data</div>;
-  }
 
   return (
     <div className="flex flex-col gap-6">

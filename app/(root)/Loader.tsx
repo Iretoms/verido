@@ -9,8 +9,8 @@ const Loading = () => {
         <Image
           src="/assets/icons/verido_logo.svg" 
           alt="Verido Logo"
-          width={400} 
-          height={400}
+          width={600} 
+          height={600}
           className="opacity-100"
         />
       </div>

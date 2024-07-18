@@ -5,9 +5,10 @@ import type { Metadata } from "next";
 import { Manrope as Inter } from "next/font/google";
 import "../../app/globals.css";
 import { QueryProvider } from "../QueryProvider";
+import { useIsFetching } from "@tanstack/react-query";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import Loading from "./loading";
+import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +23,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <ChakraProvider>
         <QueryProvider>
           <body className={`${inter.className} flex h-screen bg-gray-body`}>
-            <Suspense fallback={<Loading />}>
-              <Sidebar />
-              <div className="flex-1 flex flex-col overflow-hidden">
-                <div className="p-5">
-                  <Navbar />
-                </div>
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body px-6">
-                  {children}
-                </main>
+            <GlobalLoadingIndicator />
+
+            <Sidebar />
+            <div className="flex-1 flex flex-col overflow-hidden">
+              <div className="p-5">
+                <Navbar />
               </div>
-            </Suspense>
+              <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body px-6">
+                {children}
+              </main>
+            </div>
           </body>
         </QueryProvider>
       </ChakraProvider>

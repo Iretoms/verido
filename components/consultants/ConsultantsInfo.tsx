@@ -10,7 +10,7 @@ import { columnsBusiness } from "../../app/(root)/business-owners/column";
 const ConsultantsInfo = () => {
   const { id } = useParams() as { id: string };
   const { data: selectedConsultant } = useConsultantById(id);
-  const { data: businessData, isLoading, isError } = useBusiness();
+  const { data: businessData } = useBusiness();
 
   const adminBusiness = businessData || [];
 

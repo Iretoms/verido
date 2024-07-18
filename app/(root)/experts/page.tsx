@@ -10,18 +10,11 @@ const extractExperts = (data: AdminBusinessResponse[]): any[] => {
 };
 
 const Experts = () => {
-  const { data: businessData, isLoading, isError } = useBusiness();
+  const { data: businessData } = useBusiness();
   const pathname = usePathname();
 
   const experts = businessData ? extractExperts(businessData) : [];
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading consultant data</div>;
-  }
 
   return (
     <div className="flex flex-col gap-6">
