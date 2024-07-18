@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Product } from "@/types";
+import { Product } from "../../types/index";
 import Image from "next/image";
 import { Checkbox } from "../ui/checkbox";
 

@@ -1,4 +1,4 @@
-import { AuthLayoutWrapper } from "@/components/auth/AuthLayoutWrapper";
+import { AuthLayoutWrapper } from "../../components/auth/AuthLayoutWrapper";
 import { QueryProvider } from "../QueryProvider";
 import { ChakraProvider } from "@chakra-ui/react";
 

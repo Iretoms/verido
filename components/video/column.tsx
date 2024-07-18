@@ -1,6 +1,5 @@
-import { IVideo } from "@/types";
+import { IVideo } from "../../types/index";
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
 
 const getStatusColor = (category: string) => {
   switch (category) {
@@ -38,5 +37,4 @@ export const columnsVideo: ColumnDef<IVideo>[] = [
       );
     },
   },
-  
 ];

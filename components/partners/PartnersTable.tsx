@@ -22,16 +22,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../../components/ui/table";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../../components/ui/select";
 
-import { Partner } from "@/types";
+import { Partner } from "../../types/index";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

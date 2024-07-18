@@ -3,8 +3,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import useAuth from "../../../lib/react-query/mutations/useAuth";
-import { IRecoverPassword } from "@/types";
-// import { Button } from "@/components/ui/button";
+import { IRecoverPassword } from "../../../types/index";
+
 
 const RecoverPassword = () => {
   const {

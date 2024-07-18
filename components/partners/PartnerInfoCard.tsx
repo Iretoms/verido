@@ -1,5 +1,5 @@
 import React from "react";
-import { Partner } from "@/types";
+import { Partner } from "../../types/index";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import {
@@ -12,7 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "../../components/ui/alert-dialog";
 
 interface BusinessInfoCardProps {
   partners: Partner;

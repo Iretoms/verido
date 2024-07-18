@@ -1,6 +1,6 @@
 // columnsCountry.ts
 import { ColumnDef } from "@tanstack/react-table";
-import { ICountry } from "@/types"; // Adjust the path to where your types are defined
+import { ICountry } from "../../types/index"; // Adjust the path to where your types are defined
 
 export const columnsCountry: ColumnDef<ICountry>[] = [
   {

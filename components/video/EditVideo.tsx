@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,11 +9,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ICreateVideo, IVideo } from "@/types";
-import useVideos from "@/lib/react-query/mutations/useVideo";
+} from "../../components/ui/dialog";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { ICreateVideo, IVideo } from "../../types/index";
 
 interface EditVideoDialogProps {
   isOpen: boolean;

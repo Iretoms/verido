@@ -1,11 +1,11 @@
 "use client";
 
-import { PartnersTable } from "@/components/partners/PartnersTable";
+import { PartnersTable } from "../../../components/partners/PartnersTable";
 import { columnsPartner } from "./column";
 import React from "react";
 
 import { usePathname } from "next/navigation";
-import { usePartners } from "@/lib/react-query/query/usePartners";
+import { usePartners } from "../../../lib/react-query/query/usePartners";
 
 
 const PartnersComponent = () => {

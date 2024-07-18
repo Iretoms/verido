@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCurrentUser } from "@/lib/react-query/query/useUser";
+import { useCurrentUser } from "../../lib/react-query/query/useUser";
 
 const Sidebar = () => {
   const queryClient = useQueryClient();

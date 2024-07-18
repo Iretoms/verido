@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { IUsersReg } from "@/types";
-import useAuth from "@/lib/react-query/mutations/useAuth";
+import { IUsersReg } from "../../types/index";
+import useAuth from "../../lib/react-query/mutations/useAuth";
 import { Button } from "../ui/button";
 
 const Register = () => {

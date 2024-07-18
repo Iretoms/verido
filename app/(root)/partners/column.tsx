@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Partner } from "@/types";
+import { Partner } from "../../../types/index";
 
 const getStatusStyles = (status: string) => {
   switch (status) {

@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import Sidebar from "@/components/common/Sidebar";
-import Navbar from "@/components/common/Navbar";
+import Sidebar from "../../components/common/Sidebar";
+import Navbar from "../../components/common/Navbar";
 import type { Metadata } from "next";
 import { Manrope as Inter } from "next/font/google";
 import "../../app/globals.css";
-import { QueryProvider } from "@/app/QueryProvider";
+import { QueryProvider } from "../QueryProvider";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import Loading from "./loading";

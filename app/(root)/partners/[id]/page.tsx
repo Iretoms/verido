@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
-import PartnerInfo from "@/components/partners/PartnerInfo";
+import PartnerInfo from "../../../../components/partners/PartnerInfo";
 
 const PartnerDetails = () => {
   const pathname = usePathname();

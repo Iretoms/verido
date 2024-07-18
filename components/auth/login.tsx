@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { IUsers } from "@/types";
-import useAuth from "@/lib/react-query/mutations/useAuth";
+import { IUsers } from "../../types/index";
+import useAuth from "../../lib/react-query/mutations/useAuth";
 
 const Login = () => {
   const { loginMutation } = useAuth();

@@ -1,4 +1,4 @@
-import { ICountry } from "@/types";
+import { ICountry } from "../types/index";
 export const videoDummyData = [
   {
     id: "01",

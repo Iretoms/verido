@@ -15,9 +15,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { ICountry } from "@/types"; 
+} from "../../components/ui/table";
+import { Button } from "../../components/ui/button";
+import { ICountry } from "../../types/index"; 
 
 interface CountryTableProps {
   data: ICountry[];

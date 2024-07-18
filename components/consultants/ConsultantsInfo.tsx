@@ -1,11 +1,11 @@
 import React from "react";
-import { useBusiness } from "@/lib/react-query/query/useBusiness";
-import { useConsultantById } from "@/lib/react-query/query/useConsultant";
+import { useBusiness } from "../../lib/react-query/query/useBusiness";
+import { useConsultantById } from "../../lib/react-query/query/useConsultant";
 import { useParams } from "next/navigation";
 import ConsultantInfoCard from "./ConsultantInfoCard";
 
 import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
-import { columnsBusiness } from "@/app/(root)/business-owners/column";
+import { columnsBusiness } from "../../app/(root)/business-owners/column";
 
 const ConsultantsInfo = () => {
   const { id } = useParams() as { id: string };

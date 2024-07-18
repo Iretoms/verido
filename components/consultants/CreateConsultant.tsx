@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -11,12 +11,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "../../components/ui/dialog";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import Image from "next/image";
-import { ICreateConsultantCreate } from "@/types";
-import useConsultant from "@/lib/react-query/mutations/useConsultant";
+import { ICreateConsultantCreate } from "../../types/index";
+import useConsultant from "../../lib/react-query/mutations/useConsultant";
 
 const CreateConsultant = () => {
   const {

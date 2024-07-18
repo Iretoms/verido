@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Consultant } from "@/types";
+import { Consultant } from "../../types/index";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import {
@@ -13,7 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "../../components/ui/alert-dialog";
 
 interface ConsultantInfoCardProps {
   consultant: Consultant;

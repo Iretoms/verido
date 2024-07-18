@@ -17,8 +17,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Product } from "@/types";
+} from "../../components/ui/table";
+
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";

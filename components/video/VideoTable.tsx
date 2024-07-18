@@ -16,9 +16,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../../components/ui/table";
 import CreateVideo from "./CreateVideo";
-import { IVideo } from "@/types";
+import { IVideo } from "../../types/index";
 import { Button } from "../ui/button";
 import EditVideo from "./EditVideo";
 import Image from "next/image";

@@ -9,9 +9,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
-import useAuth from "@/lib/react-query/mutations/useAuth";
+import useAuth from "../../lib/react-query/mutations/useAuth";
 
 const Navbar = () => {
   const router = useRouter();

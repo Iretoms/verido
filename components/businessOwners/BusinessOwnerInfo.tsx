@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useParams } from "next/navigation";
-import { useBusinessById } from "@/lib/react-query/query/useBusiness";
+import { useBusinessById } from "../../lib/react-query/query/useBusiness";
 
 import BusinessInfoCard from "./BusinessInfoCard";
 import { ProductTable } from "../products/ProductTable";

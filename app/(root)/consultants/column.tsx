@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Consultant } from "@/types";
+import { Consultant } from "../../../types/index";
 const getStatusStyles = (status: string) => {
   switch (status) {
     case "active":

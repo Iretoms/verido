@@ -3,7 +3,7 @@ import { columns } from "./column";
 import React from "react";
 import { useBusiness } from "../../../lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
-import { AdminBusinessResponse } from "@/types";
+import { AdminBusinessResponse } from "../../../types/index";
 import { ExpertsTable } from "../../../components/experts/ExpertTable";
 const extractExperts = (data: AdminBusinessResponse[]): any[] => {
   return data.flatMap((business) => business.customer || []);

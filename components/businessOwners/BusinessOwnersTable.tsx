@@ -18,8 +18,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { AdminBusinessResponse } from "@/types";
+} from "../../components/ui/table";
+import { AdminBusinessResponse } from "../../types/index";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -29,7 +29,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../../components/ui/select";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
