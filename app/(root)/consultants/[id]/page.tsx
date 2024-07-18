@@ -1,12 +1,12 @@
 "use client";
 
-import ConsultantsInfo from "@/components/consultants/ConsultantsInfo";
+import ConsultantsInfo from "../../../../components/consultants/ConsultantsInfo";
 import React from "react";
 import { usePathname } from "next/navigation";
-import CashMovementChart from "@/components/common/CashMovementChart";
-import MoneyInOutStats from "@/components/common/MoneyInOutStats";
+import CashMovementChart from "../../../../components/common/CashMovementChart";
+import MoneyInOutStats from "../../../../components/common/MoneyInOutStats";
 import Image from "next/image";
-import ConsultantBusinessStat from "@/components/common/ConsultantBusinessStat";
+import ConsultantBusinessStat from "../../../../components/common/ConsultantBusinessStat";
 
 const Page = () => {
   const pathname = usePathname();
