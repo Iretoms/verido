@@ -20,6 +20,7 @@ import CreateConsultant from "@/components/consultants/CreateConsultant";
 import CreatePartner from "@/components/partners/CreatePartner";
 import { CountryTable } from "@/components/countries/CountryTable";
 import { countryData } from "@/constant";
+import Loading from "./loading";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
@@ -32,6 +33,9 @@ const DashboardContent = () => {
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
   console.log(currentUser);
+  if(isLoading){
+    return <Loading></Loading>
+  }
   return (
     <div className="w-full flex flex-col flex-1 p-6 space-y-6">
       <div>

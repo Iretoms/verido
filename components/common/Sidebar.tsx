@@ -39,7 +39,7 @@ const Sidebar = () => {
       path: "/consultants",
       label: "Consultants",
       icon: "/assets/icons/userSet.svg",
-      roles: ["super_admin"],
+      roles: ["super_admin" , "partner"],
     },
     {
       path: "/partners",

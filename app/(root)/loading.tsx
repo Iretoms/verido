@@ -1,10 +1,10 @@
-// src/components/Loading.tsx
+'use client'
 import React from "react";
 import Image from "next/image";
 
 const Loading = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen w-screen">
       <div className="animate-pulse">
         <Image
           src="/assets/icons/verido_logo.svg" 
