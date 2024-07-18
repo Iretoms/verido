@@ -31,7 +31,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               </main>
             </div>
           </body>
-        </QueryProvider>xx
+        </QueryProvider>
       </ChakraProvider>
     </html>
   );

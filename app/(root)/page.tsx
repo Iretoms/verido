@@ -25,11 +25,13 @@ const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
   const { data: consultantsData, isLoading, isError } = useConsultants();
   const { data: currentUser } = useCurrentUser();
-  const {data:videData} = useVideos()
+  const { data: videData } = useVideos();
   const businessOwner = businessOwnersData || [];
   const consultants = consultantsData || [];
-  const videos = videData || []
+  const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
+  const isPartner = currentUser?.role === "partner";
+  console.log(currentUser);
   return (
     <div className="w-full flex flex-col flex-1 p-6 space-y-6">
       <div>
@@ -231,9 +233,11 @@ const DashboardContent = () => {
               />
             </div>
           </div>
-          <div className="flex justify-between flex-col p-5 rounded-md bg-white max-h-[25rem] overflow-y-auto">
-            <VideoTable columns={columnsVideo} data={videos} />
-          </div>
+          {(isSuperAdmin || isPartner) && (
+            <div className="flex justify-between flex-col p-5 rounded-md bg-white max-h-[25rem] overflow-y-auto">
+              <VideoTable columns={columnsVideo} data={videos} />
+            </div>
+          )}
         </div>
         <div className="flex flex-1 flex-col gap-8">
           <DownLinksGraph
@@ -241,7 +245,11 @@ const DashboardContent = () => {
             consultantsCount={consultants.length}
             totalCount={(businessOwnersData?.length || 0) + consultants.length}
           />
-          <div className="bg-white p-6 rounded-lg flex items-center justify-between">
+          <div
+            className={`bg-white p-6 rounded-lg flex items-center justify-between ${
+              !isSuperAdmin && !isPartner ? "hidden" : ""
+            }`}
+          >
             <div className=" flex flex-col items-center justify-center">
               <Image
                 src="/assets/icons/growth.svg"
@@ -250,7 +258,9 @@ const DashboardContent = () => {
                 alt="Illustration"
               />
               <h2 className="text-[15px] text-center">
-                Create New Partner/Consultant Account
+                {isSuperAdmin
+                  ? "Create New Partner/Consultant Account"
+                  : "Create Consultant"}
               </h2>
               <div className="flex items-center gap-6 justify-between mt-10">
                 {isSuperAdmin && <CreatePartner />}
@@ -301,7 +311,7 @@ const DashboardContent = () => {
         </div>
       </div>
       <BusinessStatistics />
-      <div className="bg-white p-10 rounded-md">
+      <div className={`bg-white p-10 rounded-md ${(!isSuperAdmin && !isPartner) ? 'hidden' : ''}`}>
         <ConsultantTable data={consultants} columns={columnsConsultant} />
       </div>
       <div className="bg-white p-10 rounded-md">

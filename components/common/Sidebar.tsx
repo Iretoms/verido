@@ -3,9 +3,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
+import { useCurrentUser } from "@/lib/react-query/query/useUser";
 
 const Sidebar = () => {
+  const queryClient = useQueryClient();
+  const { data: currentUser } = useCurrentUser();
   const pathName = usePathname();
+
   const isActive = (href: string) => {
     if (href === "/") {
       return pathName === href
@@ -16,43 +21,58 @@ const Sidebar = () => {
       ? "bg-active-green rounded-lg text-verido-green"
       : "text-gray-text";
   };
-  const items = [
+
+  const allItems = [
     {
       path: "/",
       label: "Dashboard",
       icon: "/assets/icons/dashboard.svg",
+      roles: ["super_admin", "partner"],
     },
     {
       path: "/business-owners",
       label: "Business Owners",
       icon: "/assets/icons/id_card.svg",
+      roles: ["super_admin", "partner"],
     },
     {
       path: "/consultants",
       label: "Consultants",
       icon: "/assets/icons/userSet.svg",
+      roles: ["super_admin"],
     },
     {
       path: "/partners",
       label: "Partners",
       icon: "/assets/icons/user_partner.svg",
+      roles: ["super_admin"],
     },
     {
       path: "/experts",
       label: "Expert",
       icon: "/assets/icons/user-follow.svg",
+      roles: ["super_admin", "partner"],
     },
     {
       path: "/all-users",
       label: "All Users",
       icon: "/assets/icons/group-user.svg",
+      roles: ["super_admin", "partner"],
     },
     {
       path: "/chats",
       label: "Chats",
       icon: "/assets/icons/chat.svg",
+      roles: ["super_admin", "partner"],
     },
   ];
+
+  const visibleItems = allItems.filter((item) => {
+    if (currentUser?.role === "super_admin") return true;
+    if (currentUser?.role === "partner") return item.roles.includes("partner");
+   return item.path !== "/consultants" && item.path !== "/experts";
+  });
+
   return (
     <div className="bg-white w-64 hidden  h-full md:flex flex-col justify-between">
       <div className="flex flex-col ">
@@ -66,7 +86,7 @@ const Sidebar = () => {
         </div>
         <p className="p-6 text-gray-text text-[12px] font-[500]">MAIN</p>
         <nav className="flex flex-col gap-1 -mt-3 px-2">
-          {items.map((item) => (
+          {visibleItems.map((item) => (
             <Link
               key={item.path}
               href={item.path}
@@ -89,7 +109,6 @@ const Sidebar = () => {
           ))}
         </nav>
       </div>
-
       <div className="p-4 flex items-center">
         <Image
           src="/assets/icons/winkface.svg"
@@ -99,7 +118,7 @@ const Sidebar = () => {
           className="rounded-full"
         />
         <div className="ml-3">
-          <p className="text-sm font-medium">Jane Doe</p>
+          <p className="text-sm font-medium">{currentUser?.name}</p>
           <p className="text-xs text-gray-500">View Profile</p>
         </div>
         <button className="ml-auto">
