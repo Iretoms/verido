@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { ConsultantTable } from "@/components/consultants/ConsultantTable";
-import { BusinessOwnerTable } from "@/components/businessOwners/BusinessOwnersTable";
+import { ConsultantTable } from "../../components/consultants/ConsultantTable";
+import { BusinessOwnerTable } from "../../components/businessOwners/BusinessOwnersTable";
 import { columnsConsultant } from "./consultants/column";
 import { columnsBusiness } from "./business-owners/column";
-import { useBusiness } from "@/lib/react-query/query/useBusiness";
-import { useConsultants } from "@/lib/react-query/query/useConsultant";
-import { columnsVideo } from "@/components/video/column";
+import { useBusiness } from "../../lib/react-query/query/useBusiness";
+import { useConsultants } from "../../lib/react-query/query/useConsultant";
+import { columnsVideo } from "../../components/video/column";
 import { columnsCountry } from "@/components/countries/column";
 import { useCurrentUser } from "@/lib/react-query/query/useUser";
 import DownLinksGraph from "@/components/common/DownLinksGraph";
