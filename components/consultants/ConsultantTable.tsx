@@ -100,7 +100,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
 
   return (
     <div className="rounded-md">
-      <div className="flex justify-between mb-6">
+      <div className="flex flex-col md:flex-row  gap-3 md:gap-0 justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">
             Consultants (
@@ -172,10 +172,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
                 className="text-sm font-light text-gray-text"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    // onClick={() => handleRowSelection(row.original._id)}
-                    key={cell.id}
-                  >
+                  <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

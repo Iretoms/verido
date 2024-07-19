@@ -62,6 +62,7 @@ const useAuth = () => {
         errDetail = error?.response?.data?.message;
         if (Array.isArray(errDetail)) {
           errDetail = errDetail[0];
+          console.log(errDetail)
         }
       }
       showToast("Something went wrong", errDetail, "error");

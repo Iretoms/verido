@@ -74,7 +74,7 @@ const Sidebar = () => {
   });
 
   return (
-    <div className="bg-white w-64 hidden  h-full md:flex flex-col justify-between">
+    <div className="bg-white w-64 hidden  h-full md:hidden lg:flex flex-col justify-between">
       <div className="flex flex-col ">
         <div className="p-6">
           <Image

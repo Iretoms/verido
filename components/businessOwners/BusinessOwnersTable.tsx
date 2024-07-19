@@ -73,7 +73,7 @@ export function BusinessOwnerTable<
 
   return (
     <div className="rounded-md">
-      <div className="flex justify-between mb-6">
+      <div className="flex flex-col gap-3 md:gap-0 md:flex-row  justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">
             Business Owners (

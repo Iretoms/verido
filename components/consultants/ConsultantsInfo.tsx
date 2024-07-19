@@ -15,11 +15,11 @@ const ConsultantsInfo = () => {
   const adminBusiness = businessData || [];
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full p-2 lg:p-0">
       {selectedConsultant && (
         <div className="flex flex-col gap-10">
           <ConsultantInfoCard consultant={selectedConsultant} />
-          <div className=" p-10 flex flex-col gap-10 w-full bg-white rounded-lg mb-8">
+          <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
             <BusinessOwnerTable
               data={adminBusiness}
               columns={columnsBusiness}

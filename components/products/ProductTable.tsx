@@ -52,7 +52,7 @@ export function ProductTable<TData, TValue>({
 
   return (
     <div className="rounded-md">
-      <div className="flex justify-between mb-6">
+      <div className="flex flex-col gap-3 md:p-0 md:flex-row justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">Products</h2>
           <p className="text-[14px] text-black">List of Products available</p>

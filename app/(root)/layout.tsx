@@ -9,6 +9,7 @@ import { useIsFetching } from "@tanstack/react-query";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
+import MobileNav from "@/components/common/MobileNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,10 +28,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
             <Sidebar />
             <div className="flex-1 flex flex-col overflow-hidden">
-              <div className="p-5">
+              <div className="p-2 lg:p-5">
                 <Navbar />
+                <MobileNav/>
               </div>
-              <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body px-6">
+              <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body lg:px-6">
                 {children}
               </main>
             </div>

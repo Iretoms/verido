@@ -31,7 +31,7 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
   };
 
   return (
-    <div className="flex gap-5 h-full p-10 w-full bg-white rounded-lg">
+    <div className="flex flex-col md:flex-row gap-5 p-2 md:p-10 w-full bg-white rounded-lg">
       <div className="flex flex-col flex-1 justify-between items-center border-r px-10 border-r-verido-border">
         <div className="flex items-center justify-center flex-col gap-2">
           <Image

@@ -36,7 +36,7 @@ const DashboardContent = () => {
   return (
     <>
       {currentUser && (
-        <div className="w-full flex flex-col flex-1 p-6 space-y-6">
+        <div className="w-full flex flex-col flex-1 p-3 lg:p-6 space-y-6">
           <div>
             <h1 className="text-2xl">Welcome back, {currentUser?.name} 👋</h1>
             <p className="text-gray-text text-[12px] font-light">
@@ -44,10 +44,14 @@ const DashboardContent = () => {
             </p>
           </div>
 
-          <div className="w-full flex justify-between gap-7">
-            <div className="w-3/5 flex flex-col gap-10">
-              <div className="grid grid-cols-4 gap-6">
-                <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+          <div className="w-full flex flex-col bg-green lg:flex-row justify-between gap-7">
+            <div className="w-full lg:w-3/5 flex flex-col gap-10">
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 lg:gap-6">
+                <div
+                  className={`bg-white rounded-lg ${
+                    isPartner ? "hidden" : "flex"
+                  } flex flex-col gap-2 items-center p-5`}
+                >
                   <Image
                     src="/assets/icons/bar-chart2.svg"
                     alt="chart"
@@ -68,12 +72,33 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">{consultants?.length}</p>
+                  <p className="text-[18px]">{businessOwnersData?.length}</p>
                   <p className="font-light text-[12px] text-gray-text">
                     All Business
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex gap-2 flex-col items-center p-5">
+                <div
+                  className={`bg-white rounded-lg ${
+                    !isPartner && !isSuperAdmin ? "hidden" : "flex"
+                  } flex gap-2 flex-col items-center p-5`}
+                >
+                  <Image
+                    src="/assets/icons/bar-chart2.svg"
+                    alt="chart"
+                    width={100}
+                    height={100}
+                    className="object-contain w-full"
+                  />
+                  <p className="text-[18px]">{consultants?.length}</p>
+                  <p className="font-light text-[12px] text-gray-text">
+                    All Consultants
+                  </p>
+                </div>
+                <div
+                  className={`bg-white rounded-lg ${
+                    isPartner || isSuperAdmin ? "flex" : "hidden"
+                  } gap-2 flex-col items-center p-5`}
+                >
                   <Image
                     src="/assets/icons/bar-chart2.svg"
                     alt="chart"
@@ -83,10 +108,14 @@ const DashboardContent = () => {
                   />
                   <p className="text-[18px]">0</p>
                   <p className="font-light text-[12px] text-gray-text">
-                    All Consultants
+                    Active Consultants
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart3.svg"
                     alt="chart"
@@ -99,7 +128,11 @@ const DashboardContent = () => {
                     All Subscribers
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart2.svg"
                     alt="chart"
@@ -113,7 +146,11 @@ const DashboardContent = () => {
                     Partners
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart.svg"
                     alt="chart"
@@ -127,7 +164,11 @@ const DashboardContent = () => {
                     Business
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart2.svg"
                     alt="chart"
@@ -141,7 +182,11 @@ const DashboardContent = () => {
                     Consultants
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-1 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart3.svg"
                     alt="chart"
@@ -155,7 +200,11 @@ const DashboardContent = () => {
                     Subscribers
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart2.svg"
                     alt="chart"
@@ -168,7 +217,11 @@ const DashboardContent = () => {
                     Independent Partners
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart.svg"
                     alt="chart"
@@ -181,7 +234,11 @@ const DashboardContent = () => {
                     Independent Business
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart2.svg"
                     alt="chart"
@@ -194,7 +251,11 @@ const DashboardContent = () => {
                     Independent Consultants
                   </p>
                 </div>
-                <div className="bg-white rounded-lg flex flex-col gap-2 items-center p-5">
+                <div
+                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
+                    !isSuperAdmin ? "hidden" : "flex"
+                  }`}
+                >
                   <Image
                     src="/assets/icons/bar-chart3.svg"
                     alt="chart"
@@ -246,7 +307,7 @@ const DashboardContent = () => {
                 </div>
               )}
             </div>
-            <div className="flex flex-1 flex-col gap-8">
+            <div className="flex justify-between flex-1 flex-col gap-8">
               <DownLinksGraph
                 businessOwnersCount={businessOwnersData?.length}
                 consultantsCount={consultants.length}
@@ -255,7 +316,7 @@ const DashboardContent = () => {
                 }
               />
               <div
-                className={`bg-white p-6 rounded-lg flex items-center justify-between ${
+                className={`bg-white p-6 rounded-lg  flex flex-col items-center justify-between ${
                   !isSuperAdmin && !isPartner ? "hidden" : ""
                 }`}
               >
@@ -321,13 +382,13 @@ const DashboardContent = () => {
           </div>
           <BusinessStatistics />
           <div
-            className={`bg-white p-10 rounded-md ${
+            className={`bg-white p-1 md:p-10 lg:p-10 rounded-md ${
               !isSuperAdmin && !isPartner ? "hidden" : ""
             }`}
           >
             <ConsultantTable data={consultants} columns={columnsConsultant} />
           </div>
-          <div className="bg-white p-10 rounded-md">
+          <div className="bg-white p-1 md:p-10 lg:p-10  rounded-md">
             <BusinessOwnerTable
               data={businessOwner}
               columns={columnsBusiness}
@@ -335,7 +396,7 @@ const DashboardContent = () => {
           </div>
           <CashMovementChart />
           <MoneyInOutStats />
-          <div className="flex gap-4 items-center">
+          <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
             <div className="bg-white rounded-lg flex flex-1 gap-4 items-center p-5">
               <Image
                 src="/assets/icons/barchart1.svg"
@@ -345,7 +406,7 @@ const DashboardContent = () => {
                 className="object-contain"
               />
               <div>
-                <p className="text-[18px]">$1,346.00</p>
+                <p className="text-[15px] lg:text-[18px]">$1,346.00</p>
                 <p className="font-light text-[12px] text-gray-text">
                   Money In
                 </p>
@@ -360,7 +421,7 @@ const DashboardContent = () => {
                 className="object-contain"
               />
               <div>
-                <p className="text-[18px]">$13,346.00</p>
+                <p className="text-[15px] lg:text-[18px]">$13,346.00</p>
                 <p className="font-light text-[12px] text-gray-text">
                   Direct Labour
                 </p>
@@ -375,7 +436,7 @@ const DashboardContent = () => {
                 className="object-contain"
               />
               <div>
-                <p className="text-[18px]">$2,345.00</p>
+                <p className="text-[15px] lg:text-[18px]">$2,345.00</p>
                 <p className="font-light text-[12px] text-gray-text">
                   Direct Material
                 </p>
@@ -390,7 +451,7 @@ const DashboardContent = () => {
                 className="object-contain"
               />
               <div>
-                <p className="text-[18px]">$17,346.00</p>
+                <p className="text-[15px] lg:text-[18px]">$17,346.00</p>
                 <p className="font-light text-[12px] text-gray-text">
                   Overhead
                 </p>

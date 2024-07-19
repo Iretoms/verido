@@ -100,7 +100,7 @@ export function PartnersTable<TData extends Partner, TValue>({
 
   return (
     <div className="rounded-md">
-      <div className="flex justify-between mb-6">
+      <div className="flex flex-col md:flex-row  gap-3 md:gap-0 justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">
             Partners ({" "}

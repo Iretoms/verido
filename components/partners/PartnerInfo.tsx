@@ -19,17 +19,17 @@ const PartnerInfo = () => {
   const consultantData = consultantsData || [];
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full p-2 lg:p-0">
       {PartnerDetails && (
         <div className="flex flex-col gap-10">
           <PartnerInfoCard partners={PartnerDetails} />
-          <div className="flex flex-col gap-5 p-10 w-full bg-white mb-10 rounded-lg">
+          <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
             <ConsultantTable
               data={consultantData}
               columns={columnsConsultant}
             />
           </div>
-          <div className="flex flex-col gap-5 p-10 w-full bg-white mb-10 rounded-lg">
+          <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
             <BusinessOwnerTable
               data={adminBusiness}
               columns={columnsBusiness}

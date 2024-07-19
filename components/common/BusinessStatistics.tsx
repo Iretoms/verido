@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const BusinessStatistics = () => {
   return (
-    <div className="flex gap-6 justify-between">
+    <div className="flex flex-col md:flex-col lg:flex-row gap-6 justify-between">
       <div className="flex flex-col gap-5">
         <div className="bg-white flex gap-5 justify-between items-center p-5 rounded-md">
           <div className="flex flex-col gap-1">
@@ -38,7 +38,7 @@ const BusinessStatistics = () => {
           </div>
         </div>
 
-        <div className="bg-white flex items-start justify-between p-5 rounded-md">
+        <div className="bg-white gap-10 lg:gap-0 flex items-start justify-between p-5 rounded-md">
           <div className="flex flex-col gap-1">
             <p className="font-light">Top Partners</p>
             <p className="text-gray-text text-[13px] font-extralight">
@@ -53,7 +53,7 @@ const BusinessStatistics = () => {
           </div>
           <div className="flex flex-col items-center justify-between gap-2">
             <p className="font-light">Partners</p>
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-wrap lg:flex-nowrap gap-2 items-center">
               <Image
                 src="/assets/icons/starface.svg"
                 alt="percent"
@@ -107,7 +107,7 @@ const BusinessStatistics = () => {
           </div>
         </div>
 
-        <div className="bg-white flex items-start justify-between p-5 rounded-md">
+        <div className="bg-white flex items-start gap-10 lg:gap-0  justify-between p-5 rounded-md">
           <div className="flex flex-col gap-1">
             <p className="font-light">Top Businesses</p>
             <p className="text-gray-text text-[13px] font-extralight">
@@ -122,7 +122,7 @@ const BusinessStatistics = () => {
           </div>
           <div className="flex flex-col items-center justify-between gap-2">
             <p className="font-light">Business Owners</p>
-            <div className="flex gap-2 items-center">
+            <div className="flex  flex-wrap lg:flex-nowrap gap-2 items-center">
               <Image
                 src="/assets/icons/starface.svg"
                 alt="percent"
@@ -176,7 +176,7 @@ const BusinessStatistics = () => {
           </div>
         </div>
 
-        <div className="bg-white flex items-start justify-between p-5 rounded-md">
+        <div className="bg-white flex items-start gap-10 lg:gap-0  justify-between p-5 rounded-md">
           <div className="flex flex-col gap-1">
             <p className="font-light">Top Consultants</p>
             <p className="text-gray-text text-[13px] font-extralight">
@@ -191,7 +191,7 @@ const BusinessStatistics = () => {
           </div>
           <div className="flex flex-col items-center justify-between gap-2">
             <p className="font-light">Consultants</p>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center flex-wrap lg:flex-nowrap">
               <Image
                 src="/assets/icons/starface.svg"
                 alt="percent"

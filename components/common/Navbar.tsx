@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white rounded-lg flex items-center justify-between p-1 md:p-5">
+    <header className="bg-white rounded-lg hidden lg:flex items-center justify-between p-1 md:p-5">
       <div className="flex items-center gap-2 md:gap-5">
         <Image
           width={30}
@@ -68,9 +68,6 @@ const Navbar = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="font-bold" onClick={handleLogout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>

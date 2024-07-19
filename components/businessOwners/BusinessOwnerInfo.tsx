@@ -14,12 +14,12 @@ const BusinessOwnerInfo = () => {
   const { data: businessData } = useBusinessById(id);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full p-2 lg:p-0">
       {businessData && (
         <div className="flex flex-col gap-10">
           <BusinessInfoCard business={businessData} />
           <div className="flex justify-between">
-            <div className="bg-white p-3 rounded-lg flex justify-between w-[60%]">
+            <div className="bg-white gap-10 lg:gap-0 p-3 rounded-lg flex justify-between w-full  lg:w-[60%]">
               <div className=" rounded-lg">
                 <Image
                   src="/assets/icons/Image-Button.svg"
@@ -42,14 +42,14 @@ const BusinessOwnerInfo = () => {
                 </div>
                 <Button
                   size={"sm"}
-                  className="rounded-2xl bg-verido-green textt-white text-[13px] w-[30%] mt-5"
+                  className="rounded-2xl bg-verido-green textt-white text-[13px] w-full md:w-[30%] mt-5"
                 >
                   Assign/Change
                 </Button>
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-5 p-10 w-full bg-white mb-10 rounded-lg">
+          <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
             <ProductTable data={businessData.product} columns={columns} />
           </div>
         </div>

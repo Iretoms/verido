@@ -23,10 +23,12 @@ const Page = () => {
       <div className=" rounded-lg ">
         <ConsultantsInfo />
       </div>
-      <ConsultantBusinessStat />
-      <CashMovementChart />
-      <MoneyInOutStats />
-      <div className="flex gap-4 items-center">
+      <div className="p-2 md:p-0">
+        <ConsultantBusinessStat />
+        <CashMovementChart />
+        <MoneyInOutStats />
+      </div>
+      <div className="flex flex-wrap gap-4 items-center p-2 md:p-0">
         <div className="bg-white rounded-lg flex flex-1 gap-4 items-center p-5">
           <Image
             src="/assets/icons/barchart1.svg"
@@ -84,7 +86,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 p-2 md:p-0">
         <div className="bg-white rounded-lg flex gap-4 items-end p-5">
           <div className="flex flex-col gap-7">
             <p>Labour</p>

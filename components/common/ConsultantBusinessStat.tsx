@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ConsultantBusinessStat = () => {
   return (
-    <div className="flex gap-7 justify-between">
+    <div className="flex  flex-col md:flex-row gap-7 justify-between">
       <div className="flex flex-col gap-5">
         <div className="bg-white flex items-start justify-between p-5 rounded-md">
           <div className="flex flex-col gap-1">
