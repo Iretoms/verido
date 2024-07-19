@@ -21,7 +21,7 @@ import CreatePartner from "../../components/partners/CreatePartner";
 import { CountryTable } from "../../components/countries/CountryTable";
 import { countryData } from "../../constant/index";
 import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
-import { useAuthenticatedUser } from "@/context/AuthContext";
+import { useAuthenticatedUser } from "../../context/AuthContext";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();

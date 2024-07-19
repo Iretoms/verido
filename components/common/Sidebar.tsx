@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useAuthenticatedUser } from "@/context/AuthContext";
+import { useAuthenticatedUser } from "../../context/AuthContext";
 
 const Sidebar = () => {
   const { currentUser } = useAuthenticatedUser();
