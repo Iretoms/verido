@@ -32,6 +32,7 @@ import {
 } from "../../components/ui/select";
 
 import { Partner } from "../../types/index";
+import CreatePartner from "./CreatePartner";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -95,7 +96,7 @@ export function PartnersTable<TData extends Partner, TValue>({
     },
   });
   const handleSortChange = (sortOrder: "asc" | "desc") => {
-    setSorting([{ id: "username", desc: sortOrder === "desc" }]);
+    setSorting([{ id: "name", desc: sortOrder === "desc" }]);
   };
 
   return (
@@ -133,10 +134,10 @@ export function PartnersTable<TData extends Partner, TValue>({
             <Input
               placeholder="Search"
               value={
-                (table.getColumn("username")?.getFilterValue() as string) ?? ""
+                (table.getColumn("name")?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table.getColumn("username")?.setFilterValue(event.target.value)
+                table.getColumn("name")?.setFilterValue(event.target.value)
               }
               className="max-w-sm h-full outline-none"
             />
@@ -146,7 +147,7 @@ export function PartnersTable<TData extends Partner, TValue>({
               size={"sm"}
               className="text-verido-white bg-verido-green rounded-lg text-sm w-[10rem]"
             >
-              Add Partner
+              Add<CreatePartner />
             </Button>
           </div>
         </div>

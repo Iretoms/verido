@@ -9,7 +9,6 @@ import { useBusiness } from "../../lib/react-query/query/useBusiness";
 import { useConsultants } from "../../lib/react-query/query/useConsultant";
 import { columnsVideo } from "../../components/video/column";
 import { columnsCountry } from "../../components/countries/column";
-import { useCurrentUser } from "../../lib/react-query/query/useUser";
 import DownLinksGraph from "../../components/common/DownLinksGraph";
 import BusinessStatistics from "../../components/common/BusinessStatistics";
 import CashMovementChart from "../../components/common/CashMovementChart";
