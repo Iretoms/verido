@@ -20,18 +20,22 @@ import CreateConsultant from "../../components/consultants/CreateConsultant";
 import CreatePartner from "../../components/partners/CreatePartner";
 import { CountryTable } from "../../components/countries/CountryTable";
 import { countryData } from "../../constant/index";
-import Loading from "./Loader";
+import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
+import { useAuthenticatedUser } from "@/context/AuthContext";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
   const { data: consultantsData } = useConsultants();
-  const { data: currentUser } = useCurrentUser();
+  const { currentUser , isLoading} = useAuthenticatedUser();
   const { data: videData } = useVideos();
   const businessOwner = businessOwnersData || [];
   const consultants = consultantsData || [];
   const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
+  if(isLoading){
+    return<GlobalLoadingIndicator/>
+  }
 
   return (
     <>

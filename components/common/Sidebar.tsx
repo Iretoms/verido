@@ -4,11 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCurrentUser } from "../../lib/react-query/query/useUser";
+import { useAuthenticatedUser } from "@/context/AuthContext";
 
 const Sidebar = () => {
-  const queryClient = useQueryClient();
-  const { data: currentUser } = useCurrentUser();
+  const { currentUser } = useAuthenticatedUser();
   const pathName = usePathname();
 
   const isActive = (href: string) => {
@@ -39,7 +38,7 @@ const Sidebar = () => {
       path: "/consultants",
       label: "Consultants",
       icon: "/assets/icons/userSet.svg",
-      roles: ["super_admin" , "partner"],
+      roles: ["super_admin", "partner"],
     },
     {
       path: "/partners",
@@ -70,7 +69,7 @@ const Sidebar = () => {
   const visibleItems = allItems.filter((item) => {
     if (currentUser?.role === "super_admin") return true;
     if (currentUser?.role === "partner") return item.roles.includes("partner");
-   return item.path !== "/consultants" && item.path !== "/experts";
+    return item.path !== "/consultants" && item.path !== "/experts";
   });
 
   return (
