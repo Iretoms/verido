@@ -2,17 +2,8 @@ import React from "react";
 import { AdminBusinessResponse } from "../../types/index";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../../components/ui/alert-dialog";
+
+import SuspendConsultant from "../consultants/SuspendConsultant";
 
 interface BusinessInfoCardProps {
   business: AdminBusinessResponse;
@@ -61,41 +52,7 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
             </p>
           </div>
           <div className="">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  size={"sm"}
-                  className="bg-verido-orange text-white px-8 py-3 text-[13px] rounded-md"
-                >
-                  Suspend
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="w-[26rem]">
-                <AlertDialogHeader>
-                  <AlertDialogTitle className="flex  justify-between gap-1 font-normal text-[15px]">
-                    <Image
-                      src="/assets/icons/caution.svg"
-                      width={20}
-                      height={20}
-                      alt="caution"
-                    />
-                    Are you sure you want to suspend this account?
-                  </AlertDialogTitle>
-                  <AlertDialogDescription className="text-light-gray text-sm font-light">
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel className="border border-verido-green text-verido-green">
-                    No
-                  </AlertDialogCancel>
-                  <AlertDialogAction className="text-white bg-verido-orange">
-                    Yes
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <SuspendConsultant />
           </div>
         </div>
         <div className="border-t border-verido-border w-full py-4">
@@ -127,7 +84,6 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
               <li>{business.email}</li>
               <li>{business.username}</li>
               <li>{business.business?.type}</li>
-            
             </ul>
           </div>
         </div>

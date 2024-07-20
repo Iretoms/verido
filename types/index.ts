@@ -175,7 +175,7 @@ export interface AdminBusinessResponse {
   stripeCustomerID: string;
   institution: Partners[];
   videos: any[];
-  consultant: Consultant[];
+  consultant: Consultant;
   messages: any[];
   suspended: boolean;
 }
@@ -187,6 +187,10 @@ export interface ICreateConsultantCreate {
   password: string;
   partner_id: string;
   confirmPassword: string;
+}
+export interface IChangeConsultant {
+  consultant_id: string;
+  user_id: any;
 }
 export interface ICreatePartner {
   name: string;

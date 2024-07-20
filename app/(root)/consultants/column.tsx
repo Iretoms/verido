@@ -1,18 +1,13 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Consultant } from "../../../types/index";
-const getStatusStyles = (status: string) => {
-  switch (status) {
-    case "active":
-      return "bg-light-green border border-verido-green text-verido-green";
-    case "inactive":
-    case "deleted":
-      return "bg-light-danger text-danger border border-danger";
-    case "pending approval":
-      return "bg-light-orange text-verido-orange border border-verido-orange";
-    default:
-      return "text-sm font-light text-gray-text";
+const getStatusStyles = (status: boolean|string) => {
+  if (status) {
+    return "bg-light-green border border-verido-green text-verido-green";
+  } else {
+    return "bg-light-danger text-danger border border-danger";
   }
 };
+
 
 export const columnsConsultant: ColumnDef<Consultant>[] = [
   {
@@ -28,25 +23,21 @@ export const columnsConsultant: ColumnDef<Consultant>[] = [
     header: "Institution",
   },
   {
-    accessorKey: "dateJoined",
-    header: "Date Joined",
-    cell: ({ getValue }) => {
-      const date = getValue<string>();
-      return new Date(date).toLocaleDateString();
-    },
+    accessorKey: "email",
+    header: "Email",
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ getValue }) => {
-      const status = getValue<string>();
+      const status = getValue<boolean | string>();
       return (
         <span
           className={`px-6 py-1 rounded-lg text-xs font-medium ${getStatusStyles(
             status
           )}`}
         >
-          {status}
+          {status ? "Active" : "Suspended"}
         </span>
       );
     },

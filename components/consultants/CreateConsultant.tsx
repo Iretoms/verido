@@ -19,6 +19,7 @@ import { ICreateConsultantCreate } from "../../types/index";
 import useConsultant from "../../lib/react-query/mutations/useConsultant";
 
 const CreateConsultant = () => {
+   const [open, setOpen] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -37,7 +38,6 @@ const CreateConsultant = () => {
       confirmPassword: "",
     },
   });
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -49,14 +49,14 @@ const CreateConsultant = () => {
     try {
       await createConsultantMutation.mutateAsync(data);
       reset();
-      console.log(data);
+      setOpen(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size={"sm"} className="bg-verido-green text-verido-white">
           Consultant

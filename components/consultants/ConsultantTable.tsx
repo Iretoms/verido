@@ -44,34 +44,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
-  const getStatusStyles = (status: string) => {
-    switch (status) {
-      case "active":
-        return "bg-light-green border border-verido-green text-verido-green";
-      case "suspended":
-        return "bg-light-danger text-danger border border-danger";
-      case "pending approval":
-        return "bg-light-orange text-verido-orange border border-verido-orange";
-      default:
-        return "text-sm font-light text-gray-text";
-    }
-  };
 
-  const statusColumn = columns.find((col) => col.cell);
-  if (statusColumn) {
-    statusColumn.cell = ({ getValue }) => {
-      const status = getValue() as string;
-      return (
-        <span
-          className={`px-6 py-1 rounded-lg text-xs font-medium ${getStatusStyles(
-            status
-          )}`}
-        >
-          {status}
-        </span>
-      );
-    };
-  }
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );

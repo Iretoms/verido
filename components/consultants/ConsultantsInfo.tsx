@@ -6,13 +6,21 @@ import ConsultantInfoCard from "./ConsultantInfoCard";
 
 import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
 import { columnsBusiness } from "../../app/(root)/business-owners/column";
+import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 
 const ConsultantsInfo = () => {
   const { id } = useParams() as { id: string };
-  const { data: selectedConsultant } = useConsultantById(id);
+  const { data: selectedConsultant, isPending , isRefetching } = useConsultantById(id);
   const { data: businessData } = useBusiness();
 
   const adminBusiness = businessData || [];
+
+  if (isPending) {
+    return <GlobalLoadingIndicator />;
+  }
+   if (isRefetching) {
+     return <GlobalLoadingIndicator />;
+   }
 
   return (
     <div className="w-full h-full p-2 lg:p-0">

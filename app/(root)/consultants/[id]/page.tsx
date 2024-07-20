@@ -1,5 +1,4 @@
 "use client";
-
 import ConsultantsInfo from "../../../../components/consultants/ConsultantsInfo";
 import React from "react";
 import { usePathname } from "next/navigation";

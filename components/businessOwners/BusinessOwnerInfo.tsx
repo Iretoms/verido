@@ -7,11 +7,18 @@ import { useBusinessById } from "../../lib/react-query/query/useBusiness";
 import BusinessInfoCard from "./BusinessInfoCard";
 import { ProductTable } from "../products/ProductTable";
 import { columns } from "../products/column";
+import ChangeConsultant from "../consultants/ChangeConsultant";
+import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 
 const BusinessOwnerInfo = () => {
   const { id } = useParams() as { id: string };
 
-  const { data: businessData } = useBusinessById(id);
+  const { data: businessData , isLoading } = useBusinessById(id);
+
+  
+  if (isLoading) {
+    return <GlobalLoadingIndicator/>;
+  }
 
   return (
     <div className="w-full h-full p-2 lg:p-0">
@@ -32,7 +39,7 @@ const BusinessOwnerInfo = () => {
               <div className="flex flex-col gap-3  text-black-light w-[60%]">
                 <p className="text-[18px] mb-14">Consultant</p>
                 <p className="text-[26px] font-semibold">
-                  {businessData.full_name}
+                  {businessData.consultant?.username}
                 </p>
                 <div className="flex flex-col items-start ">
                   <p className="font-light text-[12px] text-light-gray">
@@ -40,12 +47,7 @@ const BusinessOwnerInfo = () => {
                   </p>
                   <p className="text-[13px]">{businessData.full_name}</p>
                 </div>
-                <Button
-                  size={"sm"}
-                  className="rounded-2xl bg-verido-green textt-white text-[13px] w-full md:w-[30%] mt-5"
-                >
-                  Assign/Change
-                </Button>
+                <ChangeConsultant />
               </div>
             </div>
           </div>

@@ -11,6 +11,16 @@ export const createPartners = async (payload: ICreatePartner) => {
 
   return data;
 };
+export const suspendPartner = async (id: string) => {
+  const { data } = await VeridoAPI.get(`/partner/suspend/${id}`);
+
+  return data;
+};
+export const activatePartner = async (id: string) => {
+  const { data } = await VeridoAPI.get(`/partner/activate/${id}`);
+
+  return data;
+};
 
 export const fetchPartnerById = async (id: string) => {
   const { data } = await VeridoAPI.get(`/admin/partners/${id}`);

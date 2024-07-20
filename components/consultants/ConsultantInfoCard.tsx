@@ -3,17 +3,8 @@ import React, { useState } from "react";
 import { Consultant } from "../../types/index";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../../components/ui/alert-dialog";
+import SuspendConsultant from "./SuspendConsultant";
+import ActivateConsultant from "./ActivateConsultant";
 
 interface ConsultantInfoCardProps {
   consultant: Consultant;
@@ -24,11 +15,20 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
 }) => {
   const renderStars = (rating: number) => {
     return Array.from({ length: rating }, (_, index) => {
-      return index < rating && (
-        <Image src='/assets/icons/Rate.svg' alt="rating" width={20} height={20} className="object-contain"/>
-      )
+      return (
+        index < rating && (
+          <Image
+            src="/assets/icons/Rate.svg"
+            alt="rating"
+            width={20}
+            height={20}
+            className="object-contain"
+          />
+        )
+      );
     });
   };
+
 
   return (
     <div className="flex flex-col md:flex-row gap-5 p-2 md:p-10 w-full bg-white rounded-lg">
@@ -71,42 +71,12 @@ const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
               {consultant.email}
             </p>
           </div>
-          <div className="">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  size={"sm"}
-                  className="bg-verido-orange text-white px-8 py-3 text-[13px] rounded-md"
-                >
-                  Suspend
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="w-[26rem]">
-                <AlertDialogHeader>
-                  <AlertDialogTitle className="flex  justify-between gap-1 font-normal text-[15px]">
-                    <Image
-                      src="/assets/icons/caution.svg"
-                      width={20}
-                      height={20}
-                      alt="caution"
-                    />
-                    Are you sure you want to suspend this account?
-                  </AlertDialogTitle>
-                  <AlertDialogDescription className="text-light-gray text-sm font-light">
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel className="border border-verido-green text-verido-green">
-                    No
-                  </AlertDialogCancel>
-                  <AlertDialogAction className="text-white bg-verido-orange">
-                    Yes
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+          <div>
+            {consultant.status ? (
+              <SuspendConsultant id={consultant._id} />
+            ) : (
+              <ActivateConsultant id={consultant._id} />
+            )}
           </div>
         </div>
         <div className="border-t border-verido-border w-full py-4">

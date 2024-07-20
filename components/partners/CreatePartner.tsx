@@ -19,6 +19,7 @@ import { ICreatePartner } from "../../types/index";
 import usePartner from "../../lib/react-query/mutations/usePartner";
 
 const CreatePartner = () => {
+  const [open, setOpen] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -41,21 +42,22 @@ const CreatePartner = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const password = watch("password");
-  const {createPartnerMutation} = usePartner()
+  const { createPartnerMutation } = usePartner();
 
   const onSubmit = async (data: ICreatePartner) => {
     if (isSubmitting) return;
-   try {
-     await createPartnerMutation.mutateAsync(data);
-     reset();
-     console.log(data);
-   } catch (error) {
-     console.error(error);
-   }
+    try {
+      await createPartnerMutation.mutateAsync(data);
+      reset();
+      setOpen(false);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size={"sm"} className="bg-verido-green text-verido-white">
           Partner
@@ -115,9 +117,7 @@ const CreatePartner = () => {
               } px-3 py-2 focus:outline-none`}
             />
             {errors.phone && (
-              <p className="text-red-500 text-xs">
-                {errors.phone.message}
-              </p>
+              <p className="text-red-500 text-xs">{errors.phone.message}</p>
             )}
           </div>
           <div className="flex flex-col gap-1 items-start relative">

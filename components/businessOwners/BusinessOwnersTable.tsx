@@ -116,16 +116,6 @@ export function BusinessOwnerTable<
               className="max-w-sm h-full outline-none"
             />
           </div>
-
-          <div className="flex justify-between">
-            <Button
-              size={"sm"}
-              variant={"outline"}
-              className="text-verido-green border border-verido-green  rounded-lg  text-sm"
-            >
-              Change Consultant
-            </Button>
-          </div>
         </div>
       </div>
       <Table className="border-0">

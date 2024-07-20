@@ -18,6 +18,7 @@ import { ICreateVideo } from "../../types/index";
 import useVideos from "../../lib/react-query/mutations/useVideo";
 
 const CreateVideo = () => {
+  const [open, setOpen] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -32,21 +33,21 @@ const CreateVideo = () => {
       category: "",
     },
   });
-  const {createVideoMutation} = useVideos()
+  const { createVideoMutation } = useVideos();
 
   const onSubmit = async (data: ICreateVideo) => {
     if (isSubmitting) return;
     try {
-      await createVideoMutation.mutateAsync(data)
- 
+      await createVideoMutation.mutateAsync(data);
+      reset();
+      setOpen(false)
     } catch (error) {
       console.error(error);
     }
-    reset()
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           size={"sm"}

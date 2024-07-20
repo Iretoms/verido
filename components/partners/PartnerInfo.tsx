@@ -8,15 +8,22 @@ import { columnsConsultant } from "../../app/(root)/consultants/column";
 import PartnerInfoCard from "./PartnerInfoCard";
 import { useBusiness } from "../../lib/react-query/query/useBusiness";
 import { useConsultants } from "../../lib/react-query/query/useConsultant";
+import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 
 const PartnerInfo = () => {
   const { id } = useParams() as { id: string };
   const { data: businessData } = useBusiness();
 
   const adminBusiness = businessData || [];
-  const { data: PartnerDetails} = usePartnerById(id);
+  const { data: PartnerDetails, isPending , isRefetching } = usePartnerById(id);
   const { data: consultantsData } = useConsultants();
   const consultantData = consultantsData || [];
+  if (isPending) {
+    return <GlobalLoadingIndicator />;
+  }
+  if (isRefetching) {
+    return <GlobalLoadingIndicator />;
+  }
 
   return (
     <div className="w-full h-full p-2 lg:p-0">
