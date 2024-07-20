@@ -47,7 +47,7 @@ const SuspendPartner = ({ id }: any) => {
             Are you sure you want to suspend this account?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-light-gray text-sm font-light">
-            This action cannot be undone. This will suspend the partner's
+            This action cannot be undone. This will suspend the partner&apos;s
             account.
           </AlertDialogDescription>
         </AlertDialogHeader>

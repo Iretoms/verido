@@ -54,7 +54,8 @@ const ActivateConsultant = ({ id }: any) => {
             Are you sure you want to activate this account?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-light-gray text-sm font-light">
-            This action will activate the consultant's account. Are you sure?
+            This action will activate the consultant&apos;s account. Are you
+            sure?
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

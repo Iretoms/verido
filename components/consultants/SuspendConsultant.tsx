@@ -57,8 +57,8 @@ const SuspendConsultant= ({ id }:any) => {
             Are you sure you want to suspend this account?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-light-gray text-sm font-light">
-            This action cannot be undone. This will suspend the consultant's
-            account.
+            This action cannot be undone. This will suspend the
+            consultant&apos;s account.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -47,7 +47,7 @@ const ActivatePartner = ({ id }: any) => {
             Are you sure you want to activate this account?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-light-gray text-sm font-light">
-            This action will activate the partner's account.Are you sure?
+            This action will activate the partner&apos;s account.Are you sure?
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
