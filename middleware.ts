@@ -12,7 +12,12 @@ export function middleware(request: NextRequest) {
     "consultants/:id",
   ];
 
-  const superAdminRoutes = [...consultantRoutes, ...partnerRoutes , "/allUsers" , "/experts"];
+  const superAdminRoutes = [
+    ...consultantRoutes,
+    ...partnerRoutes,
+    "/allUsers",
+    "/experts",
+  ];
   const accessToken = request.cookies.get("access_token");
 
   if (!accessToken) {
