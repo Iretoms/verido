@@ -13,16 +13,17 @@ import {
 import { Button } from "../ui/button";
 import Image from "next/image";
 import usePartner from "@/lib/react-query/mutations/usePartner";
+import { useRouter } from "next/navigation";
 
 const SuspendPartner = ({ id }: any) => {
   const { suspendPartnerMutation } = usePartner();
+  const router = useRouter();
 
   const handleSuspension = async () => {
     try {
       await suspendPartnerMutation.mutateAsync(id);
-    } catch (error) {
-      console.error("Error suspending consultant:", error);
-    }
+      router.push("/partners");
+    } catch (error) {}
   };
 
   return (

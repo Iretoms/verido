@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import Image from "next/image";
+import { useAuthenticatedUser } from "@/context/AuthContext";
 
 import {
   Table,
@@ -45,7 +46,6 @@ export function PartnersTable<TData extends Partner, TValue>({
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
-
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -53,6 +53,7 @@ export function PartnersTable<TData extends Partner, TValue>({
   const handleRowSelection = (id: string) => {
     router.push(`/partners/${id}`);
   };
+  const { currentUser } = useAuthenticatedUser();
 
   const table = useReactTable({
     data,
@@ -115,12 +116,20 @@ export function PartnersTable<TData extends Partner, TValue>({
               className="max-w-sm h-full outline-none"
             />
           </div>
-          <div className="flex justify-between">
+          <div
+            className={`flex justify-between ${
+              currentUser?.role !== "super_admin" &&
+              currentUser?.role !== "partners"
+                ? "hidden"
+                : "flex"
+            }`}
+          >
             <Button
               size={"sm"}
               className="text-verido-white bg-verido-green rounded-lg text-sm w-[10rem]"
             >
-              Add<CreatePartner />
+              Add
+              <CreatePartner />
             </Button>
           </div>
         </div>

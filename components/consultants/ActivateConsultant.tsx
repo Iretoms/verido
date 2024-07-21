@@ -26,7 +26,6 @@ const ActivateConsultant = ({ id }: any) => {
       await activateConsultantMutation.mutateAsync(id);
       router.push("/consultants");
     } catch (error) {
-      console.error("Error activating consultant:", error);
     } finally {
       setIsLoading(false);
     }

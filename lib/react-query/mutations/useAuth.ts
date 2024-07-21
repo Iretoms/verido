@@ -25,11 +25,13 @@ const useAuth = () => {
       return response.response;
     },
     onSuccess: (data) => {
-      const { token } = data;
-      localStorage.setItem("access_token", token);
-      Cookies.set("access_token", token);
-      router.push("/");
-      showToast("Success!", "Sign in Successful.", "success");
+       const { token, role } = data;
+       localStorage.setItem("access_token", token);
+       localStorage.setItem("user_role", role);
+       Cookies.set("access_token", token);
+       Cookies.set("user_role", role); 
+       router.push("/");
+       showToast("Success!", "Sign in Successful.", "success");
     },
     onError: (error) => {
       let errDetail = error.message;

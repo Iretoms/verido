@@ -13,11 +13,13 @@ import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 const BusinessOwnerInfo = () => {
   const { id } = useParams() as { id: string };
 
-  const { data: businessData , isLoading } = useBusinessById(id);
+  const { data: businessData, isPending, isRefetching } = useBusinessById(id);
 
-  
-  if (isLoading) {
-    return <GlobalLoadingIndicator/>;
+  if (isPending) {
+    return <GlobalLoadingIndicator />;
+  }
+  if (isRefetching) {
+    return <GlobalLoadingIndicator />;
   }
 
   return (

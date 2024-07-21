@@ -15,21 +15,17 @@ import Image from "next/image";
 import useConsultant from "@/lib/react-query/mutations/useConsultant";
 import { useRouter } from "next/navigation";
 
-
-
-const SuspendConsultant= ({ id }:any) => {
+const SuspendConsultant = ({ id }: any) => {
   const { suspendConsultantMutation } = useConsultant();
   const [isLoading, setIsLoading] = useState(false);
-   const router = useRouter();
-
+  const router = useRouter();
 
   const handleSuspension = async () => {
-     setIsLoading(true);
+    setIsLoading(true);
     try {
       await suspendConsultantMutation.mutateAsync(id);
       router.push("/consultants");
     } catch (error) {
-      console.error("Error suspending consultant:", error);
     } finally {
       setIsLoading(false);
     }
