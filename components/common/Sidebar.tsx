@@ -26,13 +26,13 @@ const Sidebar = () => {
       path: "/",
       label: "Dashboard",
       icon: "/assets/icons/dashboard.svg",
-      roles: ["super_admin", "partner"],
+      roles: ["super_admin", "partner", "consultant"],
     },
     {
       path: "/business-owners",
       label: "Business Owners",
       icon: "/assets/icons/id_card.svg",
-      roles: ["super_admin", "partner"],
+      roles: ["super_admin", "partner", "consultant"],
     },
     {
       path: "/consultants",
@@ -50,25 +50,27 @@ const Sidebar = () => {
       path: "/experts",
       label: "Expert",
       icon: "/assets/icons/user-follow.svg",
-      roles: ["super_admin", "partner"],
+      roles: ["super_admin", "partner", "consultant"],
     },
     {
       path: "/all-users",
       label: "All Users",
       icon: "/assets/icons/group-user.svg",
-      roles: ["super_admin", "partner"],
+      roles: ["super_admin", "partner", "consultant"],
     },
     {
       path: "/chats",
       label: "Chats",
       icon: "/assets/icons/chat.svg",
-      roles: ["super_admin", "partner"],
+      roles: ["super_admin", "partner", "consultant"],
     },
   ];
 
   const visibleItems = allItems.filter((item) => {
     if (currentUser?.role === "super_admin") return true;
     if (currentUser?.role === "partner") return item.roles.includes("partner");
+    if (currentUser?.role === "consultant")
+      return item.roles.includes("consultant");
     return item.path !== "/consultants" && item.path !== "/experts";
   });
 
