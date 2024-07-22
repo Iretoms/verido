@@ -92,7 +92,7 @@ export interface Consultant {
   mobile_number: string;
   rating: number;
   ratedBy: number;
-  business: string[];
+  business: AdminBusinessResponse[];
   messages: string[];
   __v: number;
   token: string;
@@ -131,7 +131,8 @@ export interface Partner {
   password: string;
   role: string;
   status: boolean;
-  consultants: string[];
+  consultants: Consultant[];
+  businesses:AdminBusinessResponse[]
   dateJoined: string;
   __v: number;
   token: string;

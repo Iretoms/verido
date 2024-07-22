@@ -11,9 +11,8 @@ import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 const ConsultantsInfo = () => {
   const { id } = useParams() as { id: string };
   const { data: selectedConsultant, isPending , isRefetching } = useConsultantById(id);
-  const { data: businessData } = useBusiness();
+ const businessData = selectedConsultant?.business || [];
 
-  const adminBusiness = businessData || [];
 
   if (isPending) {
     return <GlobalLoadingIndicator />;
@@ -29,7 +28,7 @@ const ConsultantsInfo = () => {
           <ConsultantInfoCard consultant={selectedConsultant} />
           <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
             <BusinessOwnerTable
-              data={adminBusiness}
+              data={businessData}
               columns={columnsBusiness}
             />
           </div>

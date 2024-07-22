@@ -12,12 +12,13 @@ import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 
 const PartnerInfo = () => {
   const { id } = useParams() as { id: string };
-  const { data: businessData } = useBusiness();
 
-  const adminBusiness = businessData || [];
+
+
   const { data: PartnerDetails, isPending , isRefetching } = usePartnerById(id);
-  const { data: consultantsData } = useConsultants();
-  const consultantData = consultantsData || [];
+  const consultantsData = PartnerDetails?.consultants || [];
+  const businessData = PartnerDetails?.businesses || [];
+
   if (isPending) {
     return <GlobalLoadingIndicator />;
   }
@@ -32,13 +33,13 @@ const PartnerInfo = () => {
           <PartnerInfoCard partners={PartnerDetails} />
           <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
             <ConsultantTable
-              data={consultantData}
+              data={consultantsData}
               columns={columnsConsultant}
             />
           </div>
           <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
             <BusinessOwnerTable
-              data={adminBusiness}
+              data={businessData}
               columns={columnsBusiness}
             />
           </div>
