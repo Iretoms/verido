@@ -131,6 +131,7 @@ export interface Partner {
   password: string;
   role: string;
   status: boolean;
+  partner_id:string
   consultants: Consultant[];
   businesses:AdminBusinessResponse[]
   dateJoined: string;

@@ -85,6 +85,7 @@ const PartnerInfoCard: React.FC<BusinessInfoCardProps> = ({ partners }) => {
               <li>Admin Name</li>
               <li>Email</li>
               <li>Phone</li>
+              <li>Partner Id</li>
               <li>Business Type</li>
             </ul>
             <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
@@ -95,9 +96,9 @@ const PartnerInfoCard: React.FC<BusinessInfoCardProps> = ({ partners }) => {
                 {partners.name} {partners.name}
               </li>
               <li>{partners.name}</li>
-              <li>{partners.email}</li>
               <li>{partners.name}</li>
               <li>{partners.name}</li>
+              <li>{partners.partner_id}</li>
             </ul>
           </div>
         </div>

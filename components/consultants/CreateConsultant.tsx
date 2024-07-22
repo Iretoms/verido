@@ -126,7 +126,7 @@ const CreateConsultant = () => {
             <Input
               id="partner_id"
               {...register("partner_id", {
-                required: "Partner_id is required",
+                required: "Partner id is required",
               })}
               className={`border ${
                 errors.partner_id ? "border-red-500" : "border-verido-border"
