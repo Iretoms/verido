@@ -15,11 +15,12 @@ export interface DeleteAlertDialogProps {
   onDelete: () => void;
   headerText: string;
   bodyText: string;
+  isLoading:boolean
 }
 export const DeleteAlertDialog = (props: DeleteAlertDialogProps) => {
   const cancelRef = React.useRef(null);
 
-  const { isOpen, onClose, onDelete, headerText, bodyText } = props;
+  const { isOpen, onClose, onDelete, headerText, bodyText , isLoading } = props;
   return (
     <>
       <AlertDialog
@@ -27,6 +28,7 @@ export const DeleteAlertDialog = (props: DeleteAlertDialogProps) => {
         leastDestructiveRef={cancelRef}
         isOpen={isOpen}
         onClose={onClose}
+       
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
@@ -37,10 +39,16 @@ export const DeleteAlertDialog = (props: DeleteAlertDialogProps) => {
             <AlertDialogBody>{bodyText}</AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button size={"sm"} ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={onDelete} ml={3}>
+              <Button
+                isLoading={isLoading}
+                size={"sm"}
+                colorScheme="red"
+                onClick={onDelete}
+                ml={3}
+              >
                 Delete
               </Button>
             </AlertDialogFooter>

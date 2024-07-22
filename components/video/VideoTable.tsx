@@ -24,6 +24,7 @@ import EditVideo from "./EditVideo";
 import Image from "next/image";
 import { DeleteAlertDialog } from "../common/DeleteAlertDialog";
 import { useDisclosure } from "@chakra-ui/react";
+import useVideos from "@/lib/react-query/mutations/useVideo";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,33 +39,43 @@ export function VideoTable<TData extends IVideo, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
-    const {
-      isOpen: isOpenForEdit,
-      onOpen: onOpenForEdit,
-      onClose: onCloseForEdit,
-    } = useDisclosure();
-    const {
-      isOpen: isOpenForDelete,
-      onOpen: onOpenForDelete,
-      onClose: onCloseForDelete,
-    } = useDisclosure();
+  const [videoToDelete, setVideoToDelete] = useState<string | null>(null);
+  const { deleteVideoMutation } = useVideos();
+  const {
+    isOpen: isOpenForDelete,
+    onOpen: onOpenForDelete,
+    onClose: onCloseForDelete,
+  } = useDisclosure();
 
   const handleEditClick = (video: IVideo) => {
     setSelectedVideo(video);
+
+    
     setIsEditDialogOpen(true);
   };
 
-   const handleDelete = () => {
-     onCloseForDelete();
-   };
+  const handleDelete = () => {
+    if (videoToDelete !== null) {
+      deleteVideoMutation.mutate(videoToDelete, {
+        onSuccess: () => {
+          onCloseForDelete();
+        },
+        onError: () => {
+          onCloseForDelete();
+        },
+      });
+    }
+  };
 
-   const confirmDelete = (id:string) => {
-     onOpenForDelete();
-   };
+  const confirmDelete = (id: string) => {
+    setVideoToDelete(id);
+    console.log(videoToDelete)
+    onOpenForDelete();
+  };
 
-   const cancelDelete = () => {
-     onCloseForDelete();
-   };
+  const cancelDelete = () => {
+    onCloseForDelete();
+  };
 
   const columnsWithActions = React.useMemo(
     () => [
@@ -74,6 +85,7 @@ export function VideoTable<TData extends IVideo, TValue>({
         header: "Actions",
         cell: ({ row }) => {
           const video = row.original;
+         
           return (
             <div className="flex space-x-2">
               <Image
@@ -197,6 +209,7 @@ export function VideoTable<TData extends IVideo, TValue>({
         video={selectedVideo}
       />
       <DeleteAlertDialog
+        isLoading={deleteVideoMutation.isPending}
         isOpen={isOpenForDelete}
         onClose={cancelDelete}
         onDelete={handleDelete}

@@ -206,8 +206,10 @@ export interface ICreateVideo {
   category: string;
 }
 export interface IUpdateVideo {
-  payload: IVideo;
-  id: string;
+  title: string;
+  vidoeID: string;
+  category: string;
+  id: string | undefined;
 }
 export interface IVideo {
   _id: string;

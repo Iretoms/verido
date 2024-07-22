@@ -12,7 +12,8 @@ import {
 } from "../../components/ui/dialog";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
-import { ICreateVideo, IVideo } from "../../types/index";
+import { IUpdateVideo, IVideo } from "../../types/index";
+import useVideos from "@/lib/react-query/mutations/useVideo";
 
 interface EditVideoDialogProps {
   isOpen: boolean;
@@ -31,26 +32,31 @@ const EditVideo: React.FC<EditVideoDialogProps> = ({
     setValue,
     reset,
     formState: { isSubmitting, errors },
-  } = useForm<ICreateVideo>({
+  } = useForm<IUpdateVideo>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
-      title: video?.title || "",
-      vidoeID: video?.vidoeID || "",
-      category: video?.category || "",
+      title: video?.title,
+      vidoeID: video?.vidoeID,
+      category: video?.category,
+      id: video?._id,
     },
   });
+
   useEffect(() => {
     if (video) {
       setValue("title", video.title);
       setValue("vidoeID", video.vidoeID);
       setValue("category", video.category);
+      setValue("id", video._id);
     }
   }, [video, setValue]);
 
-  const onSubmit = async (data: ICreateVideo) => {
-    if (isSubmitting) return;
+  const { editVideoMutation } = useVideos();
+
+  const onSubmit = async (data: IUpdateVideo) => {
     try {
+      await editVideoMutation.mutateAsync(data);
     } catch (error) {
       console.error(error);
     }

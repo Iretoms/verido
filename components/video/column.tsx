@@ -14,10 +14,7 @@ const getStatusColor = (category: string) => {
 };
 
 export const columnsVideo: ColumnDef<IVideo>[] = [
-  {
-    accessorKey: "_id",
-    header: "ID",
-  },
+
   {
     accessorKey: "title",
     header: "Title",
@@ -32,7 +29,7 @@ export const columnsVideo: ColumnDef<IVideo>[] = [
     cell: ({ getValue }) => {
       const category = getValue<string>();
       return (
-        <span className={`px-2 py-1 rounded-lg ${getStatusColor(category)}`}>
+        <span className={`px-2 py-1 text-xs w-max rounded-lg ${getStatusColor(category)}`}>
           {category}
         </span>
       );
