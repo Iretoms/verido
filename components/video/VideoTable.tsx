@@ -22,6 +22,8 @@ import { IVideo } from "../../types/index";
 import { Button } from "../ui/button";
 import EditVideo from "./EditVideo";
 import Image from "next/image";
+import { DeleteAlertDialog } from "../common/DeleteAlertDialog";
+import { useDisclosure } from "@chakra-ui/react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -36,10 +38,71 @@ export function VideoTable<TData extends IVideo, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
+    const {
+      isOpen: isOpenForEdit,
+      onOpen: onOpenForEdit,
+      onClose: onCloseForEdit,
+    } = useDisclosure();
+    const {
+      isOpen: isOpenForDelete,
+      onOpen: onOpenForDelete,
+      onClose: onCloseForDelete,
+    } = useDisclosure();
+
+  const handleEditClick = (video: IVideo) => {
+    setSelectedVideo(video);
+    setIsEditDialogOpen(true);
+  };
+
+   const handleDelete = () => {
+     onCloseForDelete();
+   };
+
+   const confirmDelete = (id:string) => {
+     onOpenForDelete();
+   };
+
+   const cancelDelete = () => {
+     onCloseForDelete();
+   };
+
+  const columnsWithActions = React.useMemo(
+    () => [
+      ...columns,
+      {
+        id: "actions",
+        header: "Actions",
+        cell: ({ row }) => {
+          const video = row.original;
+          return (
+            <div className="flex space-x-2">
+              <Image
+                src="/assets/icons/editVideo.svg"
+                alt="edit"
+                width={20}
+                height={20}
+                className="cursor-pointer"
+                onClick={() => handleEditClick(video)}
+              />
+              <Image
+                src="/assets/icons/deleteVideo.svg"
+                alt="delete"
+                width={20}
+                height={20}
+                className="cursor-pointer"
+                onClick={() => confirmDelete(video._id)}
+              />
+            </div>
+          );
+        },
+      },
+    ],
+    [columns]
+  );
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columnsWithActions,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onRowSelectionChange: setRowSelection,
@@ -50,11 +113,6 @@ export function VideoTable<TData extends IVideo, TValue>({
       columnFilters,
     },
   });
-
-  const handleEditClick = (video: IVideo) => {
-    setSelectedVideo(video);
-    setIsEditDialogOpen(true);
-  };
 
   return (
     <div className="rounded-md">
@@ -102,25 +160,6 @@ export function VideoTable<TData extends IVideo, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-                <TableCell>
-                  <div className="flex space-x-2">
-                    <Image
-                      src="/assets/icons/editVideo.svg"
-                      alt="edit"
-                      width={20}
-                      height={20}
-                      className="cursor-pointer"
-                      onClick={() => handleEditClick(row.original)}
-                    />
-                    <Image
-                      src="/assets/icons/deleteVideo.svg"
-                      alt="delete"
-                      width={20}
-                      height={20}
-                      className="cursor-pointer"
-                    />
-                  </div>
-                </TableCell>
               </TableRow>
             ))
           ) : (
@@ -156,6 +195,13 @@ export function VideoTable<TData extends IVideo, TValue>({
         isOpen={isEditDialogOpen}
         onClose={() => setIsEditDialogOpen(false)}
         video={selectedVideo}
+      />
+      <DeleteAlertDialog
+        isOpen={isOpenForDelete}
+        onClose={cancelDelete}
+        onDelete={handleDelete}
+        headerText="Delete Video"
+        bodyText="Are you sure? You can't undo this action afterwards."
       />
     </div>
   );
