@@ -27,7 +27,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function ProductTable<TData, TValue>({
+export function SuppliersTable<TData, TValue>({
   columns,
   data = [],
 }: DataTableProps<TData, TValue>) {
@@ -53,8 +53,8 @@ export function ProductTable<TData, TValue>({
     <div className="rounded-md">
       <div className="flex flex-col gap-3 md:p-0 md:flex-row justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="text-[20px]">Products</h2>
-          <p className="text-[14px] text-black">List of Products available</p>
+          <h2 className="text-[20px]">Suppliers</h2>
+          <p className="text-[14px] text-black">List of Suppliers available</p>
         </div>
         <div className="flex gap-10">
           <div className="flex items-center p-2 justify-between border border-text-gray rounded-lg h-[2.5rem]">
@@ -87,7 +87,7 @@ export function ProductTable<TData, TValue>({
                 width={20}
                 height={20}
               />
-              Add New Products
+              Add New Suppliers
             </Button>
           </div>
         </div>
@@ -130,7 +130,7 @@ export function ProductTable<TData, TValue>({
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                You don&apos;t have Products yet.
+                You don&apos;t have Suppliers yet.
               </TableCell>
             </TableRow>
           )}

@@ -1,30 +1,74 @@
-import React from "react";
+"use client";
 import Image from "next/image";
 
-interface DownlinksProps {
-  totalCount: any;
-  businessOwnersCount: any;
-  consultantsCount: any;
-}
+import * as React from "react";
+import { Label, Pie, PieChart } from "recharts";
+import { useDashboardStats } from "@/lib/react-query/query/useStats";
 
-const DownLinksGraph: React.FC<DownlinksProps> = ({
-  totalCount,
-  businessOwnersCount,
-  consultantsCount,
-}) => {
-  const radius = 80;
-  const circumference = 2 * Math.PI * radius;
-  const businessOwnersPercentage = (businessOwnersCount / totalCount) * 100;
-  const consultantsPercentage = (consultantsCount / totalCount) * 100;
-  const businessOwnersOffset =
-    circumference - (businessOwnersPercentage / 100) * circumference;
-  const consultantsOffset =
-    circumference - (consultantsPercentage / 100) * circumference;
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+
+
+const chartConfig = {
+  businessOwners: {
+    label: "Business Owners",
+    color: "#08A730",
+  },
+  consultants: {
+    label: "Consultants",
+    color: "#007AFF",
+  },
+  partners: {
+    label: "Partners",
+    color: "#FF9500",
+  },
+} satisfies ChartConfig;
+
+export function DownLinksGraph() {
+  const { data: dashboardStats } = useDashboardStats();
+    const chartData = React.useMemo(() => {
+      if (!dashboardStats) return [];
+
+      return [
+        {
+          browser: "Business Owners",
+          visitors: dashboardStats.all_users.businesses,
+          fill: chartConfig.businessOwners.color,
+        },
+        {
+          browser: "Consultants",
+          visitors: dashboardStats.all_users.consultants,
+          fill: chartConfig.consultants.color,
+        },
+        {
+          browser: "Partners",
+          visitors: dashboardStats.all_users.partners,
+          fill: chartConfig.partners.color,
+        },
+      ];
+    }, [dashboardStats]);
+  const totalVisitors = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  }, []);
+
 
   return (
-    <div className="lg:w-[400px] md:w-full w-full h-[22rem] bg-white rounded-2xl p-5">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-light">Downlinks</h2>
+    <Card className="flex flex-col">
+      <CardHeader className="flex justify-between items-center flex-row">
+        <CardTitle className="text-[15px]">Total</CardTitle>
+
         <Image
           src="/assets/icons/more-fill.svg"
           width={20}
@@ -32,68 +76,73 @@ const DownLinksGraph: React.FC<DownlinksProps> = ({
           alt="more"
           className="object-contain cursor-pointer"
         />
-      </div>
-      <div className="relative w-[14rem] h-[14rem] mx-auto">
-        <svg className="w-full h-full" viewBox="0 0 180 180">
-          <circle
-            className="text-gray-200"
-            strokeWidth="5"
-            stroke="currentColor"
-            fill="transparent"
-            r={radius}
-            cx="90"
-            cy="90"
-          />
-          <circle
-            className="text-green-500 transition-all duration-1000 ease-in-out"
-            strokeWidth="5"
-            strokeLinecap="round"
-            stroke="currentColor"
-            fill="transparent"
-            r={radius}
-            cx="90"
-            cy="90"
-            style={{
-              strokeDasharray: circumference,
-              strokeDashoffset: businessOwnersOffset,
-            }}
-          />
-          <circle
-            className="text-blue-500 transition-all duration-1000 ease-in-out"
-            strokeWidth="5"
-            strokeLinecap="round"
-            stroke="currentColor"
-            fill="transparent"
-            r={radius}
-            cx="90"
-            cy="90"
-            style={{
-              strokeDasharray: circumference,
-              strokeDashoffset: consultantsOffset,
-            }}
-          />
-        </svg>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <div className="text-xl text-light-gray">Total</div>
-          <div className="text-2xl">{totalCount.toLocaleString()}</div>
+      </CardHeader>
+      <CardContent className="flex-1 pb-0">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square max-h-[250px]"
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={chartData}
+              dataKey="visitors"
+              nameKey="browser"
+              innerRadius={90}
+              strokeWidth={5}
+            >
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text
+                        x={viewBox.cx}
+                        y={viewBox.cy}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                      >
+                        <tspan
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          className="fill-foreground text-3xl font-bold"
+                        >
+                          {totalVisitors.toLocaleString()}
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 24}
+                          className="fill-muted-foreground"
+                        >
+                          Total
+                        </tspan>
+                      </text>
+                    );
+                  }
+                }}
+              />
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex justify-center gap-5 mt-4">
+          <div className="flex items-center">
+            <div className="w-2 h-2 rounded-full bg-verido-green mr-2"></div>
+            <span className="text-[12px]">Business Owners</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-2 h-2 rounded-full bg-verido-orange mr-2"></div>
+            <span className="text-[12px]">Partners</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+            <span className="text-[12px]">Consultants</span>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-center gap-5 mt-4">
-        <div className="flex items-center">
-          <div className="w-2 h-2 rounded-full bg-verido-green mr-2"></div>
-          <span className="text-[12px]">Business Owners</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-2 h-2 rounded-full bg-verido-orange mr-2"></div>
-          <span className="text-[12px]">Partners</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-          <span className="text-[12px]">Consultants</span>
-        </div>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
-};
-
-export default DownLinksGraph;
+}

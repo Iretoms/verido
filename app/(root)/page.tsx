@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -9,7 +10,7 @@ import { useBusiness } from "../../lib/react-query/query/useBusiness";
 import { useConsultants } from "../../lib/react-query/query/useConsultant";
 import { columnsVideo } from "../../components/video/column";
 import { columnsCountry } from "../../components/countries/column";
-import DownLinksGraph from "../../components/common/DownLinksGraph";
+import { DownLinksGraph } from "@/components/common/DownLinksGraph";
 import BusinessStatistics from "../../components/common/BusinessStatistics";
 import CashMovementChart from "../../components/charts/CashMovementChart";
 import MoneyInOutStats from "../../components/common/MoneyInOutStats";
@@ -22,18 +23,47 @@ import { countryData } from "../../constant/index";
 import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
 import { useAuthenticatedUser } from "../../context/AuthContext";
 import { useDashboardStats } from "@/lib/react-query/query/useStats";
+import { DashboardHexChart } from "@/components/charts/DashboardHexChart";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
   const { data: consultantsData } = useConsultants();
   const { currentUser, isLoading } = useAuthenticatedUser();
-  // const {data:dashboardStats} = useDashboardStats()
   const { data: videData } = useVideos();
   const businessOwner = businessOwnersData || [];
   const consultants = consultantsData || [];
   const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
+  const { data: dashboardStats } = useDashboardStats();
+  const chartData = React.useMemo(() => {
+    if (!dashboardStats) return [];
+
+    const moneyInData = dashboardStats.money_in_v_money_out.total_money_in;
+    const moneyOutData = dashboardStats.money_in_v_money_out.total_money_out;
+
+    const combinedData = moneyInData.map((inItem) => {
+      const correspondingOutItem = moneyOutData.find(
+        (outItem) => outItem.month === inItem.month
+      ) || { totalAmount: 0 };
+      return {
+        month: inItem.month,
+        desktop: inItem.totalAmount,
+        mobile: correspondingOutItem.totalAmount,
+      };
+    });
+
+    return combinedData;
+  }, [dashboardStats]);
+  const totalSubscription = React.useMemo(() => {
+    const total =
+      dashboardStats?.money_in_v_money_out.subscription.reduce(
+        (acc, curr) => acc + curr.totalAmount,
+        0
+      ) || 0;
+    return parseFloat(total.toFixed(2));
+  }, [dashboardStats]);
+
   if (isLoading) {
     return <GlobalLoadingIndicator />;
   }
@@ -64,7 +94,9 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">{businessOwnersData?.length}</p>
+                  <p className="text-[18px]">
+                    {dashboardStats?.all_users.partners}
+                  </p>
                   <p className="font-light text-[12px] text-gray-text">
                     All Partners
                   </p>
@@ -77,7 +109,9 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">{businessOwnersData?.length}</p>
+                  <p className="text-[18px]">
+                    {dashboardStats?.all_users.businesses}
+                  </p>
                   <p className="font-light text-[12px] text-gray-text">
                     All Business
                   </p>
@@ -94,7 +128,9 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">{consultants?.length}</p>
+                  <p className="text-[18px]">
+                    {dashboardStats?.all_users.consultants}
+                  </p>
                   <p className="font-light text-[12px] text-gray-text">
                     All Consultants
                   </p>
@@ -111,28 +147,14 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
+                  <p className="text-[18px]">
+                    {dashboardStats?.all_users.businesses}
+                  </p>
                   <p className="font-light text-[12px] text-gray-text">
-                    Active Consultants
+                    All Suscribers
                   </p>
                 </div>
-                <div
-                  className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
-                  }`}
-                >
-                  <Image
-                    src="/assets/icons/bar-chart3.svg"
-                    alt="chart"
-                    width={100}
-                    height={100}
-                    className="object-contain w-full"
-                  />
-                  <p className="text-[18px]">0</p>
-                  <p className="font-light text-[12px] text-gray-text">
-                    All Subscribers
-                  </p>
-                </div>
+
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
                     !isSuperAdmin ? "hidden" : "flex"
@@ -145,8 +167,10 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
-                  <p className="text-verido-green">VERIDO</p>
+                  <p className="text-[18px] font-bold">
+                    {dashboardStats?.verido_users.partners}
+                  </p>
+                  <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
                     Partners
                   </p>
@@ -163,8 +187,10 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
-                  <p className="text-verido-green">VERIDO</p>
+                  <p className="text-[18px] font-bold">
+                    {dashboardStats?.verido_users.businesses}
+                  </p>
+                  <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
                     Business
                   </p>
@@ -181,8 +207,10 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
-                  <p className="text-verido-green">VERIDO</p>
+                  <p className="text-[18px] font-bold">
+                    {dashboardStats?.all_users.consultants}
+                  </p>
+                  <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
                     Consultants
                   </p>
@@ -199,12 +227,13 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
-                  <p className="text-verido-green">VERIDO</p>
+                  <p className="text-[18px] font-bold">0</p>
+                  <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
-                    Subscribers
+                    Suscribers
                   </p>
                 </div>
+
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
                     !isSuperAdmin ? "hidden" : "flex"
@@ -217,8 +246,10 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
-                  <p className="font-light text-[12px] text-gray-text">
+                  <p className="text-[18px]">
+                    {dashboardStats?.independent_users.partners}
+                  </p>
+                  <p className="font-light text-[12px] text-gray-text text-center">
                     Independent Partners
                   </p>
                 </div>
@@ -234,8 +265,10 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
-                  <p className="font-light text-[12px] text-gray-text">
+                  <p className="text-[18px]">
+                    {dashboardStats?.independent_users.businesses}
+                  </p>
+                  <p className="font-light text-[12px] text-gray-text text-center">
                     Independent Business
                   </p>
                 </div>
@@ -251,8 +284,10 @@ const DashboardContent = () => {
                     height={100}
                     className="object-contain w-full"
                   />
-                  <p className="text-[18px]">0</p>
-                  <p className="font-light text-[12px] text-gray-text">
+                  <p className="text-[18px]">
+                    {dashboardStats?.independent_users.consultants}
+                  </p>
+                  <p className="font-light text-[12px] text-gray-text text-center">
                     Independent Consultants
                   </p>
                 </div>
@@ -269,7 +304,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px]">0</p>
-                  <p className="font-light text-[12px] text-gray-text">
+                  <p className="font-light text-[12px] text-gray-text text-center">
                     Independent Subscribers
                   </p>
                 </div>
@@ -313,13 +348,7 @@ const DashboardContent = () => {
               )}
             </div>
             <div className="flex justify-between flex-1 flex-col gap-8">
-              <DownLinksGraph
-                businessOwnersCount={businessOwnersData?.length}
-                consultantsCount={consultants.length}
-                totalCount={
-                  (businessOwnersData?.length || 0) + consultants.length
-                }
-              />
+              <DownLinksGraph />
               <div
                 className={`bg-white p-6 rounded-lg  flex flex-col items-center justify-between ${
                   !isSuperAdmin && !isPartner ? "hidden" : ""
@@ -344,44 +373,7 @@ const DashboardContent = () => {
                 </div>
               </div>
               <div>
-                <div className="bg-white p-6 rounded-lg flex flex-col justify-between gap-3">
-                  <div className="flex justify-between items-center">
-                    <p className="flex gap-2 items-center">
-                      <span className="font-light">Cash Flow</span>
-                      <span className="text-gray-text text-[13px] font-extralight">
-                        Last 6 months
-                      </span>
-                    </p>
-                    <p className="">
-                      <Image
-                        src="/assets/icons/3dots.svg"
-                        alt="percent"
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                      />
-                    </p>
-                  </div>
-                  <div className="self-center">
-                    <Image
-                      src="/assets/icons/hexagonchart.svg"
-                      alt="percent"
-                      width={270}
-                      height={270}
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="flex items-center gap-5 self-center">
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-verido-green"></div>
-                      <p className="text-[13px]">Money In</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full  bg-verido-red"></div>
-                      <p className="text-[13px]">Money Out</p>
-                    </div>
-                  </div>
-                </div>
+                <DashboardHexChart chartData={chartData} />
               </div>
             </div>
           </div>
@@ -399,6 +391,7 @@ const DashboardContent = () => {
               columns={columnsBusiness}
             />
           </div>
+
           <CashMovementChart />
 
           <MoneyInOutStats />
@@ -412,9 +405,11 @@ const DashboardContent = () => {
                 className="object-contain"
               />
               <div>
-                <p className="text-[15px] lg:text-[18px]">$1,346.00</p>
+                <p className="text-[15px] lg:text-[18px]">
+                  {totalSubscription}
+                </p>
                 <p className="font-light text-[12px] text-gray-text">
-                  Money In
+                  Total susbscription
                 </p>
               </div>
             </div>
@@ -427,7 +422,13 @@ const DashboardContent = () => {
                 className="object-contain"
               />
               <div>
-                <p className="text-[15px] lg:text-[18px]">$13,346.00</p>
+                <p className="text-[15px] lg:text-[18px]">
+                  $
+                  {
+                    dashboardStats?.money_in_v_money_out.expenses
+                      .directLabour?.[0]?.totalAmount
+                  }
+                </p>
                 <p className="font-light text-[12px] text-gray-text">
                   Direct Labour
                 </p>
@@ -442,7 +443,13 @@ const DashboardContent = () => {
                 className="object-contain"
               />
               <div>
-                <p className="text-[15px] lg:text-[18px]">$2,345.00</p>
+                <p className="text-[15px] lg:text-[18px]">
+                  $
+                  {
+                    dashboardStats?.money_in_v_money_out.expenses
+                      .directMaterial?.[0]?.totalAmount
+                  }
+                </p>
                 <p className="font-light text-[12px] text-gray-text">
                   Direct Material
                 </p>

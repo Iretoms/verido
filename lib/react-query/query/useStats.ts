@@ -9,7 +9,7 @@ export const useDashboardStats = () => {
 
     queryFn: async () => {
       const response = await fetchDashboardStats();
-      return response.data;
+      return response;
     },
   });
 };

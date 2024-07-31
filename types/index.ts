@@ -39,6 +39,38 @@ export interface Product {
   forecast_month: string;
   units: number;
 }
+export interface Customer {
+  _id: string;
+  name: string;
+  phone: string;
+  email: string;
+  businessName: string;
+  address1: string;
+  address2: string;
+  postCode: string;
+  region: string;
+  town: string;
+  safeDelete: number;
+  userID: string;
+  localID: string;
+  __v: number;
+}
+export interface Supplier {
+  _id: string;
+  name: string;
+  phone: string;
+  email: string;
+  businessName: string;
+  address1: string;
+  address2: string;
+  postCode: string;
+  region: string;
+  town: string;
+  safeDelete: number;
+  userID: string;
+  localID: string;
+  __v: number;
+}
 
 export interface BusinessOwner {
   id: number;
@@ -131,12 +163,18 @@ export interface Partner {
   password: string;
   role: string;
   status: boolean;
-  partner_id:string
+  partner_id: string;
   consultants: Consultant[];
-  businesses:AdminBusinessResponse[]
+  businesses: AdminBusinessResponse[];
   dateJoined: string;
   __v: number;
   token: string;
+}
+
+export interface AdminBusinessFullResponse {
+  code: number;
+  response: AdminBusinessResponse;
+  data: AdminBusinessData;
 }
 
 export interface AdminBusinessResponse {
@@ -180,6 +218,38 @@ export interface AdminBusinessResponse {
   consultant: Consultant;
   messages: any[];
   suspended: boolean;
+}
+export interface AdminBusinessData {
+  money_in_v_money_out: {
+    total_money_in: any[];
+    total_money_out: any[];
+    money_in: {
+      sales: any[];
+      refundsReceived: any[];
+      otherMoneyIn: any[];
+      installments: any[];
+    };
+    expenses: {
+      directMaterial: any[];
+      directLabour: any[];
+      overheadItemTransactions: any[];
+      assets: any[];
+      refundsGiven: any[];
+      otherMoneyOut: any[];
+      installments: any[];
+    };
+  };
+  associates: {
+    customers: any[];
+    suppliers: any[];
+  };
+  company: {
+    products: any[];
+    assets: any[];
+    overhead: any[];
+    labour: any[];
+    material: any[];
+  };
 }
 
 export interface ICreateConsultantCreate {
@@ -225,4 +295,47 @@ export interface ICountry {
   consultants: number;
   businesses: number;
   subscribers: number;
+}
+
+export interface IDashboardStatistics {
+  all_users: UserCounts;
+  verido_users: UserCounts;
+  independent_users: Partial<UserCounts>;
+  money_in_v_money_out: MoneyInVsMoneyOut;
+}
+
+export interface UserCounts {
+  partners: number;
+  consultants: number;
+  businesses: number;
+}
+
+export interface MoneyInVsMoneyOut {
+  total_money_in: MoneyTransaction[];
+  total_money_out: MoneyTransaction[];
+  money_in: MoneyIn;
+  expenses: Expenses;
+  subscription: MoneyTransaction[];
+}
+
+export interface MoneyTransaction {
+  month: string;
+  totalAmount: number;
+}
+
+export interface MoneyIn {
+  sales: MoneyTransaction[];
+  refundsReceived: MoneyTransaction[];
+  otherMoneyIn: MoneyTransaction[];
+  installments: MoneyTransaction[];
+}
+
+export interface Expenses {
+  directMaterial: MoneyTransaction[];
+  directLabour: MoneyTransaction[];
+  overheadItemTransactions: MoneyTransaction[];
+  assets: MoneyTransaction[];
+  refundsGiven: MoneyTransaction[];
+  otherMoneyOut: MoneyTransaction[];
+  installments: MoneyTransaction[];
 }

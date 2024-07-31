@@ -1,66 +1,86 @@
 "use client";
-import { Bar, BarChart } from "recharts";
+import React, { useEffect, useState } from "react";
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from "recharts";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { useDashboardStats } from "@/lib/react-query/query/useStats";
 
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
+interface ChartData {
+  month: string;
+  moneyIn: number;
+  moneyOut: number;
+}
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#2563eb",
+  moneyIn: {
+    label: "Money In",
+    color: "#08A730",
   },
-  mobile: {
-    label: "Mobile",
-    color: "#60a5fa",
+  moneyOut: {
+    label: "Money Out",
+    color: "#FF2D55",
   },
 } satisfies ChartConfig;
 
 const CashMovementChart = () => {
+  const { data: dashboardStats } = useDashboardStats();
+const [chartData, setChartData] = useState<ChartData[]>([]);
+
+  useEffect(() => {
+    if (dashboardStats) {
+      const transformedData =
+        dashboardStats.money_in_v_money_out.total_money_in.map((moneyIn) => {
+          const moneyOut =
+            dashboardStats.money_in_v_money_out.total_money_out.find(
+              (item) => item.month === moneyIn.month
+            );
+          return {
+            month: moneyIn.month,
+            moneyIn: moneyIn.totalAmount,
+            moneyOut: moneyOut ? moneyOut.totalAmount : 0,
+          };
+        });
+      setChartData(transformedData);
+    }
+  }, [dashboardStats]);
+
   return (
-    // <div className="bg-white p-10 rounded-md flex flex-col gap-3">
-    //   <div className="flex justify-between items-center">
-    //     <p className="font-light">Cash Movement</p>
-    //     <div className="flex items-center gap-3 p-2 border border-solid border-gray-text rounded-md">
-    //       <span className="text-gray-text text-[13px] font-extralight">
-    //         2020
-    //       </span>
-    //       <span>
-    //         <Image
-    //           src="/assets/icons/calendericon.svg"
-    //           alt="percent"
-    //           width={20}
-    //           height={20}
-    //           className="object-contain"
-    //         />
-    //       </span>
-    //     </div>
-    //   </div>
-    //   <div className="self-center">
-    //     <Image
-    //       src="/assets/icons/cashmovementchart.svg"
-    //       alt="percent"
-    //       width={900}
-    //       height={900}
-    //       className="object-contain"
-    //     />
-    //   </div>
-    // </div>
-    <ChartContainer
-      config={chartConfig}
-      className="min-h-[100px] w-full bg-verido-white"
-    >
-      <BarChart accessibilityLayer data={chartData}>
-        <Bar dataKey="desktop" fill="verido-green" radius={4} />
-        <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-      </BarChart>
+    <ChartContainer config={chartConfig} className="bg-verido-white py-20 px-10">
+      <ResponsiveContainer width="100%" height={100}>
+        <BarChart
+          data={chartData}
+          barCategoryGap="10%"
+          margin={{ left: 0, right: 0 }}
+        >
+          <XAxis className="bg-slate-400" dataKey="month" />
+          {/* <YAxis /> */}
+          <ChartTooltip labelClassName="bg-white" content={<ChartTooltipContent />} />
+          <Bar
+            barSize={20}
+            dataKey="moneyIn"
+            fill={chartConfig.moneyIn.color}
+            radius={10}
+          />
+          <Bar
+            barSize={20}
+            dataKey="moneyOut"
+            fill={chartConfig.moneyOut.color}
+            radius={4}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </ChartContainer>
   );
 };

@@ -18,12 +18,12 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
             src="/assets/icons/winkface.svg"
             width={30}
             height={30}
-            alt={business.full_name}
+            alt={business?.full_name}
             className="w-16 h-16 rounded-full object-contain"
           />
           <div className="flex flex-col justify-center items-center gap-1">
-            <h2 className="text-lg">{business.business?.name}</h2>
-            <p className="text-gray-text text-[10px] ">{business.email}</p>
+            <h2 className="text-lg">{business?.business?.name}</h2>
+            <p className="text-gray-text text-[10px] ">{business?.email}</p>
             <Button
               size={"sm"}
               className="bg-verido-green text-white px-3 py-2 text-[13px] rounded-md"
@@ -48,7 +48,7 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
           <div className="flex flex-col flex-1 gap-2 ">
             <h3 className="text-2xl">Business Owner&apos;s Informations</h3>
             <p className="text-gray-text text-[12px] w-[70%]">
-              {business.full_name}
+              {business?.full_name}
             </p>
           </div>
           <div className="">
@@ -57,7 +57,7 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
         </div>
         <div className="border-t border-verido-border w-full py-4">
           <h3 className="text-2xl">About</h3>
-          <p className="text-gray-text text-[12px]">{business.full_name}</p>
+          <p className="text-gray-text text-[12px]">{business?.full_name}</p>
         </div>
         <div className="border-t border-verido-border py-4 flex flex-col gap-5 w-full">
           <h3 className="text-2xl">Contact</h3>
@@ -73,17 +73,17 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
               <li>Business Type</li>
             </ul>
             <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
-              <li>{business.full_name}</li>
-              <li>{business.business?.name}</li>
-              <li>{business.business?.sector}</li>
+              <li>{business?.full_name}</li>
+              <li>{business?.business?.name}</li>
+              <li>{business?.business?.sector}</li>
               <li>
-                {business.business?.currencySymbol}{" "}
-                {business.business?.currency}
+                {business?.business?.currencySymbol}{" "}
+                {business?.business?.currency}
               </li>
-              <li>{business.full_name}</li>
-              <li>{business.email}</li>
-              <li>{business.username}</li>
-              <li>{business.business?.type}</li>
+              <li>{business?.full_name}</li>
+              <li>{business?.email}</li>
+              <li>{business?.username}</li>
+              <li>{business?.business?.type}</li>
             </ul>
           </div>
         </div>
@@ -96,9 +96,9 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
               <li>Subscription Expires</li>
             </ul>
             <ul className="flex flex-col gap-4 text-[12px] text-gray-text">
-              <li>{business.subscription_status?.started}</li>
-              <li>{business.subscription_status?.status}</li>
-              <li>{business.subscription_status?.expires}</li>
+              <li>{business?.subscription_status?.started}</li>
+              <li>{business?.subscription_status?.status}</li>
+              <li>{business?.subscription_status?.expires}</li>
             </ul>
           </div>
         </div>
