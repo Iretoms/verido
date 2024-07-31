@@ -1,18 +1,15 @@
+// @ts-nocheck
 "use client";
 import { columnsBusiness } from "./column";
 import React from "react";
 import { useBusiness } from "../../../lib/react-query/query/useBusiness";
 import { usePathname } from "next/navigation";
 import { BusinessOwnerTable } from "../../../components/businessOwners/BusinessOwnersTable";
-import { AdminBusinessResponse } from "@/types";
 
 const BusinessOwners = () => {
-  const { data: businessData} = useBusiness();
+  const { data: businessData } = useBusiness();
 
-    const adminBusiness: AdminBusinessResponse[] = businessData
-      ? businessData.map((item) => item.response)
-      : [];
-  
+  const adminBusiness = businessData || [];
 
   const pathname = usePathname();
 

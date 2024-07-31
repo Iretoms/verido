@@ -13,7 +13,6 @@ import { columnsCountry } from "../../components/countries/column";
 import { DownLinksGraph } from "@/components/common/DownLinksGraph";
 import BusinessStatistics from "../../components/common/BusinessStatistics";
 import CashMovementChart from "../../components/charts/CashMovementChart";
-import MoneyInOutStats from "../../components/common/MoneyInOutStats";
 import { VideoTable } from "../../components/video/VideoTable";
 import { useVideos } from "../../lib/react-query/query/useVideo";
 import CreateConsultant from "../../components/consultants/CreateConsultant";
@@ -24,6 +23,7 @@ import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
 import { useAuthenticatedUser } from "../../context/AuthContext";
 import { useDashboardStats } from "@/lib/react-query/query/useStats";
 import { DashboardHexChart } from "@/components/charts/DashboardHexChart";
+import { DashboardMultipleLineChart } from "@/components/charts/DashboardMultipleLineChart";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
@@ -393,8 +393,7 @@ const DashboardContent = () => {
           </div>
 
           <CashMovementChart />
-
-          <MoneyInOutStats />
+          <DashboardMultipleLineChart/>
           <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
             <div className="bg-white rounded-lg flex flex-1 gap-4 items-center p-5">
               <Image
