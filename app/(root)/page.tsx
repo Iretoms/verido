@@ -11,7 +11,7 @@ import { columnsVideo } from "../../components/video/column";
 import { columnsCountry } from "../../components/countries/column";
 import DownLinksGraph from "../../components/common/DownLinksGraph";
 import BusinessStatistics from "../../components/common/BusinessStatistics";
-import CashMovementChart from "../../components/common/CashMovementChart";
+import CashMovementChart from "../../components/charts/CashMovementChart";
 import MoneyInOutStats from "../../components/common/MoneyInOutStats";
 import { VideoTable } from "../../components/video/VideoTable";
 import { useVideos } from "../../lib/react-query/query/useVideo";
@@ -21,19 +21,21 @@ import { CountryTable } from "../../components/countries/CountryTable";
 import { countryData } from "../../constant/index";
 import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
 import { useAuthenticatedUser } from "../../context/AuthContext";
+import { useDashboardStats } from "@/lib/react-query/query/useStats";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
   const { data: consultantsData } = useConsultants();
-  const { currentUser , isLoading} = useAuthenticatedUser();
+  const { currentUser, isLoading } = useAuthenticatedUser();
+  // const {data:dashboardStats} = useDashboardStats()
   const { data: videData } = useVideos();
   const businessOwner = businessOwnersData || [];
   const consultants = consultantsData || [];
   const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
-  if(isLoading){
-    return<GlobalLoadingIndicator/>
+  if (isLoading) {
+    return <GlobalLoadingIndicator />;
   }
 
   return (
@@ -398,6 +400,7 @@ const DashboardContent = () => {
             />
           </div>
           <CashMovementChart />
+
           <MoneyInOutStats />
           <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
             <div className="bg-white rounded-lg flex flex-1 gap-4 items-center p-5">

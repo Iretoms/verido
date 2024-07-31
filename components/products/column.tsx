@@ -45,19 +45,19 @@ export const columns: ColumnDef<Product>[] = [
     header: "Name",
   },
   {
-    accessorKey: "cost_price",
+    accessorKey: "costPrice",
     header: "Cost price",
   },
   {
-    accessorKey: "selling_price",
+    accessorKey: "sellingPrice",
     header: "Selling Price",
   },
   {
-    accessorKey: "forecast_month",
+    accessorKey: "forecast",
     header: "Forcast/Month",
   },
   {
-    accessorKey: "units",
+    accessorKey: "unit",
     header: "Unit",
   },
   {
