@@ -24,6 +24,7 @@ import { useAuthenticatedUser } from "../../context/AuthContext";
 import { useDashboardStats } from "@/lib/react-query/query/useStats";
 import { DashboardHexChart } from "@/components/charts/DashboardHexChart";
 import { DashboardMultipleLineChart } from "@/components/charts/DashboardMultipleLineChart";
+import StatisticsCard from "@/components/common/StatisticsCard";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
@@ -35,7 +36,7 @@ const DashboardContent = () => {
   const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
-  const { data: dashboardStats } = useDashboardStats();
+  const { data: dashboardStats , isPending } = useDashboardStats();
   const chartData = React.useMemo(() => {
     if (!dashboardStats) return [];
 
@@ -64,7 +65,7 @@ const DashboardContent = () => {
     return parseFloat(total.toFixed(2));
   }, [dashboardStats]);
 
-  if (isLoading) {
+  if (isLoading || isPending) {
     return <GlobalLoadingIndicator />;
   }
 
@@ -393,82 +394,34 @@ const DashboardContent = () => {
           </div>
 
           <CashMovementChart />
-          <DashboardMultipleLineChart/>
+          <DashboardMultipleLineChart />
           <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
-            <div className="bg-white rounded-lg flex flex-1 gap-4 items-center p-5">
-              <Image
-                src="/assets/icons/barchart1.svg"
-                alt="chart"
-                width={60}
-                height={60}
-                className="object-contain"
-              />
-              <div>
-                <p className="text-[15px] lg:text-[18px]">
-                  {totalSubscription}
-                </p>
-                <p className="font-light text-[12px] text-gray-text">
-                  Total susbscription
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg flex flex-1 gap-2 items-center p-5">
-              <Image
-                src="/assets/icons/barchart2.svg"
-                alt="chart"
-                width={60}
-                height={60}
-                className="object-contain"
-              />
-              <div>
-                <p className="text-[15px] lg:text-[18px]">
-                  $
-                  {
-                    dashboardStats?.money_in_v_money_out.expenses
-                      .directLabour?.[0]?.totalAmount
-                  }
-                </p>
-                <p className="font-light text-[12px] text-gray-text">
-                  Direct Labour
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg flex flex-1 gap-2 items-center p-5">
-              <Image
-                src="/assets/icons/barchart3.svg"
-                alt="chart"
-                width={60}
-                height={60}
-                className="object-contain"
-              />
-              <div>
-                <p className="text-[15px] lg:text-[18px]">
-                  $
-                  {
-                    dashboardStats?.money_in_v_money_out.expenses
-                      .directMaterial?.[0]?.totalAmount
-                  }
-                </p>
-                <p className="font-light text-[12px] text-gray-text">
-                  Direct Material
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg flex flex-1 gap-2 items-center p-5">
-              <Image
-                src="/assets/icons/barchart4.svg"
-                alt="chart"
-                width={60}
-                height={60}
-                className="object-contain"
-              />
-              <div>
-                <p className="text-[15px] lg:text-[18px]">$17,346.00</p>
-                <p className="font-light text-[12px] text-gray-text">
-                  Overhead
-                </p>
-              </div>
-            </div>
+            <StatisticsCard
+              value={totalSubscription}
+              label="Total Subscription"
+              iconSrc="/assets/icons/barchart1.svg"
+            />
+            <StatisticsCard
+              value={
+                dashboardStats?.money_in_v_money_out.expenses.directLabour?.[0]
+                  ?.totalAmount
+              }
+              label="Direct Labour"
+              iconSrc="/assets/icons/barchart2.svg"
+            />
+            <StatisticsCard
+              value={
+                dashboardStats?.money_in_v_money_out.expenses
+                  .directMaterial?.[0]?.totalAmount
+              }
+              label="Direct Material"
+              iconSrc="/assets/icons/barchart3.svg"
+            />
+            <StatisticsCard
+              value="$17,346.00"
+              label="Overhead"
+              iconSrc="/assets/icons/barchart4.svg"
+            />
           </div>
           <div className="bg-white p-10 rounded-md">
             <CountryTable data={countryData} columns={columnsCountry} />

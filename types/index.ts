@@ -155,6 +155,18 @@ export interface Partners {
   status: string;
   updatedAt: string;
 }
+export interface PartnerStatData {
+  all_users: {
+    consultants: number;
+    businesses: number;
+  };
+  money_in_v_money_out: MoneyInVsMoneyOut;
+}
+export interface PartnerFullResponse {
+  code: number;
+  response: Partner;
+  data: PartnerStatData;
+}
 export interface Partner {
   _id: string;
   name: string;
@@ -219,6 +231,14 @@ export interface AdminBusinessResponse {
   messages: any[];
   suspended: boolean;
 }
+export interface ExpenseItem {
+  _id: string;
+  totalAmount: number;
+}
+export interface LabourItem {
+  _id: string;
+  totalAmount: number;
+}
 export interface AdminBusinessData {
   money_in_v_money_out: {
     total_money_in: any[];
@@ -230,8 +250,8 @@ export interface AdminBusinessData {
       installments: any[];
     };
     expenses: {
-      directMaterial: any[];
-      directLabour: any[];
+      directMaterial: ExpenseItem[];
+      directLabour: LabourItem[];
       overheadItemTransactions: any[];
       assets: any[];
       refundsGiven: any[];

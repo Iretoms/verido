@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchPartners , fetchPartnerById } from "@/lib/api/partners.api";
-import { Partner } from "@/types";
+import { fetchPartners, fetchPartnerById } from "@/lib/api/partners.api";
+import { Partner, PartnerStatData } from "@/types";
 
 export const usePartners = () => {
   return useQuery<Partner[], Error>({
@@ -12,11 +12,14 @@ export const usePartners = () => {
   });
 };
 export const usePartnerById = (id: string) => {
-  return useQuery<Partner, Error>({
+  return useQuery<{ response: Partner; data: PartnerStatData }, Error>({
     queryKey: ["partner"],
     queryFn: async () => {
       const response = await fetchPartnerById(id);
-      return response.response;
+      return {
+        response: response.response,
+        data: response.data,
+      };
     },
   });
 };
