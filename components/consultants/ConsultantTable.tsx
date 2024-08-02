@@ -139,7 +139,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
         <TableBody className="border-none">
           {isLoading ? (
             <TableRow className="text-sm font-bold text-gray-text">
-              <TableCell colSpan={columns.length} className="h-24 text-center font-bold text-lg">
+              <TableCell colSpan={columns.length} className="h-24 text-center font-bold text-sm">
                 Loading Consultants...
               </TableCell>
             </TableRow>

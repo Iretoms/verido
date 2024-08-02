@@ -141,7 +141,7 @@ export function BusinessOwnerTable<
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell
                 colSpan={columns.length}
-                className="h-24 text-center font-bold text-lg"
+                className="h-24 text-center font-bold text-sm"
               >
                 Loading Business...
               </TableCell>

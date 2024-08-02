@@ -156,7 +156,7 @@ export function PartnersTable<TData extends Partner, TValue>({
         <TableBody className="border-none">
           {isLoading ? (
             <TableRow className="text-sm font-bold text-gray-text">
-              <TableCell colSpan={columns.length} className="font-bold text-lg h-24 text-center">
+              <TableCell colSpan={columns.length} className="font-bold text-sm h-24 text-center">
                 Loading Partners...
               </TableCell>
             </TableRow>
