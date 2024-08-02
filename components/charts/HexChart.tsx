@@ -28,6 +28,10 @@ const chartConfig = {
     label: "Money In",
     color: "#08A730",
   },
+  moneyOut: {
+    label: "Money Out",
+    color: "#FF2D55",
+  },
 } satisfies ChartConfig;
 
 export function HexChart({chartData}:HexChartProps) {
@@ -61,6 +65,11 @@ export function HexChart({chartData}:HexChartProps) {
             <Radar
               dataKey="moneyIn"
               fill={chartConfig.moneyIn.color}
+              fillOpacity={0.6}
+            />
+            <Radar
+              dataKey="moneyOut"
+              fill={chartConfig.moneyOut.color}
               fillOpacity={0.6}
             />
           </RadarChart>

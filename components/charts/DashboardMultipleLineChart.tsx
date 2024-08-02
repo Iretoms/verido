@@ -64,9 +64,11 @@ export function DashboardMultipleLineChart() {
 
   useEffect(() => {
     if (dashboardStats) {
-      const { total_money_in, expenses } = dashboardStats.money_in_v_money_out;
-      const transformedData = total_money_in.map((moneyIn) => {
-        const month = moneyIn.month;
+      const { money_in, expenses } = dashboardStats.money_in_v_money_out;
+      const salesData = money_in.sales;
+
+      const transformedData = salesData.map((sale) => {
+        const month = sale._id;
         const monthName = monthNames[parseInt(month.split("-")[1]) - 1];
         const directLabour =
           expenses.directLabour.find((item) => item._id === month)
@@ -77,11 +79,14 @@ export function DashboardMultipleLineChart() {
 
         return {
           month: monthName,
-          moneyIn: moneyIn.totalAmount,
+          moneyIn: sale.totalAmount,
           directLabour: directLabour,
           directMaterial: directMaterial,
         };
       });
+      transformedData.sort(
+        (a, b) => monthNames.indexOf(a.month) - monthNames.indexOf(b.month)
+      );
 
       setChartData(transformedData);
     }

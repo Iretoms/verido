@@ -50,7 +50,7 @@ const monthNames = [
   "December",
 ];
 
-const CashMovementChart = () => {
+const SubscriptionCashMovementChart = () => {
   const { data: dashboardStats } = useDashboardStats();
   const [chartData, setChartData] = useState<ChartData[]>([]);
 
@@ -58,7 +58,7 @@ const CashMovementChart = () => {
     if (dashboardStats) {
       const subscriptionData = dashboardStats.money_in_v_money_out.subscription;
 
-      const transformedData = subscriptionData.map((subscription) => {
+      const transformedData = subscriptionData?.map((subscription) => {
         const month = subscription.month;
         const monthName = monthNames[parseInt(month.split("-")[1]) - 1];
         const moneyIn = subscription.totalAmount;
@@ -131,4 +131,4 @@ const CashMovementChart = () => {
   );
 };
 
-export default CashMovementChart;
+export default SubscriptionCashMovementChart;

@@ -24,25 +24,52 @@ const PartnerInfo = () => {
   const consultantsData = partnerDetails?.consultants || [];
   const businessData = partnerDetails?.businesses || [];
 
-  const chartDataCash = partnerStats?.money_in_v_money_out?.money_in?.sales.map(
-    ((sale) => {
+  const chartDataCash = React.useMemo(() => {
+    if (!partnerStats?.money_in_v_money_out) return [];
+
+    const salesData = partnerStats.money_in_v_money_out.money_in.sales;
+    const moneyOutData = partnerStats.money_in_v_money_out.total_money_out;
+
+    const combinedData = salesData.map((sale) => {
       const month = sale._id;
       const monthName = monthNames[parseInt(month?.split("-")[1]) - 1];
       const moneyIn = sale.totalAmount;
 
+      const correspondingMoneyOut = moneyOutData.find(
+        (outItem) => outItem.month === month
+      ) || { totalAmount: 0 };
+
       return {
         month: monthName,
         moneyIn: moneyIn,
+        moneyOut: correspondingMoneyOut.totalAmount,
       };
-    }) || []
-  );
+    });
+
+    moneyOutData.forEach((outItem) => {
+      const month = outItem.month;
+      const monthName = monthNames[parseInt(month?.split("-")[1]) - 1];
+      if (!combinedData.some((item) => item.month === monthName)) {
+        combinedData.push({
+          month: monthName,
+          moneyIn: 0,
+          moneyOut: outItem.totalAmount,
+        });
+      }
+    });
+
+    return combinedData.sort(
+      (a, b) => monthNames.indexOf(a.month) - monthNames.indexOf(b.month)
+    );
+  }, [partnerStats]);
 
   const moneySalesIn =
     partnerStats?.money_in_v_money_out?.total_money_in?.[0]?.totalAmount;
   const partnerLabourStat =
     partnerStats?.money_in_v_money_out?.expenses?.directLabour[0]?.totalAmount;
   const partnerMaterialStat =
-    partnerStats?.money_in_v_money_out?.expenses?.directMaterial[0]?.totalAmount;
+    partnerStats?.money_in_v_money_out?.expenses?.directMaterial[0]
+      ?.totalAmount;
 
   const chartDataMoneyInVsMoneyOut =
     partnerStats?.money_in_v_money_out?.total_money_in.map((moneyIn) => {
@@ -65,7 +92,7 @@ const PartnerInfo = () => {
       };
     }) || [];
 
-  if (isPending || isRefetching) {
+  if (isPending) {
     return <GlobalLoadingIndicator />;
   }
 

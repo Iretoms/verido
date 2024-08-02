@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 
+import Image from "next/image";
 import * as React from "react";
 import { Label, Pie, PieChart } from "recharts";
 import { useDashboardStats } from "@/lib/react-query/query/useStats";
@@ -8,7 +8,6 @@ import { useDashboardStats } from "@/lib/react-query/query/useStats";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -19,7 +18,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
 
 const chartConfig = {
   businessOwners: {
@@ -38,31 +36,49 @@ const chartConfig = {
 
 export function DownLinksGraph() {
   const { data: dashboardStats } = useDashboardStats();
-    const chartData = React.useMemo(() => {
-      if (!dashboardStats) return [];
 
-      return [
-        {
-          browser: "Business Owners",
-          visitors: dashboardStats.all_users.businesses,
-          fill: chartConfig.businessOwners.color,
-        },
-        {
-          browser: "Consultants",
-          visitors: dashboardStats.all_users.consultants,
-          fill: chartConfig.consultants.color,
-        },
-        {
-          browser: "Partners",
-          visitors: dashboardStats.all_users.partners,
-          fill: chartConfig.partners.color,
-        },
-      ];
-    }, [dashboardStats]);
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  const userRole = React.useMemo(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("user_role");
+    }
+    return null;
   }, []);
 
+  const chartData = React.useMemo(() => {
+    if (!dashboardStats || !userRole) return [];
+
+    const data = [
+      {
+        browser: "Business Owners",
+        visitors: dashboardStats.all_users.businesses,
+        fill: chartConfig.businessOwners.color,
+      },
+      {
+        browser: "Consultants",
+        visitors: dashboardStats.all_users.consultants,
+        fill: chartConfig.consultants.color,
+      },
+      {
+        browser: "Partners",
+        visitors: dashboardStats.all_users.partners,
+        fill: chartConfig.partners.color,
+      },
+    ];
+
+    if (userRole === "super_admin") {
+      return data;
+    } else if (userRole === "partner") {
+      return data.filter((item) => item.browser !== "Partners");
+    } else if (userRole === "consultant") {
+      return data.filter((item) => item.browser === "Business Owners");
+    } else {
+      return [];
+    }
+  }, [dashboardStats, userRole]);
+
+  const totalVisitors = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  }, [chartData]);
 
   return (
     <Card className="flex flex-col">
@@ -129,18 +145,24 @@ export function DownLinksGraph() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex justify-center gap-5 mt-4">
-          <div className="flex items-center">
-            <div className="w-2 h-2 rounded-full bg-verido-green mr-2"></div>
-            <span className="text-[12px]">Business Owners</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-2 h-2 rounded-full bg-verido-orange mr-2"></div>
-            <span className="text-[12px]">Partners</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-            <span className="text-[12px]">Consultants</span>
-          </div>
+          {userRole !== "consultant" && (
+            <div className="flex items-center">
+              <div className="w-2 h-2 rounded-full bg-verido-green mr-2"></div>
+              <span className="text-[12px]">Business Owners</span>
+            </div>
+          )}
+          {userRole === "super_admin" && (
+            <div className="flex items-center">
+              <div className="w-2 h-2 rounded-full bg-verido-orange mr-2"></div>
+              <span className="text-[12px]">Partners</span>
+            </div>
+          )}
+          {userRole !== "consultant" && (
+            <div className="flex items-center">
+              <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+              <span className="text-[12px]">Consultants</span>
+            </div>
+          )}
         </div>
       </CardFooter>
     </Card>

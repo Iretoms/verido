@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import { columnsVideo } from "../../components/video/column";
 import { columnsCountry } from "../../components/countries/column";
 import { DownLinksGraph } from "@/components/common/DownLinksGraph";
 import BusinessStatistics from "../../components/common/BusinessStatistics";
-import CashMovementChart from "../../components/charts/CashMovementChart";
+import SubscriptionCashMovementChart from "../../components/charts/SubscriptionCashMovementChart";
 import { VideoTable } from "../../components/video/VideoTable";
 import { useVideos } from "../../lib/react-query/query/useVideo";
 import CreateConsultant from "../../components/consultants/CreateConsultant";
@@ -25,6 +25,8 @@ import { useDashboardStats } from "@/lib/react-query/query/useStats";
 import { DashboardHexChart } from "@/components/charts/DashboardHexChart";
 import { DashboardMultipleLineChart } from "@/components/charts/DashboardMultipleLineChart";
 import StatisticsCard from "@/components/common/StatisticsCard";
+import { monthNames } from "../../constant/index";
+import DashboardMoneyInMoneyOut from "@/components/charts/DashboardMoneyInMoneyOut";
 
 const DashboardContent = () => {
   const { data: businessOwnersData } = useBusiness();
@@ -36,7 +38,8 @@ const DashboardContent = () => {
   const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
-  const { data: dashboardStats , isPending } = useDashboardStats();
+  const isConsultant = currentUser?.role === "consultant";
+  const { data: dashboardStats, isPending } = useDashboardStats();
   const chartData = React.useMemo(() => {
     if (!dashboardStats) return [];
 
@@ -48,17 +51,45 @@ const DashboardContent = () => {
         (outItem) => outItem.month === inItem.month
       ) || { totalAmount: 0 };
       return {
-        month: inItem.month,
+        month: monthNames[parseInt(inItem.month.split("-")[1]) - 1],
         desktop: inItem.totalAmount,
         mobile: correspondingOutItem.totalAmount,
       };
     });
 
-    return combinedData;
+    return combinedData.sort(
+      (a, b) => monthNames.indexOf(a.month) - monthNames.indexOf(b.month)
+    );
   }, [dashboardStats]);
   const totalSubscription = React.useMemo(() => {
     const total =
-      dashboardStats?.money_in_v_money_out.subscription.reduce(
+      dashboardStats?.money_in_v_money_out.subscription?.reduce(
+        (acc, curr) => acc + curr.totalAmount,
+        0
+      ) || 0;
+    return parseFloat(total.toFixed(2));
+  }, [dashboardStats]);
+  const totalDirectLabour = React.useMemo(() => {
+    const total =
+      dashboardStats?.money_in_v_money_out.expenses.directLabour?.reduce(
+        (acc, curr) => acc + curr.totalAmount,
+        0
+      ) || 0;
+    return parseFloat(total.toFixed(2));
+  }, [dashboardStats]);
+
+  const totalDirectMaterial = React.useMemo(() => {
+    const total =
+      dashboardStats?.money_in_v_money_out.expenses.directMaterial?.reduce(
+        (acc, curr) => acc + curr.totalAmount,
+        0
+      ) || 0;
+    return parseFloat(total.toFixed(2));
+  }, [dashboardStats]);
+
+  const totalOverhead = React.useMemo(() => {
+    const total =
+      dashboardStats?.money_in_v_money_out.expenses.overheadItemTransactions?.reduce(
         (acc, curr) => acc + curr.totalAmount,
         0
       ) || 0;
@@ -86,7 +117,7 @@ const DashboardContent = () => {
                 <div
                   className={`bg-white rounded-lg ${
                     isPartner ? "hidden" : "flex"
-                  } flex flex-col gap-2 items-center p-5`}
+                  } flex-col gap-2 items-center p-5`}
                 >
                   <Image
                     src="/assets/icons/bar-chart2.svg"
@@ -96,7 +127,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px]">
-                    {dashboardStats?.all_users.partners}
+                    {dashboardStats?.all_users?.partners}
                   </p>
                   <p className="font-light text-[12px] text-gray-text">
                     All Partners
@@ -158,7 +189,7 @@ const DashboardContent = () => {
 
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -169,7 +200,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px] font-bold">
-                    {dashboardStats?.verido_users.partners}
+                    {dashboardStats?.verido_users?.partners}
                   </p>
                   <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
@@ -178,7 +209,7 @@ const DashboardContent = () => {
                 </div>
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -189,7 +220,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px] font-bold">
-                    {dashboardStats?.verido_users.businesses}
+                    {dashboardStats?.verido_users?.businesses}
                   </p>
                   <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
@@ -198,7 +229,7 @@ const DashboardContent = () => {
                 </div>
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -209,7 +240,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px] font-bold">
-                    {dashboardStats?.all_users.consultants}
+                    {dashboardStats?.all_users?.consultants}
                   </p>
                   <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
@@ -218,7 +249,7 @@ const DashboardContent = () => {
                 </div>
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -237,7 +268,7 @@ const DashboardContent = () => {
 
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -248,7 +279,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px]">
-                    {dashboardStats?.independent_users.partners}
+                    {dashboardStats?.independent_users?.partners}
                   </p>
                   <p className="font-light text-[12px] text-gray-text text-center">
                     Independent Partners
@@ -256,7 +287,7 @@ const DashboardContent = () => {
                 </div>
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -267,7 +298,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px]">
-                    {dashboardStats?.independent_users.businesses}
+                    {dashboardStats?.independent_users?.businesses}
                   </p>
                   <p className="font-light text-[12px] text-gray-text text-center">
                     Independent Business
@@ -275,7 +306,7 @@ const DashboardContent = () => {
                 </div>
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -286,7 +317,7 @@ const DashboardContent = () => {
                     className="object-contain w-full"
                   />
                   <p className="text-[18px]">
-                    {dashboardStats?.independent_users.consultants}
+                    {dashboardStats?.independent_users?.consultants}
                   </p>
                   <p className="font-light text-[12px] text-gray-text text-center">
                     Independent Consultants
@@ -294,7 +325,7 @@ const DashboardContent = () => {
                 </div>
                 <div
                   className={`bg-white rounded-lg flex flex-col gap-1 items-center p-5 ${
-                    !isSuperAdmin ? "hidden" : "flex"
+                    isSuperAdmin ? "" : "hidden"
                   }`}
                 >
                   <Image
@@ -392,33 +423,27 @@ const DashboardContent = () => {
               columns={columnsBusiness}
             />
           </div>
-
-          <CashMovementChart />
+          <DashboardMoneyInMoneyOut />
+          {isConsultant ? "" : <SubscriptionCashMovementChart />}
           <DashboardMultipleLineChart />
           <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
             <StatisticsCard
-              value={totalSubscription}
+              value={`$ ${totalSubscription}`}
               label="Total Subscription"
               iconSrc="/assets/icons/barchart1.svg"
             />
             <StatisticsCard
-              value={
-                dashboardStats?.money_in_v_money_out.expenses.directLabour?.[0]
-                  ?.totalAmount
-              }
+              value={`$ ${totalDirectLabour}`}
               label="Direct Labour"
               iconSrc="/assets/icons/barchart2.svg"
             />
             <StatisticsCard
-              value={
-                dashboardStats?.money_in_v_money_out.expenses
-                  .directMaterial?.[0]?.totalAmount
-              }
+              value={`$ ${totalDirectMaterial}`}
               label="Direct Material"
               iconSrc="/assets/icons/barchart3.svg"
             />
             <StatisticsCard
-              value="$17,346.00"
+              value={`$ ${totalOverhead}`}
               label="Overhead"
               iconSrc="/assets/icons/barchart4.svg"
             />

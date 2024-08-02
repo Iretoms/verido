@@ -22,7 +22,7 @@ const BusinessInfoCard: React.FC<BusinessInfoCardProps> = ({ business }) => {
             className="w-16 h-16 rounded-full object-contain"
           />
           <div className="flex flex-col justify-center items-center gap-1">
-            <h2 className="text-lg">{business?.business?.name}</h2>
+            <h2 className="text-lg text-center">{business?.business?.name}</h2>
             <p className="text-gray-text text-[10px] ">{business?.email}</p>
             <Button
               size={"sm"}
