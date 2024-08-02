@@ -13,7 +13,7 @@ const Experts = () => {
   const { data: businessData } = useBusiness();
   const pathname = usePathname();
 
-  const experts = businessData ? extractExperts(businessData) : [];
+  // const experts = businessData ? extractExperts(businessData) : [];
 
 
   return (
@@ -23,7 +23,7 @@ const Experts = () => {
         <span className="text-gray-text">{pathname.substring(1)}</span>
       </div>
       <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 min-h-[42rem]">
-        <ExpertsTable data={experts} columns={columns} />
+        {/* <ExpertsTable data={experts} columns={columns} /> */}
       </div>
     </div>
   );
