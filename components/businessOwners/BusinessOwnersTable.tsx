@@ -34,12 +34,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isLoading: boolean;
 }
 
 export function BusinessOwnerTable<
   TData extends AdminBusinessResponse,
   TValue
->({ columns, data }: DataTableProps<TData, TValue>) {
+>({ columns, data, isLoading }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
   const handleRowSelection = (id: string) => {
@@ -136,7 +137,16 @@ export function BusinessOwnerTable<
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {table.getRowModel().rows?.length ? (
+          {isLoading ? (
+            <TableRow className="text-sm font-bold text-gray-text">
+              <TableCell
+                colSpan={columns.length}
+                className="h-24 text-center font-bold text-lg"
+              >
+                Loading Business...
+              </TableCell>
+            </TableRow>
+          ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}

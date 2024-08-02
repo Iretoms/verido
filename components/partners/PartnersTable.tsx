@@ -38,11 +38,13 @@ import CreatePartner from "./CreatePartner";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isLoading: boolean;
 }
 
 export function PartnersTable<TData extends Partner, TValue>({
   columns,
   data,
+  isLoading,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
@@ -152,7 +154,13 @@ export function PartnersTable<TData extends Partner, TValue>({
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {table.getRowModel().rows?.length ? (
+          {isLoading ? (
+            <TableRow className="text-sm font-bold text-gray-text">
+              <TableCell colSpan={columns.length} className="font-bold text-lg h-24 text-center">
+                Loading Partners...
+              </TableCell>
+            </TableRow>
+          ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
@@ -161,10 +169,7 @@ export function PartnersTable<TData extends Partner, TValue>({
                 className="text-sm font-light text-gray-text"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    // onClick={() => handleRowSelection(row.original._id)}
-                    key={cell.id}
-                  >
+                  <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

@@ -47,10 +47,7 @@ interface CashMovementChartProps {
   chartData: ChartData[];
 }
 
-const BusinessMoneyInMoneyOut = ({chartData}:CashMovementChartProps) => {
-
-
-
+const PartnerMoneyInMoneyOut = ({ chartData }: CashMovementChartProps) => {
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-center">
@@ -109,4 +106,4 @@ const BusinessMoneyInMoneyOut = ({chartData}:CashMovementChartProps) => {
   );
 };
 
-export default BusinessMoneyInMoneyOut;
+export default PartnerMoneyInMoneyOut;

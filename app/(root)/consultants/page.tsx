@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useConsultants } from "../../../lib/react-query/query/useConsultant";
 
 const Consultants = () => {
-  const { data: consultantsData } = useConsultants();
+  const { data: consultantsData , isLoading } = useConsultants();
   const pathname = usePathname();
   const consultantData = consultantsData || [];
 
@@ -18,7 +18,7 @@ const Consultants = () => {
       </div>
 
       <div className="bg-verido-white p-3 md:p-6 rounded-lg flex flex-col gap-6 min-h-[42rem]">
-        <ConsultantTable data={consultantData} columns={columnsConsultant} />
+        <ConsultantTable data={consultantData} columns={columnsConsultant} isLoading={isLoading} />
       </div>
     </div>
   );

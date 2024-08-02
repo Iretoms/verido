@@ -162,9 +162,21 @@ export interface PartnerStatData {
   };
   money_in_v_money_out: MoneyInVsMoneyOut;
 }
+export interface ConsultantStatData {
+  all_users: {
+    consultants: number;
+    businesses: number;
+  };
+  money_in_v_money_out: MoneyInVsMoneyOut;
+}
 export interface PartnerFullResponse {
   code: number;
   response: Partner;
+  data: ConsultantStatData;
+}
+export interface ConsultantFullResponse {
+  code: number;
+  response: Consultant;
   data: PartnerStatData;
 }
 export interface Partner {

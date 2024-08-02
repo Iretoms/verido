@@ -36,14 +36,15 @@ import { Consultant } from "@/types";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isLoading: boolean;
 }
 
 export function ConsultantTable<TData extends Consultant, TValue>({
   columns,
   data,
+  isLoading,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
-
 
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -136,7 +137,13 @@ export function ConsultantTable<TData extends Consultant, TValue>({
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {table.getRowModel().rows?.length ? (
+          {isLoading ? (
+            <TableRow className="text-sm font-bold text-gray-text">
+              <TableCell colSpan={columns.length} className="h-24 text-center font-bold text-lg">
+                Loading Consultants...
+              </TableCell>
+            </TableRow>
+          ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}

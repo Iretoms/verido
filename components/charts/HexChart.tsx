@@ -81,6 +81,10 @@ export function HexChart({chartData}:HexChartProps) {
             <div className="h-2 w-2 rounded-full bg-verido-green"></div>
             <p className="text-[13px]">Money In</p>
           </div>
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-verido-red"></div>
+            <p className="text-[13px]">Money Out</p>
+          </div>
         </div>
       </CardFooter>
     </Card>

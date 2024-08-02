@@ -2,10 +2,8 @@
 import ConsultantsInfo from "../../../../components/consultants/ConsultantsInfo";
 import React from "react";
 import { usePathname } from "next/navigation";
-import CashMovementChart from "../../../../components/charts/SubscriptionCashMovementChart";
-import MoneyInOutStats from "../../../../components/common/MoneyInOutStats";
 import Image from "next/image";
-import ConsultantBusinessStat from "../../../../components/common/ConsultantBusinessStat";
+
 
 const Page = () => {
   const pathname = usePathname();
@@ -22,12 +20,7 @@ const Page = () => {
       <div className=" rounded-lg ">
         <ConsultantsInfo />
       </div>
-      <div className="p-2 md:p-0">
-        <ConsultantBusinessStat />
-        <CashMovementChart />
-        <MoneyInOutStats />
-      </div>
-      <div className="flex flex-wrap gap-4 items-center p-2 md:p-0">
+      {/* <div className="flex flex-wrap gap-4 items-center p-2 md:p-0">
         <div className="bg-white rounded-lg flex flex-1 gap-4 items-center p-5">
           <Image
             src="/assets/icons/barchart1.svg"
@@ -148,7 +141,7 @@ const Page = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

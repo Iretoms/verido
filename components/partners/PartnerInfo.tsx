@@ -14,6 +14,7 @@ import { MultipleLineChart } from "../charts/MultipleLineChart";
 import StatisticsCard from "../common/StatisticsCard";
 import PartnerCashStatistics from "./PartnerCashStatistics";
 import { HexChart } from "../charts/HexChart";
+import PartnerMoneyInMoneyOut from "../charts/PartnerMoneyInMoneyOut";
 
 const PartnerInfo = () => {
   const { id } = useParams() as { id: string };
@@ -63,34 +64,63 @@ const PartnerInfo = () => {
     );
   }, [partnerStats]);
 
-  const moneySalesIn =
-    partnerStats?.money_in_v_money_out?.total_money_in?.[0]?.totalAmount;
-  const partnerLabourStat =
-    partnerStats?.money_in_v_money_out?.expenses?.directLabour[0]?.totalAmount;
-  const partnerMaterialStat =
-    partnerStats?.money_in_v_money_out?.expenses?.directMaterial[0]
-      ?.totalAmount;
+const moneySalesIn = React.useMemo(() => {
+  return (
+    partnerStats?.money_in_v_money_out?.total_money_in?.reduce(
+      (acc, curr) => acc + (curr.totalAmount || 0),
+      0
+    ) || 0
+  );
+}, [partnerStats]);
 
-  const chartDataMoneyInVsMoneyOut =
-    partnerStats?.money_in_v_money_out?.total_money_in.map((moneyIn) => {
-      const month = moneyIn.month;
-      const monthName = monthNames[parseInt(month.split("-")[1]) - 1];
-      const directLabour =
-        partnerStats?.money_in_v_money_out?.expenses.directLabour.find(
-          (item) => item._id === month
-        )?.totalAmount || 0;
-      const directMaterial =
-        partnerStats?.money_in_v_money_out?.expenses.directMaterial.find(
-          (item) => item._id === month
-        )?.totalAmount || 0;
+const partnerLabourStat = React.useMemo(() => {
+  return (
+    partnerStats?.money_in_v_money_out?.expenses?.directLabour?.reduce(
+      (acc, curr) => acc + (curr.totalAmount || 0),
+      0
+    ) || 0
+  );
+}, [partnerStats]);
 
-      return {
-        month: monthName,
-        moneyIn: moneyIn.totalAmount,
-        directLabour: directLabour,
-        directMaterial: directMaterial,
-      };
-    }) || [];
+const partnerMaterialStat = React.useMemo(() => {
+  return (
+    partnerStats?.money_in_v_money_out?.expenses?.directMaterial?.reduce(
+      (acc, curr) => acc + (curr.totalAmount || 0),
+      0
+    ) || 0
+  );
+}, [partnerStats]);
+
+  const chartDataMoneyInVsMoneyOut = React.useMemo(() => {
+    if (!partnerStats?.money_in_v_money_out?.money_in?.sales) return [];
+
+    const data = partnerStats.money_in_v_money_out.money_in.sales.map(
+      (moneyIn) => {
+        const month = moneyIn._id;
+        const monthName = monthNames[parseInt(month?.split("-")[1]) - 1];
+        const directLabour =
+          partnerStats.money_in_v_money_out.expenses.directLabour.find(
+            (item) => item._id === month
+          )?.totalAmount || 0;
+        const directMaterial =
+          partnerStats.money_in_v_money_out.expenses.directMaterial.find(
+            (item) => item._id === month
+          )?.totalAmount || 0;
+
+        return {
+          month: monthName,
+          moneyIn: moneyIn.totalAmount,
+          directLabour: directLabour,
+          directMaterial: directMaterial,
+        };
+      }
+    );
+    return data.sort((a, b) => {
+      const monthIndexA = monthNames.indexOf(a.month);
+      const monthIndexB = monthNames.indexOf(b.month);
+      return monthIndexA - monthIndexB;
+    });
+  }, [partnerStats]);
 
   if (isPending) {
     return <GlobalLoadingIndicator />;
@@ -111,6 +141,7 @@ const PartnerInfo = () => {
           </div>
 
           <BusinessCashMovementChart chartData={chartDataCash} />
+          <PartnerMoneyInMoneyOut chartData={chartDataCash} />
           <MultipleLineChart chartData={chartDataMoneyInVsMoneyOut} />
           <div className="flex mt-3 lg:mt-10 flex-wrap lg:flex-nowrap gap-4 items-center">
             <StatisticsCard

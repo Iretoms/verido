@@ -1,11 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Bar,
   BarChart,
-  ResponsiveContainer,
   XAxis,
-  Tooltip,
   CartesianGrid,
   YAxis,
 } from "recharts";
@@ -18,12 +16,9 @@ import {
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useDashboardStats } from "@/lib/react-query/query/useStats";
 import { DatePicker } from "../common/DatePicker";
 
 interface ChartData {
@@ -47,10 +42,7 @@ interface CashMovementChartProps {
   chartData: ChartData[];
 }
 
-const BusinessMoneyInMoneyOut = ({chartData}:CashMovementChartProps) => {
-
-
-
+const ConsultantMoneyInMoneyOut = ({ chartData }: CashMovementChartProps) => {
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-center">
@@ -109,4 +101,4 @@ const BusinessMoneyInMoneyOut = ({chartData}:CashMovementChartProps) => {
   );
 };
 
-export default BusinessMoneyInMoneyOut;
+export default ConsultantMoneyInMoneyOut;

@@ -21,7 +21,7 @@ import BusinessMoneyInMoneyOut from "../charts/BusinessMoneyInMoneyOut";
 
 const BusinessOwnerInfo = () => {
   const { id } = useParams() as { id: string };
-  const { data, isPending, isRefetching } = useBusinessById(id);
+  const { data, isLoading, isRefetching } = useBusinessById(id);
   const businessData = data as AdminBusinessFullResponse;
   const products = businessData?.data?.company?.products ?? [];
   const customers = businessData?.data?.associates?.customers ?? [];
@@ -129,7 +129,7 @@ const BusinessOwnerInfo = () => {
     );
   }, [businessData]);
 
-  if (isPending) {
+  if (isLoading || isRefetching) {
     return <GlobalLoadingIndicator />;
   }
 
