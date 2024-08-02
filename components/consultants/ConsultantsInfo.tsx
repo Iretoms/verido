@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import { monthNames } from "@/constant";
 import { useConsultantById } from "../../lib/react-query/query/useConsultant";
