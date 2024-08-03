@@ -122,7 +122,8 @@ const partnerMaterialStat = React.useMemo(() => {
     });
   }, [partnerStats]);
 
-  if (isPending) {
+
+  if (isPending || isRefetching) {
     return <GlobalLoadingIndicator />;
   }
 

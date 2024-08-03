@@ -80,7 +80,7 @@ const ConsultantsInfo = () => {
     );
   }, [consultantStats]);
 
-  if (isPending) {
+  if (isPending || isRefetching) {
     return <GlobalLoadingIndicator />;
   }
 
