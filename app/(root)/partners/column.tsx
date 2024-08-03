@@ -22,6 +22,10 @@ export const columnsPartner: ColumnDef<Partner>[] = [
     accessorKey: "name",
     header: "Institution",
   },
+  {
+    accessorKey: "partner_id",
+    header: "Partner ID",
+  },
 
   {
     accessorKey: "dateJoined",

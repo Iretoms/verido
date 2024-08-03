@@ -19,8 +19,8 @@ export const columnsConsultant: ColumnDef<Consultant>[] = [
     header: "Name",
   },
   {
-    accessorKey: "institution",
-    header: "Institution",
+    accessorKey: "consultant_id",
+    header: "Consultant ID",
   },
   {
     accessorKey: "email",
