@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { ConsultantTable } from "../../components/consultants/ConsultantTable";
 import { BusinessOwnerTable } from "../../components/businessOwners/BusinessOwnersTable";
-import { columnsConsultant } from "./consultants/column";
+import { columnsConsultant } from "./superagents/column";
 import { columnsBusiness } from "./business-owners/column";
 import { useBusiness } from "../../lib/react-query/query/useBusiness";
 import { useConsultants } from "../../lib/react-query/query/useConsultant";

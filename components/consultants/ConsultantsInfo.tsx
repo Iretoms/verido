@@ -13,7 +13,7 @@ import StatisticsCard from "../common/StatisticsCard";
 
 const ConsultantsInfo = () => {
   const { id } = useParams() as { id: string };
-  const { data, isPending, isRefetching } = useConsultantById(id);
+  const { data, isLoading, isRefetching } = useConsultantById(id);
   const consultantStats = data?.data;
   const selectedConsultant = data?.response;
   const businessData = selectedConsultant?.business || [];
@@ -80,7 +80,7 @@ const ConsultantsInfo = () => {
     );
   }, [consultantStats]);
 
-  if (isPending || isRefetching) {
+  if (isLoading || isRefetching) {
     return <GlobalLoadingIndicator />;
   }
 

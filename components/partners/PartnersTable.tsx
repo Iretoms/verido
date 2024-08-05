@@ -53,7 +53,7 @@ export function PartnersTable<TData extends Partner, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const handleRowSelection = (id: string) => {
-    router.push(`/partners/${id}`);
+    router.push(`/companies/${id}`);
   };
   const { currentUser } = useAuthenticatedUser();
 
@@ -80,10 +80,10 @@ export function PartnersTable<TData extends Partner, TValue>({
       <div className="flex flex-col md:flex-row  gap-3 md:gap-0 justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">
-            Partners ({" "}
+            Companies ({" "}
             <span className="font-bold text-gray-text">{data?.length}</span>)
           </h2>
-          <p className="text-[14px] text-black">List of Partners available</p>
+          <p className="text-[14px] text-black">List of Companies available</p>
         </div>
         <div className="flex gap-2">
           <Select onValueChange={handleSortChange}>
@@ -157,7 +157,7 @@ export function PartnersTable<TData extends Partner, TValue>({
           {isLoading ? (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="font-bold text-sm h-24 text-center">
-                Loading Partners...
+                Loading Companies...
               </TableCell>
             </TableRow>
           ) : table.getRowModel().rows?.length ? (
@@ -178,7 +178,7 @@ export function PartnersTable<TData extends Partner, TValue>({
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No Partners yet.
+                No Company yet.
               </TableCell>
             </TableRow>
           )}

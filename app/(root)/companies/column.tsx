@@ -12,7 +12,7 @@ const getStatusStyles = (status: boolean | string) => {
 export const columnsPartner: ColumnDef<Partner>[] = [
   {
     accessorKey: "name",
-    header: "Partner Name",
+    header: "Company Name",
   },
   {
     accessorKey: "email",

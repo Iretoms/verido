@@ -51,7 +51,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const handleRowSelection = (id: string) => {
-    router.push(`/consultants/${id}`);
+    router.push(`/superagents/${id}`);
   };
 
   const table = useReactTable({
@@ -77,11 +77,11 @@ export function ConsultantTable<TData extends Consultant, TValue>({
       <div className="flex flex-col md:flex-row  gap-3 md:gap-0 justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">
-            Consultants (
+            Super Agents (
             <span className="font-bold text-gray-text">{data?.length}</span>)
           </h2>
           <p className="text-[14px] text-black">
-            List of consultants available{"   "}
+            List of Super Agents  available{"   "}
           </p>
         </div>
         <div className="flex gap-2">
@@ -161,7 +161,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No Consultants associated to you yet.
+                No Super Agent associated to you yet.
               </TableCell>
             </TableRow>
           )}

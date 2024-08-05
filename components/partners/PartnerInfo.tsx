@@ -5,7 +5,7 @@ import { usePartnerById } from "../../lib/react-query/query/usePartners";
 import { ConsultantTable } from "../consultants/ConsultantTable";
 import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
 import { columnsBusiness } from "../../app/(root)/business-owners/column";
-import { columnsConsultant } from "../../app/(root)/consultants/column";
+import { columnsConsultant } from "../../app/(root)/superagents/column";
 import PartnerInfoCard from "./PartnerInfoCard";
 import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 import BusinessCashMovementChart from "../charts/BusinessCashMovementChart";
@@ -64,32 +64,32 @@ const PartnerInfo = () => {
     );
   }, [partnerStats]);
 
-const moneySalesIn = React.useMemo(() => {
-  return (
-    partnerStats?.money_in_v_money_out?.total_money_in?.reduce(
-      (acc, curr) => acc + (curr.totalAmount || 0),
-      0
-    ) || 0
-  );
-}, [partnerStats]);
+  const moneySalesIn = React.useMemo(() => {
+    return (
+      partnerStats?.money_in_v_money_out?.total_money_in?.reduce(
+        (acc, curr) => acc + (curr.totalAmount || 0),
+        0
+      ) || 0
+    );
+  }, [partnerStats]);
 
-const partnerLabourStat = React.useMemo(() => {
-  return (
-    partnerStats?.money_in_v_money_out?.expenses?.directLabour?.reduce(
-      (acc, curr) => acc + (curr.totalAmount || 0),
-      0
-    ) || 0
-  );
-}, [partnerStats]);
+  const partnerLabourStat = React.useMemo(() => {
+    return (
+      partnerStats?.money_in_v_money_out?.expenses?.directLabour?.reduce(
+        (acc, curr) => acc + (curr.totalAmount || 0),
+        0
+      ) || 0
+    );
+  }, [partnerStats]);
 
-const partnerMaterialStat = React.useMemo(() => {
-  return (
-    partnerStats?.money_in_v_money_out?.expenses?.directMaterial?.reduce(
-      (acc, curr) => acc + (curr.totalAmount || 0),
-      0
-    ) || 0
-  );
-}, [partnerStats]);
+  const partnerMaterialStat = React.useMemo(() => {
+    return (
+      partnerStats?.money_in_v_money_out?.expenses?.directMaterial?.reduce(
+        (acc, curr) => acc + (curr.totalAmount || 0),
+        0
+      ) || 0
+    );
+  }, [partnerStats]);
 
   const chartDataMoneyInVsMoneyOut = React.useMemo(() => {
     if (!partnerStats?.money_in_v_money_out?.money_in?.sales) return [];
@@ -121,7 +121,6 @@ const partnerMaterialStat = React.useMemo(() => {
       return monthIndexA - monthIndexB;
     });
   }, [partnerStats]);
-
 
   if (isPending || isRefetching) {
     return <GlobalLoadingIndicator />;
