@@ -109,7 +109,7 @@ export function VideoTable<TData extends IVideo, TValue>({
         },
       },
     ],
-    [columns]
+    [columns , confirmDelete]
   );
 
   const table = useReactTable({
