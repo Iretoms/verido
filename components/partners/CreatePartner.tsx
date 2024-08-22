@@ -60,14 +60,14 @@ const CreatePartner = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size={"sm"} className="bg-verido-green text-verido-white">
-          Partner
+          Company
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <DialogHeader>
             <DialogTitle className="text-3xl font-light">
-              Create Partner✌🏻️
+              Create Company✌🏻️
             </DialogTitle>
             <DialogDescription className="text-gray-text font-light text-sm">
               Please provide the partner’s info.

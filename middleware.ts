@@ -4,8 +4,8 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const consultantRoutes = [
     "/",
-    "/business-owners",
-    "/business-owners/:id",
+    "/sub-agents",
+    "/sub-agents/:id",
     "/partners",
     "/partners/:id",
     "/chats",
@@ -14,8 +14,8 @@ export function middleware(request: NextRequest) {
     "/",
     "/consultants",
     "/consultants/:id",
-    "/business-owners",
-    "/business-owners/:id",
+    "/sub-agents",
+    "/sub-agents/:id",
     "/chats",
   ];
   const superAdminRoutes = [
@@ -59,9 +59,9 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
-    "/business-owners",
+    "/sub-agents",
     "/consultants",
-    "/business-owners/:path*",
+    "/sub-agents/:path*",
     "/consultants/:path*",
     "/partners",
     "/partners/:path*",

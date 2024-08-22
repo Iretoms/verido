@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ConsultantTable } from "../../components/consultants/ConsultantTable";
 import { BusinessOwnerTable } from "../../components/businessOwners/BusinessOwnersTable";
 import { columnsConsultant } from "./superagents/column";
-import { columnsBusiness } from "./business-owners/column";
+import { columnsBusiness } from "./sub-agents/column";
 import { useBusiness } from "../../lib/react-query/query/useBusiness";
 import { useConsultants } from "../../lib/react-query/query/useConsultant";
 import { columnsVideo } from "../../components/video/column";
@@ -112,7 +112,7 @@ const DashboardContent = () => {
           </div>
 
           <div className="w-full flex flex-col bg-green lg:flex-row justify-between gap-7">
-            <div className="w-full lg:w-3/5 flex flex-col gap-10">
+            <div className="w-full flex flex-col gap-10">
               <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 lg:gap-6">
                 <div
                   className={`bg-white rounded-lg ${
@@ -145,7 +145,7 @@ const DashboardContent = () => {
                     {dashboardStats?.all_users.businesses}
                   </p>
                   <p className="font-light text-[12px] text-gray-text">
-                    All Business
+                    All Sub Agents
                   </p>
                 </div>
                 <div
@@ -164,7 +164,7 @@ const DashboardContent = () => {
                     {dashboardStats?.all_users.consultants}
                   </p>
                   <p className="font-light text-[12px] text-gray-text">
-                    All Consultants
+                    All Super Agents
                   </p>
                 </div>
                 <div
@@ -224,7 +224,7 @@ const DashboardContent = () => {
                   </p>
                   <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
-                    Business
+                    Sub Agents
                   </p>
                 </div>
                 <div
@@ -244,7 +244,7 @@ const DashboardContent = () => {
                   </p>
                   <p className="text-verido-green text-sm font-bold">VERIDO</p>
                   <p className="font-light text-[12px] text-gray-text">
-                    Consultants
+                    Super Agents
                   </p>
                 </div>
                 <div
@@ -301,7 +301,7 @@ const DashboardContent = () => {
                     {dashboardStats?.independent_users?.businesses}
                   </p>
                   <p className="font-light text-[12px] text-gray-text text-center">
-                    Independent Business
+                    Independent Sub Agents
                   </p>
                 </div>
                 <div
@@ -320,7 +320,7 @@ const DashboardContent = () => {
                     {dashboardStats?.independent_users?.consultants}
                   </p>
                   <p className="font-light text-[12px] text-gray-text text-center">
-                    Independent Consultants
+                    Independent Super Agents
                   </p>
                 </div>
                 <div
@@ -373,13 +373,9 @@ const DashboardContent = () => {
                   />
                 </div>
               </div>
-              {(isSuperAdmin || isPartner) && (
-                <div className="flex justify-between flex-col p-5 rounded-md bg-white max-h-[25rem] overflow-y-auto">
-                  <VideoTable columns={columnsVideo} data={videos} />
-                </div>
-              )}
             </div>
-            <div className="flex justify-between flex-1 flex-col gap-8">
+
+            {/* <div className="flex justify-between flex-1 flex-col gap-8">
               <DownLinksGraph />
               <div
                 className={`bg-white p-6 rounded-lg  flex flex-col items-center justify-between ${
@@ -407,25 +403,26 @@ const DashboardContent = () => {
               <div>
                 <DashboardHexChart chartData={chartData} />
               </div>
-            </div>
+            </div> */}
           </div>
+          <DashboardMultipleLineChart />
+          <DashboardMoneyInMoneyOut />
+          {isConsultant ? "" : <SubscriptionCashMovementChart />}
           <BusinessStatistics />
-          <div
+          {/* <div
             className={`bg-white p-1 md:p-10 lg:p-10 rounded-md ${
               !isSuperAdmin && !isPartner ? "hidden" : ""
             }`}
           >
             <ConsultantTable data={consultants} columns={columnsConsultant} />
-          </div>
-          <div className="bg-white p-1 md:p-10 lg:p-10  rounded-md">
+          </div> */}
+          {/* <div className="bg-white p-1 md:p-10 lg:p-10  rounded-md">
             <BusinessOwnerTable
               data={businessOwner}
               columns={columnsBusiness}
             />
-          </div>
-          <DashboardMoneyInMoneyOut />
-          {isConsultant ? "" : <SubscriptionCashMovementChart />}
-          <DashboardMultipleLineChart />
+          </div> */}
+
           <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
             <StatisticsCard
               value={`$ ${totalSubscription}`}
@@ -450,6 +447,13 @@ const DashboardContent = () => {
           </div>
           <div className="bg-white p-10 rounded-md">
             <CountryTable data={countryData} columns={columnsCountry} />
+          </div>
+          <div>
+            {(isSuperAdmin || isPartner) && (
+              <div className="flex justify-between flex-col p-5 rounded-md bg-white max-h-[25rem] overflow-y-auto">
+                <VideoTable columns={columnsVideo} data={videos} />
+              </div>
+            )}
           </div>
         </div>
       )}

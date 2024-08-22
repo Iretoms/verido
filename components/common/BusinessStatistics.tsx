@@ -4,7 +4,7 @@ import Image from "next/image";
 const BusinessStatistics = () => {
   return (
     <div className="flex flex-col md:flex-col lg:flex-row gap-6 justify-between">
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 w-full">
         <div className="bg-white flex items-start gap-10 lg:gap-0  justify-between p-5 rounded-md">
           <div className="flex flex-col gap-1">
             <p className="font-bold text-sm">Top Businesses</p>
@@ -245,7 +245,7 @@ const BusinessStatistics = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 flex-1">
+      {/* <div className="flex flex-col gap-5 flex-1">
         <div className="bg-white rounded-lg flex gap-4 items-start p-5 pt-6 h-[15.6rem]">
           <div className="flex flex-col gap-7">
             <p>Labour</p>
@@ -309,7 +309,7 @@ const BusinessStatistics = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

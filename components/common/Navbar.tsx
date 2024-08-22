@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import {
@@ -10,15 +10,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "../../components/ui/dropdown-menu";
-import { useRouter } from "next/navigation";
 import useAuth from "../../lib/react-query/mutations/useAuth";
+import LogoutModal from "../auth/LogoutModal";
 
 const Navbar = () => {
-  const router = useRouter();
-  const {logout} = useAuth()
+  const { logout } = useAuth();
+
 
   const handleLogout = () => {
-    logout()
+    logout();
   };
 
   return (
@@ -69,7 +69,8 @@ const Navbar = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="font-bold" onClick={handleLogout}>Logout</DropdownMenuItem>
+
+            <LogoutModal logout = {handleLogout} />
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

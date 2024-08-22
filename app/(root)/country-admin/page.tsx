@@ -1,8 +1,8 @@
-"use client";
-import React from "react";
+"use client"
 import { usePathname } from "next/navigation";
+import React from "react";
 
-const AllUsers = () => {
+const SuperAdmins = () => {
   const pathname = usePathname();
   return (
     <div>
@@ -12,11 +12,11 @@ const AllUsers = () => {
           <span className="text-gray-text">{pathname.substring(1)}</span>
         </div>
         <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 min-h-[42rem]">
-          All Users
+          Country Admin
         </div>
       </div>
     </div>
   );
 };
 
-export default AllUsers;
+export default SuperAdmins;

@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import ConsultantInfoCard from "./ConsultantInfoCard";
 
 import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
-import { columnsBusiness } from "../../app/(root)/business-owners/column";
+import { columnsBusiness } from "../../app/(root)/sub-agents/column";
 import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 import ConsultantMoneyInMoneyOut from "../charts/ConsultantMoneyInMoneyOut";
 import StatisticsCard from "../common/StatisticsCard";

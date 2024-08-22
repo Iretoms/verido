@@ -13,6 +13,8 @@ const isLoggedIn = () => {
     Cookies.get("access_token") !== undefined
   );
 };
+const expires = new Date(Date.now() + 1 * 60 * 60 * 1000);
+
 
 const useAuth = () => {
   const queryClient = useQueryClient();
@@ -28,7 +30,7 @@ const useAuth = () => {
        const { token, role } = data;
        localStorage.setItem("access_token", token);
        localStorage.setItem("user_role", role);
-       Cookies.set("access_token", token);
+       Cookies.set("access_token", token , {expires:expires});
        Cookies.set("user_role", role); 
        router.push("/");
        showToast("Success!", "Sign in Successful.", "success");

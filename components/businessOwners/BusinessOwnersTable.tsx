@@ -44,7 +44,7 @@ export function BusinessOwnerTable<
   const router = useRouter();
 
   const handleRowSelection = (id: string) => {
-    router.push(`/business-owners/${id}`);
+    router.push(`/sub-agents/${id}`);
   };
 
   const [rowSelection, setRowSelection] = React.useState({});
@@ -77,11 +77,11 @@ export function BusinessOwnerTable<
       <div className="flex flex-col gap-3 md:gap-0 md:flex-row  justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">
-            Business Owners (
+            Sub Agents (
             <span className="font-bold text-gray-text">{data?.length}</span>)
           </h2>
           <p className="text-[14px] text-black">
-            List of Business owners available
+            List of Sub Agents available
           </p>
         </div>
         <div className="flex gap-2">
@@ -143,7 +143,7 @@ export function BusinessOwnerTable<
                 colSpan={columns.length}
                 className="h-24 text-center font-bold text-sm"
               >
-                Loading Business...
+                Loading Subagents...
               </TableCell>
             </TableRow>
           ) : table.getRowModel().rows?.length ? (
@@ -164,7 +164,7 @@ export function BusinessOwnerTable<
           ) : (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                You don&apos;t have Business associates yet.
+                You don&apos;t have sub agents associates yet.
               </TableCell>
             </TableRow>
           )}

@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { usePartnerById } from "../../lib/react-query/query/usePartners";
 import { ConsultantTable } from "../consultants/ConsultantTable";
 import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
-import { columnsBusiness } from "../../app/(root)/business-owners/column";
+import { columnsBusiness } from "../../app/(root)/sub-agents/column";
 import { columnsConsultant } from "../../app/(root)/superagents/column";
 import PartnerInfoCard from "./PartnerInfoCard";
 import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";

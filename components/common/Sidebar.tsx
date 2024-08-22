@@ -29,6 +29,18 @@ const Sidebar = () => {
       roles: ["super_admin", "partner", "consultant"],
     },
     {
+      path: "/country-admin",
+      label: "Country Admin",
+      icon: "/assets/icons/dashboard.svg",
+      roles: ["super_admin", "partner", "consultant"],
+    },
+    {
+      path: "/partners",
+      label: "Partners",
+      icon: "/assets/icons/dashboard.svg",
+      roles: ["super_admin", "partner", "consultant"],
+    },
+    {
       path: "/companies",
       label: "Companies",
       icon: "/assets/icons/user_partner.svg",
@@ -41,8 +53,8 @@ const Sidebar = () => {
       roles: ["super_admin", "partner"],
     },
     {
-      path: "/business-owners",
-      label: "Business Owners",
+      path: "/sub-agents",
+      label: "Sub Agents",
       icon: "/assets/icons/id_card.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
@@ -52,16 +64,17 @@ const Sidebar = () => {
       icon: "/assets/icons/user-follow.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
-    {
-      path: "/all-users",
-      label: "All Users",
-      icon: "/assets/icons/group-user.svg",
-      roles: ["super_admin", "partner", "consultant"],
-    },
+
     {
       path: "/chats",
       label: "Chats",
       icon: "/assets/icons/chat.svg",
+      roles: ["super_admin", "partner", "consultant"],
+    },
+    {
+      path: "/marketplace",
+      label: "Marketplace",
+      icon: "/assets/icons/group-user.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
   ];
