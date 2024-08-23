@@ -22,11 +22,11 @@ const SuspendPartner = ({ id }: any) => {
   const handleSuspension = async () => {
     try {
       await suspendPartnerMutation.mutateAsync(id);
-      router.push("/partners");
+      router.push("/superagents");
     } catch (error) {}
   };
 
-  return (
+  return ( 
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button

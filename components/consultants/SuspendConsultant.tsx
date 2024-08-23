@@ -24,7 +24,7 @@ const SuspendConsultant = ({ id }: any) => {
     setIsLoading(true);
     try {
       await suspendConsultantMutation.mutateAsync(id);
-      router.push("/consultants");
+      router.push("/sub-agents");
     } catch (error) {
     } finally {
       setIsLoading(false);

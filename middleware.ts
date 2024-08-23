@@ -12,8 +12,8 @@ export function middleware(request: NextRequest) {
   ];
   const partnerRoutes = [
     "/",
-    "/consultants",
-    "/consultants/:id",
+    "/companies",
+    "/companies/:id",
     "/sub-agents",
     "/sub-agents/:id",
     "/chats",
@@ -23,6 +23,8 @@ export function middleware(request: NextRequest) {
     ...partnerRoutes,
     "/allUsers",
     "/experts",
+    "/superagents",
+    "/superagents/:id",
   ];
 
   const accessToken = request.cookies.get("access_token")?.value;
@@ -60,9 +62,13 @@ export const config = {
   matcher: [
     "/",
     "/sub-agents",
-    "/consultants",
+    "/country-admin",
+    "/country-admin/:path*",
+    "/companies",
+    "/superagents",
+    "/superagents/:path*",
     "/sub-agents/:path*",
-    "/consultants/:path*",
+    "/companies/:path*",
     "/partners",
     "/partners/:path*",
     "/experts",
