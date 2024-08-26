@@ -15,6 +15,7 @@ import { DashboardMultipleLineChart } from "@/components/charts/DashboardMultipl
 import StatisticsCard from "@/components/common/StatisticsCard";
 import DashboardMoneyInMoneyOut from "@/components/charts/DashboardMoneyInMoneyOut";
 import { Skeleton } from "@chakra-ui/react";
+import { Input } from "@/components/ui/input";
 
 const DashboardContent = () => {
   const { currentUser, isLoading } = useAuthenticatedUser();
@@ -88,6 +89,21 @@ const DashboardContent = () => {
             <p className="text-gray-text text-[12px] font-light">
               Find your company’s key metrics and activities here
             </p>
+            <div>
+              <div className="flex items-center p-2 justify-between border border-text-gray rounded-lg h-[2.5rem]">
+                <Image
+                  className="object-contain"
+                  src="/assets/icons/person.svg"
+                  alt="search icon"
+                  width={15}
+                  height={15}
+                />
+                <Input
+                  placeholder="Search"
+                  className="max-w-sm h-full outline-none"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="w-full flex flex-col bg-green lg:flex-row justify-between gap-7">

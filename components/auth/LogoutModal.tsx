@@ -4,7 +4,6 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -12,6 +11,7 @@ import {
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 interface AlertDialog {
   logout: () => void;
@@ -23,7 +23,7 @@ const LogoutModal = ({ logout }: AlertDialog) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <p className="font-bold cursor-pointer">Logout</p>
+        <p className="cursor-pointer">Logout</p>
       </AlertDialogTrigger>
       <AlertDialogContent className="w-[40rem] flex justify-center gap-20 items-center flex-col h-[20rem]">
         <AlertDialogHeader>
@@ -41,13 +41,13 @@ const LogoutModal = ({ logout }: AlertDialog) => {
           <AlertDialogCancel className="border border-verido-green text-verido-green w-[10rem]">
             No
           </AlertDialogCancel>
-          <AlertDialogAction
+          <Button
             className="text-white bg-verido-red w-[10rem]"
             disabled={isLoading}
             onClick={logout}
           >
-            {isLoading ? "Suspending..." : "Yes"}
-          </AlertDialogAction>
+            {isLoading ? <LoadingSpinner/> : "Yes"}
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

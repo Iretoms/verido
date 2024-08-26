@@ -14,15 +14,17 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import usePartner from "@/lib/react-query/mutations/usePartner";
 import { useRouter } from "next/navigation";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const ActivatePartner = ({ id }: any) => {
   const { activatePartnerMutation } = usePartner();
   const router = useRouter();
+  const isLoading = activatePartnerMutation.isPending
 
   const handleActivate = async () => {
     try {
       await activatePartnerMutation.mutateAsync(id);
-      router.push("/partners");
+      router.push("/companies");
     } catch (error) {}
   };
 
@@ -55,12 +57,13 @@ const ActivatePartner = ({ id }: any) => {
           <AlertDialogCancel className="border border-verido-green text-verido-green">
             No
           </AlertDialogCancel>
-          <AlertDialogAction
+          <Button
+          disabled={isLoading}
             onClick={handleActivate}
             className="text-white bg-verido-green"
           >
-            Yes
-          </AlertDialogAction>
+            {isLoading ? <LoadingSpinner/> : "Yes"}
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -16,6 +16,7 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { ICreateVideo } from "../../types/index";
 import useVideos from "../../lib/react-query/mutations/useVideo";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const CreateVideo = () => {
   const [open, setOpen] = React.useState(false);
@@ -122,7 +123,7 @@ const CreateVideo = () => {
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Creating..." : "Create"}
+              {isSubmitting ? <LoadingSpinner/> : "Create"}
             </Button>
           </DialogFooter>
         </form>

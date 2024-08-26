@@ -5,10 +5,17 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useAuthenticatedUser } from "../../context/AuthContext";
 import SidebarSkeleton from "./SidebarSkeleton";
+import LogoutModal from "../auth/LogoutModal";
+import useAuth from "@/lib/react-query/mutations/useAuth";
 
 const Sidebar: React.FC = () => {
   const { currentUser, isLoading } = useAuthenticatedUser();
   const pathName = usePathname();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -84,7 +91,6 @@ const Sidebar: React.FC = () => {
     );
   }, [currentUser]);
 
-
   return (
     <div className="bg-white w-64 hidden h-full md:hidden lg:flex flex-col justify-between">
       <div className="flex flex-col ">
@@ -148,7 +154,7 @@ const Sidebar: React.FC = () => {
             height={20}
             alt="Logout"
           />
-          Logout
+          <LogoutModal logout={handleLogout} />
         </div>
       </div>
     </div>

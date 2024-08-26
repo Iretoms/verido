@@ -14,19 +14,21 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import usePartner from "@/lib/react-query/mutations/usePartner";
 import { useRouter } from "next/navigation";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const SuspendPartner = ({ id }: any) => {
   const { suspendPartnerMutation } = usePartner();
   const router = useRouter();
+  const isLoading = suspendPartnerMutation.isPending;
 
   const handleSuspension = async () => {
     try {
       await suspendPartnerMutation.mutateAsync(id);
-      router.push("/superagents");
+      router.push("/companies");
     } catch (error) {}
   };
 
-  return ( 
+  return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
@@ -56,12 +58,13 @@ const SuspendPartner = ({ id }: any) => {
           <AlertDialogCancel className="border border-verido-green text-verido-green">
             No
           </AlertDialogCancel>
-          <AlertDialogAction
+          <Button
+            disabled={isLoading}
             onClick={handleSuspension}
             className="text-white bg-verido-orange"
           >
-            Yes
-          </AlertDialogAction>
+            {isLoading ? <LoadingSpinner /> : "Yes"}
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

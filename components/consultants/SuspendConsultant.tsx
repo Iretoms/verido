@@ -14,21 +14,18 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import useConsultant from "@/lib/react-query/mutations/useConsultant";
 import { useRouter } from "next/navigation";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const SuspendConsultant = ({ id }: any) => {
   const { suspendConsultantMutation } = useConsultant();
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = suspendConsultantMutation.isPending;
   const router = useRouter();
 
   const handleSuspension = async () => {
-    setIsLoading(true);
     try {
       await suspendConsultantMutation.mutateAsync(id);
-      router.push("/sub-agents");
-    } catch (error) {
-    } finally {
-      setIsLoading(false);
-    }
+      router.push("/superagents");
+    } catch (error) {}
   };
 
   return (
@@ -61,13 +58,13 @@ const SuspendConsultant = ({ id }: any) => {
           <AlertDialogCancel className="border border-verido-green text-verido-green">
             No
           </AlertDialogCancel>
-          <AlertDialogAction
+          <Button
             onClick={handleSuspension}
             className="text-white bg-verido-orange"
             disabled={isLoading}
           >
-            {isLoading ? "Suspending..." : "Yes"}
-          </AlertDialogAction>
+            {isLoading ? <LoadingSpinner /> : "Yes"}
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

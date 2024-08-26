@@ -14,21 +14,18 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import useConsultant from "@/lib/react-query/mutations/useConsultant";
 import { useRouter } from "next/navigation";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const ActivateConsultant = ({ id }: any) => {
   const { activateConsultantMutation } = useConsultant();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = activateConsultantMutation.isPending;
 
   const handleActivate = async () => {
-    setIsLoading(true);
     try {
       await activateConsultantMutation.mutateAsync(id);
-      router.push("/consultants");
-    } catch (error) {
-    } finally {
-      setIsLoading(false);
-    }
+      router.push("/subperagents");
+    } catch (error) {}
   };
 
   return (
@@ -61,13 +58,13 @@ const ActivateConsultant = ({ id }: any) => {
           <AlertDialogCancel className="border border-verido-green text-verido-green">
             No
           </AlertDialogCancel>
-          <AlertDialogAction
+          <Button
             onClick={handleActivate}
             className="text-white bg-verido-green"
             disabled={isLoading}
           >
-            {isLoading ? "Activating..." : "Yes"}
-          </AlertDialogAction>
+            {isLoading ? <LoadingSpinner /> : "Yes"}
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

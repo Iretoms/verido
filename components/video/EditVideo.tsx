@@ -14,6 +14,7 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { IUpdateVideo, IVideo } from "../../types/index";
 import useVideos from "@/lib/react-query/mutations/useVideo";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 interface EditVideoDialogProps {
   isOpen: boolean;
@@ -131,7 +132,7 @@ const EditVideo: React.FC<EditVideoDialogProps> = ({
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Updating..." : "Update"}
+              {isSubmitting ? <LoadingSpinner /> : "Update"}
             </Button>
           </DialogFooter>
         </form>

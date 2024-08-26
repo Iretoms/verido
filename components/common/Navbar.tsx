@@ -12,10 +12,11 @@ import {
 } from "../../components/ui/dropdown-menu";
 import useAuth from "../../lib/react-query/mutations/useAuth";
 import LogoutModal from "../auth/LogoutModal";
+import { useAuthenticatedUser } from "@/context/AuthContext";
 
 const Navbar = () => {
   const { logout } = useAuth();
-
+  const { currentUser } = useAuthenticatedUser();
 
   const handleLogout = () => {
     logout();
@@ -30,12 +31,6 @@ const Navbar = () => {
           src="/assets/icons/add-box.svg"
           alt="documents"
         />
-        <p className="font-semibold text-[14px] text-black-light">
-          Do you know the latest update of 2021? 🎉{" "}
-          <span className="text-verido-green font-normal">
-            Our roadmap is alive for future updates.
-          </span>
-        </p>
         <Image
           width={20}
           height={20}
@@ -45,7 +40,6 @@ const Navbar = () => {
         />
       </div>
       <div className="flex items-center gap-7">
-        <Image src="/assets/icons/search.svg" width={20} height={20} alt="" />
         <div className="relative">
           <Image
             src="/assets/icons/notification.svg"
@@ -55,24 +49,22 @@ const Navbar = () => {
           />
           <div className="absolute top-0 right-0 bg-verido-blue rounded-full w-2 h-2"></div>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Image
-              src="/assets/icons/winkface.svg"
-              width={30}
-              height={30}
-              alt="user avatar"
-            />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuSeparator />
-
-            <LogoutModal logout = {handleLogout} />
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex justify-center items-center gap-2">
+          <Image
+            src="/assets/icons/Avatar.svg"
+            width={30}
+            height={30}
+            alt="user avatar"
+          />
+          <p>{currentUser?.name}</p>
+          <Image
+          className="cursor-pointer"
+            src="/assets/icons/dropdown.svg"
+            width={20}
+            height={20}
+            alt="user avatar"
+          />
+        </div>
       </div>
     </header>
   );
