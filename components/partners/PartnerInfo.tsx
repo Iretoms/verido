@@ -7,7 +7,6 @@ import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
 import { columnsBusiness } from "../../app/(root)/sub-agents/column";
 import { columnsConsultant } from "../../app/(root)/superagents/column";
 import PartnerInfoCard from "./PartnerInfoCard";
-import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 import BusinessCashMovementChart from "../charts/BusinessCashMovementChart";
 import { monthNames } from "@/constant";
 import { MultipleLineChart } from "../charts/MultipleLineChart";
@@ -15,11 +14,13 @@ import StatisticsCard from "../common/StatisticsCard";
 import PartnerCashStatistics from "./PartnerCashStatistics";
 import { HexChart } from "../charts/HexChart";
 import PartnerMoneyInMoneyOut from "../charts/PartnerMoneyInMoneyOut";
+import PartnerInfoCardSkeleton from "./PartnerInfoCardSkeleton";
 
 const PartnerInfo = () => {
   const { id } = useParams() as { id: string };
+  
 
-  const { data, isPending, isRefetching } = usePartnerById(id);
+  const { data , isFetching  } = usePartnerById(id);
   const partnerDetails = data?.response;
   const partnerStats = data?.data;
   const consultantsData = partnerDetails?.consultants || [];
@@ -122,8 +123,12 @@ const PartnerInfo = () => {
     });
   }, [partnerStats]);
 
-  if (isPending || isRefetching) {
-    return <GlobalLoadingIndicator />;
+  if (isFetching) {
+    return (
+    
+        <PartnerInfoCardSkeleton />
+    
+    );
   }
 
   return (

@@ -55,7 +55,7 @@ const useAuth = () => {
     onSuccess: (data) => {
       const { token } = data;
       localStorage.setItem("access_token", token);
-      Cookies.set("access_token", token, { expires: 1 });
+      Cookies.set("access_token", token, { expires:expires });
       showToast("Success!", "Password recovery is Successful.", "success");
 
       router.push("/signin");
@@ -66,7 +66,6 @@ const useAuth = () => {
         errDetail = error?.response?.data?.message;
         if (Array.isArray(errDetail)) {
           errDetail = errDetail[0];
-          console.log(errDetail)
         }
       }
       showToast("Something went wrong", errDetail, "error");

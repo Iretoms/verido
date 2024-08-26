@@ -11,17 +11,16 @@ import { columns } from "../products/column";
 import { columnsCustomer } from "../customers/column";
 import { columnsSupplier } from "../suppliers/column";
 import ChangeConsultant from "../consultants/ChangeConsultant";
-import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 import { AdminBusinessFullResponse } from "@/types";
 import BusinessCashMovementChart from "../charts/BusinessCashMovementChart";
 import { MultipleLineChart } from "../charts/MultipleLineChart";
 import StatisticsCard from "../common/StatisticsCard";
-import DashboardMoneyInMoneyOut from "../charts/DashboardMoneyInMoneyOut";
 import BusinessMoneyInMoneyOut from "../charts/BusinessMoneyInMoneyOut";
+import PartnerInfoCardSkeleton from "../partners/PartnerInfoCardSkeleton";
 
 const BusinessOwnerInfo = () => {
   const { id } = useParams() as { id: string };
-  const { data, isLoading, isRefetching } = useBusinessById(id);
+  const { data, isFetching } = useBusinessById(id);
   const businessData = data as AdminBusinessFullResponse;
   const products = businessData?.data?.company?.products ?? [];
   const customers = businessData?.data?.associates?.customers ?? [];
@@ -129,8 +128,8 @@ const BusinessOwnerInfo = () => {
     );
   }, [businessData]);
 
-  if (isLoading || isRefetching) {
-    return <GlobalLoadingIndicator />;
+  if (isFetching) {
+    return <PartnerInfoCardSkeleton />;
   }
 
   return (

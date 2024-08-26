@@ -34,13 +34,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  isLoading: boolean;
+  isFetching: boolean;
 }
 
 export function BusinessOwnerTable<
   TData extends AdminBusinessResponse,
   TValue
->({ columns, data, isLoading }: DataTableProps<TData, TValue>) {
+>({ columns, data, isFetching }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
   const handleRowSelection = (id: string) => {
@@ -137,7 +137,7 @@ export function BusinessOwnerTable<
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {isLoading ? (
+          {isFetching ? (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell
                 colSpan={columns.length}

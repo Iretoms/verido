@@ -9,7 +9,7 @@ import { useConsultants } from "../../../lib/react-query/query/useConsultant";
 
 
 const ConsultantsPage = () => {
-  const { data: consultantsData, isLoading } = useConsultants();
+  const { data: consultantsData, isFetching } = useConsultants();
   const pathname = usePathname();
   const consultantData = consultantsData || [];
 
@@ -25,7 +25,7 @@ const ConsultantsPage = () => {
           <ConsultantTable
             data={consultantData}
             columns={columnsConsultant}
-            isLoading={isLoading}
+            isFetching={isFetching}
           />
         </div>
       </div>

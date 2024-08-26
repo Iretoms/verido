@@ -2,17 +2,6 @@ import React from "react";
 import { Partner } from "../../types/index";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../../components/ui/alert-dialog";
 import SuspendPartner from "./SuspendPartner";
 import ActivatePartner from "./ActivatePartner";
 

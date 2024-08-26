@@ -36,13 +36,13 @@ import { Consultant } from "@/types";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  isLoading: boolean;
+  isFetching: boolean;
 }
 
 export function ConsultantTable<TData extends Consultant, TValue>({
   columns,
   data,
-  isLoading,
+  isFetching,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
 
@@ -137,7 +137,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
           ))}
         </TableHeader>
         <TableBody className="border-none">
-          {isLoading ? (
+          {isFetching ? (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center font-bold text-sm">
                 Loading Consultants...

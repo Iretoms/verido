@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { usePartners } from "../../../lib/react-query/query/usePartners";
 
 const PartnersPage = () => {
-  const { data: partnerData, isLoading } = usePartners();
+  const { data: partnerData, isFetching } = usePartners();
   const partners = partnerData || [];
 
   const pathname = usePathname();
@@ -23,7 +23,7 @@ const PartnersPage = () => {
         <PartnersTable
           data={partners}
           columns={columnsPartner}
-          isLoading={isLoading}
+          isFetching={isFetching}
         />
       </div>
     </div>

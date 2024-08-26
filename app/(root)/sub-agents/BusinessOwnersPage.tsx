@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { BusinessOwnerTable } from "../../../components/businessOwners/BusinessOwnersTable";
 
 const BusinessOwnersPage = () => {
-  const { data: businessData, isLoading } = useBusiness();
+  const { data: businessData, isFetching } = useBusiness();
 
   const adminBusiness = businessData || [];
 
@@ -23,7 +23,7 @@ const BusinessOwnersPage = () => {
         <BusinessOwnerTable
           data={adminBusiness}
           columns={columnsBusiness}
-          isLoading={isLoading}
+          isFetching={isFetching}
         />
       </div>
     </div>

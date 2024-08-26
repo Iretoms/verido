@@ -1,66 +1,29 @@
-//@ts-nocheck
 "use client";
 import React from "react";
 import Image from "next/image";
-import { ConsultantTable } from "../../components/consultants/ConsultantTable";
-import { BusinessOwnerTable } from "../../components/businessOwners/BusinessOwnersTable";
-import { columnsConsultant } from "./superagents/column";
-import { columnsBusiness } from "./sub-agents/column";
-import { useBusiness } from "../../lib/react-query/query/useBusiness";
-import { useConsultants } from "../../lib/react-query/query/useConsultant";
 import { columnsVideo } from "../../components/video/column";
 import { columnsCountry } from "../../components/countries/column";
-import { DownLinksGraph } from "@/components/common/DownLinksGraph";
 import BusinessStatistics from "../../components/common/BusinessStatistics";
 import SubscriptionCashMovementChart from "../../components/charts/SubscriptionCashMovementChart";
 import { VideoTable } from "../../components/video/VideoTable";
 import { useVideos } from "../../lib/react-query/query/useVideo";
-import CreateConsultant from "../../components/consultants/CreateConsultant";
-import CreatePartner from "../../components/partners/CreatePartner";
 import { CountryTable } from "../../components/countries/CountryTable";
 import { countryData } from "../../constant/index";
-import GlobalLoadingIndicator from "../GlobalLoadingIndicator";
 import { useAuthenticatedUser } from "../../context/AuthContext";
 import { useDashboardStats } from "@/lib/react-query/query/useStats";
-import { DashboardHexChart } from "@/components/charts/DashboardHexChart";
 import { DashboardMultipleLineChart } from "@/components/charts/DashboardMultipleLineChart";
 import StatisticsCard from "@/components/common/StatisticsCard";
-import { monthNames } from "../../constant/index";
 import DashboardMoneyInMoneyOut from "@/components/charts/DashboardMoneyInMoneyOut";
+import { Skeleton } from "@chakra-ui/react";
 
 const DashboardContent = () => {
-  const { data: businessOwnersData } = useBusiness();
-  const { data: consultantsData } = useConsultants();
   const { currentUser, isLoading } = useAuthenticatedUser();
   const { data: videData } = useVideos();
-  const businessOwner = businessOwnersData || [];
-  const consultants = consultantsData || [];
   const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
   const isConsultant = currentUser?.role === "consultant";
   const { data: dashboardStats, isPending } = useDashboardStats();
-  const chartData = React.useMemo(() => {
-    if (!dashboardStats) return [];
-
-    const moneyInData = dashboardStats.money_in_v_money_out.total_money_in;
-    const moneyOutData = dashboardStats.money_in_v_money_out.total_money_out;
-
-    const combinedData = moneyInData.map((inItem) => {
-      const correspondingOutItem = moneyOutData.find(
-        (outItem) => outItem.month === inItem.month
-      ) || { totalAmount: 0 };
-      return {
-        month: monthNames[parseInt(inItem.month.split("-")[1]) - 1],
-        desktop: inItem.totalAmount,
-        mobile: correspondingOutItem.totalAmount,
-      };
-    });
-
-    return combinedData.sort(
-      (a, b) => monthNames.indexOf(a.month) - monthNames.indexOf(b.month)
-    );
-  }, [dashboardStats]);
   const totalSubscription = React.useMemo(() => {
     const total =
       dashboardStats?.money_in_v_money_out.subscription?.reduce(
@@ -97,7 +60,23 @@ const DashboardContent = () => {
   }, [dashboardStats]);
 
   if (isLoading || isPending) {
-    return <GlobalLoadingIndicator />;
+    return (
+      <div className="w-full flex flex-col flex-1 p-3 lg:p-6 space-y-6">
+        <div className="flex flex-col gap-5">
+          <Skeleton height={"32px"} width={"500px"} className="rounded-lg" />
+          <Skeleton height={"18px"} width={"60px"} className="rounded-lg" />
+        </div>
+
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 lg:gap-6">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <Skeleton
+              className="rounded-lg w-[254px] h-[261.5px]"
+              key={index}
+            />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -105,9 +84,9 @@ const DashboardContent = () => {
       {currentUser && (
         <div className="w-full flex flex-col flex-1 p-3 lg:p-6 space-y-6">
           <div>
-            <h1 className="text-2xl">Welcome back, {currentUser?.name} 👋</h1>
+            <h1 className="text-2xl font-bold">Dashboard</h1>
             <p className="text-gray-text text-[12px] font-light">
-              Your current status and analytics are here
+              Find your company’s key metrics and activities here
             </p>
           </div>
 
@@ -374,54 +353,11 @@ const DashboardContent = () => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="flex justify-between flex-1 flex-col gap-8">
-              <DownLinksGraph />
-              <div
-                className={`bg-white p-6 rounded-lg  flex flex-col items-center justify-between ${
-                  !isSuperAdmin && !isPartner ? "hidden" : ""
-                }`}
-              >
-                <div className=" flex flex-col items-center justify-center">
-                  <Image
-                    src="/assets/icons/growth.svg"
-                    width={300}
-                    height={300}
-                    alt="Illustration"
-                  />
-                  <h2 className="text-[15px] text-center">
-                    {isSuperAdmin
-                      ? "Create New Partner/Consultant Account"
-                      : "Create Consultant"}
-                  </h2>
-                  <div className="flex items-center gap-6 justify-between mt-10">
-                    {isSuperAdmin && <CreatePartner />}
-                    <CreateConsultant />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <DashboardHexChart chartData={chartData} />
-              </div>
-            </div> */}
           </div>
           <DashboardMultipleLineChart />
           <DashboardMoneyInMoneyOut />
           {isConsultant ? "" : <SubscriptionCashMovementChart />}
           <BusinessStatistics />
-          {/* <div
-            className={`bg-white p-1 md:p-10 lg:p-10 rounded-md ${
-              !isSuperAdmin && !isPartner ? "hidden" : ""
-            }`}
-          >
-            <ConsultantTable data={consultants} columns={columnsConsultant} />
-          </div> */}
-          {/* <div className="bg-white p-1 md:p-10 lg:p-10  rounded-md">
-            <BusinessOwnerTable
-              data={businessOwner}
-              columns={columnsBusiness}
-            />
-          </div> */}
 
           <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
             <StatisticsCard

@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { IUsers } from "../../types/index";
 import useAuth from "../../lib/react-query/mutations/useAuth";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const Login = () => {
   const { loginMutation } = useAuth();
@@ -33,35 +34,37 @@ const Login = () => {
     <div className="flex items-center justify-center h-screen w-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[90%] md:w-[60%] flex flex-col gap-2"
+        className="w-[90%] md:w-[80%] flex flex-col gap-2"
       >
-        <div className="flex flex-col gap-1">
-          <h2 className="text-[3rem]">Login🖐🏻</h2>
-          <p className="text-gray-text font-extralight text-[14px]">
-            Welcome back, please login to your account.
+        <div className="flex flex-col gap-5">
+          <h2 className="text-[32px] font-bold">Welcome Back!</h2>
+          <p className="text-gray-text  text-[14px]">
+            Log in to monitor and manage your organization effectively.
           </p>
         </div>
 
-        <div className="">
+        <div className="mb-[20px]">
           <label className=" text-sm font-medium text-black-light">
-            Email:
+            Email address
           </label>
           <input
+            placeholder="Enter email address"
             {...register("email", { required: true })}
             className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
               errors.email ? "border-danger" : "border-light-gray"
             } rounded-md focus:outline-none focus:border-light-gray`}
           />
           {errors.email && (
-            <p className="text-danger text-xs mt-1">This area is required</p>
+            <p className="text-danger text-xs mt-1">Your Email is required</p>
           )}
         </div>
 
         <div className="relative">
           <label className=" text-sm font-medium text-black-light">
-            Password:
+            Password
           </label>
           <input
+            placeholder="Enter password"
             type={showPassword ? "text" : "password"}
             {...register("password", { required: true, minLength: 6 })}
             className={`mt-1 text-sm text-gray-text  w-full px-3 py-2 border ${
@@ -76,7 +79,7 @@ const Login = () => {
               src={
                 showPassword
                   ? "/assets/icons/eye-off.svg"
-                  : "/assets/icons/eye-off.svg"
+                  : "/assets/icons/eye-on.svg"
               }
               alt="toggle password visibility"
               width={15}
@@ -89,16 +92,8 @@ const Login = () => {
             </p>
           )}
         </div>
-        <div className="flex items-center justify-between mt-4">
-          {/* <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              {...register("rememberMe")}
-              className="form-checkbox text-verido-green border-light-gray rounded"
-            />
-            <span className="ml-2 text-black-light text-sm">Remember me</span>
-          </label> */}
-          <Link href="/recover-password" className="text-sm  text-gray-text">
+        <div className="flex  items-center justify-between mt-4">
+          <Link href="/recover-password" className="text-sm  text-verido-green">
             Forgot Password?
           </Link>
         </div>
@@ -108,19 +103,8 @@ const Login = () => {
           className={`text-white bg-verido-green mt-10    py-4 rounded-md w-full hover:bg-green-600`}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Signing in..." : "Sign in"}
+          {isSubmitting ? <LoadingSpinner /> : "Log in"}
         </Button>
-        <div>
-          <p className="font-bold text-gray-text text-sm">
-            Do you have an account?{" "}
-            <Link
-              className="text-verido-green text-sm font-bold"
-              href="/signup"
-            >
-              Create an account
-            </Link>
-          </p>
-        </div>
       </form>
     </div>
   );

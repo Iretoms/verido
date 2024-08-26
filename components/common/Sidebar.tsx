@@ -1,13 +1,13 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useQueryClient } from "@tanstack/react-query";
 import { useAuthenticatedUser } from "../../context/AuthContext";
+import SidebarSkeleton from "./SidebarSkeleton";
 
-const Sidebar = () => {
-  const { currentUser } = useAuthenticatedUser();
+const Sidebar: React.FC = () => {
+  const { currentUser, isLoading } = useAuthenticatedUser();
   const pathName = usePathname();
 
   const isActive = (href: string) => {
@@ -31,40 +31,39 @@ const Sidebar = () => {
     {
       path: "/country-admin",
       label: "Country Admin",
-      icon: "/assets/icons/dashboard.svg",
+      icon: "/assets/icons/user-star.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
     {
       path: "/partners",
       label: "Partners",
-      icon: "/assets/icons/dashboard.svg",
+      icon: "/assets/icons/user-multiple.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
     {
       path: "/companies",
       label: "Companies",
-      icon: "/assets/icons/user_partner.svg",
+      icon: "/assets/icons/city.svg",
       roles: ["super_admin"],
     },
     {
       path: "/superagents",
       label: "Super Agents",
-      icon: "/assets/icons/userSet.svg",
+      icon: "/assets/icons/person.svg",
       roles: ["super_admin", "partner"],
     },
     {
       path: "/sub-agents",
       label: "Sub Agents",
-      icon: "/assets/icons/id_card.svg",
+      icon: "/assets/icons/user-square.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
     {
       path: "/experts",
       label: "Expert",
-      icon: "/assets/icons/user-follow.svg",
+      icon: "/assets/icons/user-check.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
-
     {
       path: "/chats",
       label: "Chats",
@@ -74,21 +73,20 @@ const Sidebar = () => {
     {
       path: "/marketplace",
       label: "Marketplace",
-      icon: "/assets/icons/group-user.svg",
+      icon: "/assets/icons/marketplace.svg",
       roles: ["super_admin", "partner", "consultant"],
     },
   ];
 
-  const visibleItems = allItems.filter((item) => {
-    if (currentUser?.role === "super_admin") return true;
-    if (currentUser?.role === "partner") return item.roles.includes("partner");
-    if (currentUser?.role === "consultant")
-      return item.roles.includes("consultant");
-    return item.path !== "/consultants" && item.path !== "/experts";
-  });
+  const getVisibleItems = useMemo(() => {
+    return allItems.filter((item) =>
+      item.roles.includes(currentUser?.role ?? "")
+    );
+  }, [currentUser]);
+
 
   return (
-    <div className="bg-white w-64 hidden  h-full md:hidden lg:flex flex-col justify-between">
+    <div className="bg-white w-64 hidden h-full md:hidden lg:flex flex-col justify-between">
       <div className="flex flex-col ">
         <div className="p-6">
           <Image
@@ -99,50 +97,59 @@ const Sidebar = () => {
           />
         </div>
         <p className="p-6 text-gray-text text-[12px] font-[500]">MAIN</p>
-        <nav className="flex flex-col gap-1 -mt-3 px-2">
-          {visibleItems.map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className={`flex items-center relative px-6 py-3 ${isActive(
-                item.path
-              )}`}
-            >
-              <Image src={item.icon} width={25} height={25} alt={item.label} />
-              <span
-                className={`mx-3 font-light font-sm text-sm ${isActive(
-                  item.path
-                )}`}
-              >
-                {item.label}
-              </span>
-              {isActive(item.path).includes("bg-active-green") && (
-                <div className="absolute w-[2px] h-[70%] bg-verido-green right-0 mr-1"></div>
-              )}
-            </Link>
-          ))}
-        </nav>
+        {isLoading ? (
+          <SidebarSkeleton />
+        ) : (
+          <nav className="flex flex-col gap-1 -mt-3 px-2">
+            {getVisibleItems.map((item: any) => (
+              <Link key={item.path} href={item.path}>
+                <Link
+                  href={item.path}
+                  className={`flex items-center relative px-6 py-3 ${isActive(
+                    item.path
+                  )}`}
+                >
+                  <Image
+                    src={item.icon}
+                    width={25}
+                    height={25}
+                    alt={item.label}
+                  />
+                  <span
+                    className={`mx-3 font-light font-sm text-sm ${isActive(
+                      item.path
+                    )}`}
+                  >
+                    {item.label}
+                  </span>
+                  {isActive(item.path).includes("bg-active-green") && (
+                    <div className="absolute w-[2px] h-[70%] bg-verido-green right-0 mr-1"></div>
+                  )}
+                </Link>
+              </Link>
+            ))}
+          </nav>
+        )}
       </div>
-      <div className="p-4 flex items-center">
-        <Image
-          src="/assets/icons/winkface.svg"
-          width={40}
-          height={40}
-          alt="User avatar"
-          className="rounded-full"
-        />
-        <div className="ml-3">
-          <p className="text-sm font-medium">{currentUser?.name}</p>
-          <p className="text-xs text-gray-500">View Profile</p>
-        </div>
-        <button className="ml-auto">
+      <div className="flex flex-col p-5 gap-8">
+        <div className="flex gap-3 font-light font-sm text-sm cursor-pointer">
           <Image
             src="/assets/icons/settings.svg"
             width={20}
             height={20}
             alt="Settings"
           />
-        </button>
+          Settings
+        </div>
+        <div className="flex gap-3 font-light font-sm text-sm cursor-pointer">
+          <Image
+            src="/assets/icons/logout.svg"
+            width={20}
+            height={20}
+            alt="Logout"
+          />
+          Logout
+        </div>
       </div>
     </div>
   );

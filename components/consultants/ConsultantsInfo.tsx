@@ -4,16 +4,15 @@ import { monthNames } from "@/constant";
 import { useConsultantById } from "../../lib/react-query/query/useConsultant";
 import { useParams } from "next/navigation";
 import ConsultantInfoCard from "./ConsultantInfoCard";
-
 import { BusinessOwnerTable } from "../businessOwners/BusinessOwnersTable";
 import { columnsBusiness } from "../../app/(root)/sub-agents/column";
-import GlobalLoadingIndicator from "@/app/GlobalLoadingIndicator";
 import ConsultantMoneyInMoneyOut from "../charts/ConsultantMoneyInMoneyOut";
 import StatisticsCard from "../common/StatisticsCard";
+import PartnerInfoCardSkeleton from "../partners/PartnerInfoCardSkeleton";
 
 const ConsultantsInfo = () => {
   const { id } = useParams() as { id: string };
-  const { data, isLoading, isRefetching } = useConsultantById(id);
+  const { data, isFetching } = useConsultantById(id);
   const consultantStats = data?.data;
   const selectedConsultant = data?.response;
   const businessData = selectedConsultant?.business || [];
@@ -80,8 +79,8 @@ const ConsultantsInfo = () => {
     );
   }, [consultantStats]);
 
-  if (isLoading || isRefetching) {
-    return <GlobalLoadingIndicator />;
+  if (isFetching) {
+    return <PartnerInfoCardSkeleton />;
   }
 
   return (
