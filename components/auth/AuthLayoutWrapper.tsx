@@ -51,6 +51,7 @@ export const AuthLayoutWrapper = ({ children }: Props) => {
           </div>
         </div>
         <div className="flex-1 flex-col flex items-center  justify-center">
+          
           {children}
         </div>
       </body>

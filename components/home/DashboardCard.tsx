@@ -22,7 +22,7 @@ const DashboardCard = ({
 }: IDashboardCard) => {
   return (
     <div
-      className={`rounded-lg flex justify-between items-center p-3  ${bgColor}`}
+      className={`rounded-lg flex justify-between items-center p-3 ${bgColor}`}
     >
       <div>
         <p className="font-medium text-gray-700 text-[14px] mb-4">{title}</p>

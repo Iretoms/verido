@@ -46,6 +46,8 @@ const config = {
         "verido-card-purple": "#F1EEFB",
         "verido-card-red": "#FFE8E5",
         "verido-card-blue": "#E6F2FF",
+        "button-disabled": "#E4E5E8",
+        "verido-nuetral": "#63656E",
       },
       keyframes: {
         "accordion-down": {

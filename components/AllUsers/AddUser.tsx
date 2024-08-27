@@ -13,10 +13,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { ICreatePartner } from "../../types/index";
 import usePartner from "../../lib/react-query/mutations/usePartner";
+import InternationalPhoneSelect from "../common/InternationalPhoneSelect";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const AddUser = () => {
   const [open, setOpen] = React.useState(false);
@@ -66,18 +75,43 @@ const AddUser = () => {
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-light">
-              Create Company✌🏻️
+            <DialogTitle className="text-[20px] font-semibold">
+              Add User
             </DialogTitle>
-            <DialogDescription className="text-gray-text font-light text-sm">
-              Please provide the partner’s info.
-            </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="name" className="text-[11px]">
-              Full Name:
+            <Label htmlFor="name" className="text-[14px] font-medium">
+              User Type
+            </Label>
+            <Select>
+              <SelectTrigger className="w-full text-light-gray">
+                <SelectValue placeholder="Select User Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem className="text-sm text-light-gray" value="desc">
+                  Country Admin
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Partner
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Company
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Super Agents
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Sub Agents
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-1 items-start">
+            <Label htmlFor="name" className="text-[14px] font-medium">
+              Name
             </Label>
             <Input
+              placeholder="Enter title"
               id="name"
               {...register("name", { required: "Full name is required" })}
               className={`border ${
@@ -89,10 +123,11 @@ const AddUser = () => {
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="email" className="text-[11px]">
-              Email:
+            <Label htmlFor="email" className="text-[14px] font-medium">
+              Email address
             </Label>
             <Input
+              placeholder="Enter email Address"
               id="email"
               {...register("email", { required: "Email is required" })}
               className={`border ${
@@ -104,8 +139,45 @@ const AddUser = () => {
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="phone" className="text-[11px]">
-              Phone Number:
+            <Label htmlFor="email" className="text-[14px] font-medium">
+              Phone
+            </Label>
+            <InternationalPhoneSelect />
+
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email.message}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-1 items-start">
+            <Label htmlFor="name" className="text-[14px] font-medium">
+              Sector
+            </Label>
+            <Select>
+              <SelectTrigger className="w-full text-light-gray">
+                <SelectValue placeholder="Select Sector" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem className="text-sm text-light-gray" value="desc">
+                  Country Admin
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Partner
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Company
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Super Agents
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Sub Agents
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-1 items-start">
+            <Label htmlFor="phone" className="text-[14px] font-medium">
+              Institution
             </Label>
             <Input
               id="phone"
@@ -120,89 +192,39 @@ const AddUser = () => {
               <p className="text-red-500 text-xs">{errors.phone.message}</p>
             )}
           </div>
-          <div className="flex flex-col gap-1 items-start relative">
-            <Label htmlFor="password" className="text-[11px]">
-              Password:
+          <div className="flex flex-col gap-1 items-start">
+            <Label htmlFor="name" className="text-[14px] font-medium">
+              Subscription Timeline
             </Label>
-            <Input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-              className={`border ${
-                errors.password ? "border-red-500" : "border-verido-border"
-              } px-3 py-2 focus:outline-none`}
-            />
-            <div
-              className="absolute right-3 top-10 cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <Image
-                src={
-                  showPassword
-                    ? "/assets/icons/eye-off.svg"
-                    : "/assets/icons/eye-off.svg"
-                }
-                alt="toggle password visibility"
-                width={15}
-                height={15}
-              />
-            </div>
-            {errors.password && (
-              <p className="text-red-500 text-xs">{errors.password.message}</p>
-            )}
+            <Select>
+              <SelectTrigger className="w-full text-light-gray">
+                <SelectValue placeholder="Select Timeline" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem className="text-sm text-light-gray" value="desc">
+                  Yearly
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Quartely
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="asc">
+                  Monthly
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-          <div className="flex flex-col gap-1 items-start relative">
-            <Label htmlFor="confirmPassword" className="text-[11px]">
-              Confirm Password:
-            </Label>
-            <Input
-              type={showConfirmPassword ? "text" : "password"}
-              id="confirmPassword"
-              {...register("confirmPassword", {
-                required: "Confirm Password is required",
-                validate: (value) =>
-                  value === password || "Passwords must match",
-              })}
-              className={`border ${
-                errors.confirmPassword
-                  ? "border-red-500"
-                  : "border-verido-border"
-              } px-3 py-2 focus:outline-none`}
-            />
-            <div
-              className="absolute right-3 top-10 cursor-pointer"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              <Image
-                src={
-                  showConfirmPassword
-                    ? "/assets/icons/eye-off.svg"
-                    : "/assets/icons/eye-off.svg"
-                }
-                alt="toggle confirm password visibility"
-                width={15}
-                height={15}
-              />
-            </div>
-            {errors.confirmPassword && (
-              <p className="text-red-500 text-xs">
-                {errors.confirmPassword.message}
-              </p>
-            )}
-          </div>
+
           <DialogFooter>
             <Button
               type="submit"
-              className="w-full bg-verido-green"
+              className={`w-full bg-button-disabled ${
+                isSubmitting
+                  ? "bg-button-disabled text-verido-nuetral"
+                  : "bg-verido-green text-verido-white"
+              } `}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Creating..." : "Create Account"}
+              {isSubmitting ? <LoadingSpinner /> : "Add User"}
             </Button>
           </DialogFooter>
         </form>

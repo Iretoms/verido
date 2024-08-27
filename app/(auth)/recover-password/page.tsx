@@ -7,6 +7,7 @@ import { IRecoverPassword } from "../../../types/index";
 import { Button } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const RecoverPassword = () => {
   const {
@@ -30,11 +31,21 @@ const RecoverPassword = () => {
     router.push("/recover-password-success");
   };
   return (
-    <div className="flex items-center justify-center h-screen w-full">
+    <div className="flex pt-16 lg:pt-0 md:pt-0 lg:items-center justify-center h-screen w-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-[90%] md:w-[80%] flex flex-col gap-2"
       >
+        <div className="flex items-start w-full md:hidden lg:hidden mb-4">
+          <Image
+            width={100}
+            height={100}
+            className="object-contain"
+            src="/assets/icons/verido_logo.svg"
+            alt="logo"
+          />
+        </div>
+
         <div className="flex flex-col gap-1">
           <h2 className="text-[32px] font-bold">Recover Password</h2>
           <p className="text-gray-text text-[14px]">
