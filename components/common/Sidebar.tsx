@@ -92,7 +92,7 @@ const Sidebar: React.FC = () => {
   }, [currentUser]);
 
   return (
-    <div className="bg-white w-64 hidden h-full md:hidden lg:flex flex-col justify-between">
+    <div className="bg-sidebar-gray border-r-[1px] border-r-[#E4E5E8] w-64 hidden h-full md:hidden lg:flex flex-col justify-between">
       <div className="flex flex-col ">
         <div className="p-6">
           <Image

@@ -16,7 +16,7 @@ const getStatusColor = (category: string) => {
 export const columnsVideo: ColumnDef<IVideo>[] = [
   {
     accessorKey: "title",
-    header: "Title",
+    header: "Name",
   },
   {
     accessorKey: "vidoeID",

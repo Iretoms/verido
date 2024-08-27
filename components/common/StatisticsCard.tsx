@@ -1,29 +1,34 @@
 import React from "react";
-import Image from "next/image";
+import clsx from "clsx";
 
 interface StatisticsCardProps {
-  iconSrc: string;
   value: string | number;
   label: string;
+  bgColor: string
+  trend?: "up" | "down";
+  percentage?: number;
 }
 
 const StatisticsCard: React.FC<StatisticsCardProps> = ({
-  iconSrc,
   value,
   label,
+  bgColor,
+  trend,
+  percentage,
 }) => {
   return (
-    <div className="bg-white rounded-lg flex flex-1 gap-2 items-center p-5">
-      <Image
-        src={iconSrc}
-        alt="chart"
-        width={60}
-        height={60}
-        className="object-contain"
-      />
-      <div>
-        <p className="text-[15px] lg:text-[18px]">{value}</p>
-        <p className="font-light text-[12px] text-gray-text">{label}</p>
+    <div className={`bg-${bgColor} rounded-lg flex flex-col gap-2  pl-3 pr-11 py-3`}>
+      <p className="text-[12px] font-medium text-gray-text">{label}</p>
+      <div className="flex items-center gap-2">
+        <p className="text-[15px] lg:text-[20px] font-bold">{value}</p>
+        <span
+          className={clsx(" font-bold text-[12px]", {
+            "text-verido-green": trend === "up",
+            "text-error": trend === "down",
+          })}
+        >
+          {trend === "up" ? `↑ ${percentage}%` : `↓ ${percentage}%`}
+        </span>
       </div>
     </div>
   );

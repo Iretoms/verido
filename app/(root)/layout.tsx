@@ -32,7 +32,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                   <Navbar />
                   <MobileNav />
                 </div>
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-body lg:px-6">
+                <main className="flex-1 overflow-x-hidden  overflow-y-auto bg-white lg:px-3">
                   {children}
                 </main>
               </div>

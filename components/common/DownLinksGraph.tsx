@@ -8,6 +8,7 @@ import { useDashboardStats } from "@/lib/react-query/query/useStats";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -22,15 +23,15 @@ import {
 const chartConfig = {
   businessOwners: {
     label: "Business Owners",
-    color: "#08A730",
+    color: "#7d65dc",
   },
   consultants: {
     label: "Consultants",
-    color: "#007AFF",
+    color: "#FF8CB1",
   },
   partners: {
     label: "Partners",
-    color: "#FF9500",
+    color: "#FFB854",
   },
 } satisfies ChartConfig;
 
@@ -82,21 +83,15 @@ export function DownLinksGraph() {
 
   return (
     <Card className="flex flex-col">
-      <CardHeader className="flex justify-between items-center flex-row">
-        <CardTitle className="text-[15px]">Total</CardTitle>
+      <CardHeader className="">
+        <CardTitle className="text-[15px]">Subscription by Type</CardTitle>
 
-        <Image
-          src="/assets/icons/more-fill.svg"
-          width={20}
-          height={20}
-          alt="more"
-          className="object-contain cursor-pointer"
-        />
+        <CardDescription>Percentage of subscribers by type</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-[300px]"
         >
           <PieChart>
             <ChartTooltip
@@ -107,8 +102,7 @@ export function DownLinksGraph() {
               data={chartData}
               dataKey="visitors"
               nameKey="browser"
-              innerRadius={90}
-              strokeWidth={5}
+              innerRadius={70}
             >
               <Label
                 content={({ viewBox }) => {
@@ -122,17 +116,17 @@ export function DownLinksGraph() {
                       >
                         <tspan
                           x={viewBox.cx}
+                          y={(viewBox.cy || 0) + -24}
+                          className="fill-muted-foreground"
+                        >
+                          Total
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
                           {totalVisitors.toLocaleString()}
-                        </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
-                        >
-                          Total
                         </tspan>
                       </text>
                     );
@@ -143,24 +137,24 @@ export function DownLinksGraph() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      <CardFooter className="flex-col gap-1 text-sm">
         <div className="flex justify-center gap-5 mt-4">
           {userRole !== "consultant" && (
             <div className="flex items-center">
-              <div className="w-2 h-2 rounded-full bg-verido-green mr-2"></div>
-              <span className="text-[12px]">Business Owners</span>
+              <div className="w-3 h-3 rounded-sm bg-[#7d65dc] mr-2"></div>
+              <span className="text-[12px]">Monthly</span>
             </div>
           )}
           {userRole === "super_admin" && (
             <div className="flex items-center">
-              <div className="w-2 h-2 rounded-full bg-verido-orange mr-2"></div>
-              <span className="text-[12px]">Partners</span>
+              <div className="w-3 h-3 rounded-sm bg-[#FF8CB1] mr-2"></div>
+              <span className="text-[12px]">Quarterly</span>
             </div>
           )}
           {userRole !== "consultant" && (
             <div className="flex items-center">
-              <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-              <span className="text-[12px]">Consultants</span>
+              <div className="w-3 h-3 rounded-sm bg-[#FFB854] mr-2"></div>
+              <span className="text-[12px]">Year</span>
             </div>
           )}
         </div>

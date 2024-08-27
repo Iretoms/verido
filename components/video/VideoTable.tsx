@@ -89,18 +89,18 @@ export function VideoTable<TData extends IVideo, TValue>({
           return (
             <div className="flex space-x-2">
               <Image
-                src="/assets/icons/editVideo.svg"
+                src="/assets/icons/edit.svg"
                 alt="edit"
-                width={20}
-                height={20}
+                width={15}
+                height={15}
                 className="cursor-pointer"
                 onClick={() => handleEditClick(video)}
               />
               <Image
-                src="/assets/icons/deleteVideo.svg"
+                src="/assets/icons/delete.svg"
                 alt="delete"
-                width={20}
-                height={20}
+                width={15}
+                height={15}
                 className="cursor-pointer"
                 onClick={() => confirmDelete(video._id)}
               />
@@ -127,14 +127,12 @@ export function VideoTable<TData extends IVideo, TValue>({
   });
 
   return (
-    <div className="rounded-md">
+    <div className="rounded-md ">
       <div className="flex justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
           <h2 className="text-[20px]">
-            Videos (
-            <span className="font-bold text-gray-text">{data?.length}</span>)
+            Videos
           </h2>
-          <p className="text-[14px] text-black">List of videos available</p>
         </div>
         <div className="flex gap-2">
           <div className="">
@@ -142,8 +140,8 @@ export function VideoTable<TData extends IVideo, TValue>({
           </div>
         </div>
       </div>
-      <Table className="border-0">
-        <TableHeader className="bg-verido-light-blue">
+      <Table className="border-[1px] ">
+        <TableHeader className="bg-gray-table ">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
