@@ -243,23 +243,31 @@ const BusinessOwnerInfo = () => {
           <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center">
             <StatisticsCard
               value={`$ ${moneyIn || 0} `}
-              label="Total Subscription"
-              iconSrc="/assets/icons/barchart1.svg"
+              bgColor="verido-card-green"
+              label="Total Subscriotion"
+              percentage={2.5}
+              trend="up"
             />
             <StatisticsCard
               value={`$ ${labour || 0}`}
+              bgColor="verido-card-purple"
               label="Direct Labour"
-              iconSrc="/assets/icons/barchart2.svg"
+              percentage={2.5}
+              trend="up"
             />
             <StatisticsCard
               value={`$ ${material || 0}`}
-              label="Direct Material"
-              iconSrc="/assets/icons/barchart3.svg"
+              label="Direct Materials"
+              bgColor="verido-card-red"
+              percentage={2.5}
+              trend="down"
             />
             <StatisticsCard
-              value="$17,346.00"
+              bgColor="verido-card-orange"
+              value={`$40,000`}
               label="Overhead"
-              iconSrc="/assets/icons/barchart4.svg"
+              percentage={2.5}
+              trend="up"
             />
           </div>
           <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">

@@ -94,24 +94,32 @@ const ConsultantsInfo = () => {
           <ConsultantMoneyInMoneyOut chartData={chartDataCash} />
           <div className="flex mt-3 lg:mt-10 flex-wrap lg:flex-nowrap gap-4 items-center">
             <StatisticsCard
-              value={`$ ${moneySalesIn}`}
-              label="Total Subscription"
-              iconSrc="/assets/icons/barchart1.svg"
+              value={`$ ${moneySalesIn || 0} `}
+              bgColor="verido-card-green"
+              label="Total Subscriotion"
+              percentage={2.5}
+              trend="up"
             />
             <StatisticsCard
-              value={`$ ${consultantLabourStat}`}
+              value={`$ ${consultantLabourStat || 0}`}
+              bgColor="verido-card-purple"
               label="Direct Labour"
-              iconSrc="/assets/icons/barchart2.svg"
+              percentage={2.5}
+              trend="up"
             />
             <StatisticsCard
-              value={`$ ${consultantMaterialStat}`}
-              label="Direct Material"
-              iconSrc="/assets/icons/barchart3.svg"
+              value={`$ ${consultantMaterialStat || 0}`}
+              label="Direct Materials"
+              bgColor="verido-card-red"
+              percentage={2.5}
+              trend="down"
             />
             <StatisticsCard
-              value="$17,346.00"
+              bgColor="verido-card-orange"
+              value={`$40,000`}
               label="Overhead"
-              iconSrc="/assets/icons/barchart4.svg"
+              percentage={2.5}
+              trend="up"
             />
           </div>
         </div>

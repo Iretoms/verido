@@ -18,9 +18,8 @@ import PartnerInfoCardSkeleton from "./PartnerInfoCardSkeleton";
 
 const PartnerInfo = () => {
   const { id } = useParams() as { id: string };
-  
 
-  const { data , isFetching  } = usePartnerById(id);
+  const { data, isFetching } = usePartnerById(id);
   const partnerDetails = data?.response;
   const partnerStats = data?.data;
   const consultantsData = partnerDetails?.consultants || [];
@@ -124,11 +123,7 @@ const PartnerInfo = () => {
   }, [partnerStats]);
 
   if (isFetching) {
-    return (
-    
-        <PartnerInfoCardSkeleton />
-    
-    );
+    return <PartnerInfoCardSkeleton />;
   }
 
   return (
@@ -150,24 +145,32 @@ const PartnerInfo = () => {
           <MultipleLineChart chartData={chartDataMoneyInVsMoneyOut} />
           <div className="flex mt-3 lg:mt-10 flex-wrap lg:flex-nowrap gap-4 items-center">
             <StatisticsCard
-              value={`$ ${moneySalesIn}`}
-              label="Total Subscription"
-              iconSrc="/assets/icons/barchart1.svg"
+              value={`$ ${moneySalesIn || 0} `}
+              bgColor="verido-card-green"
+              label="Total Subscriotion"
+              percentage={2.5}
+              trend="up"
             />
             <StatisticsCard
-              value={`$ ${partnerLabourStat}`}
+              value={`$ ${partnerLabourStat || 0}`}
+              bgColor="verido-card-purple"
               label="Direct Labour"
-              iconSrc="/assets/icons/barchart2.svg"
+              percentage={2.5}
+              trend="up"
             />
             <StatisticsCard
-              value={`$ ${partnerMaterialStat}`}
-              label="Direct Material"
-              iconSrc="/assets/icons/barchart3.svg"
+              value={`$ ${partnerMaterialStat || 0}`}
+              label="Direct Materials"
+              bgColor="verido-card-red"
+              percentage={2.5}
+              trend="down"
             />
             <StatisticsCard
-              value="$17,346.00"
+              bgColor="verido-card-orange"
+              value={`$40,000`}
               label="Overhead"
-              iconSrc="/assets/icons/barchart4.svg"
+              percentage={2.5}
+              trend="up"
             />
           </div>
           <div className="flex flex-col p-1 md:p-10 lg:p-10 gap-5 w-full bg-white mb-10 rounded-lg">
