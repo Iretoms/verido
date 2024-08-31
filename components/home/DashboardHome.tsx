@@ -129,7 +129,7 @@ const DashboardHome = () => {
           </div>
 
           <div className="w-full flex flex-col bg-green lg:flex-row justify-between gap-7">
-            <div className="w-full flex gap-10  h-screen">
+            <div className="w-full md:flex-row flex flex-col gap-10">
               <div className=" h-full flex flex-[2.5] flex-col gap-8">
                 <h1 className="font-medium text-[20px]">
                   Performance Overview
