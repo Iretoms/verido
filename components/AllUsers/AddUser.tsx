@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -7,7 +7,6 @@ import { Button } from "../../components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -22,44 +21,47 @@ import {
 } from "../../components/ui/select";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
-import { ICreatePartner } from "../../types/index";
-import usePartner from "../../lib/react-query/mutations/usePartner";
 import InternationalPhoneSelect from "../common/InternationalPhoneSelect";
 import { LoadingSpinner } from "../ui/loading-spinner";
+
+interface ICreateUser {
+  userType: string;
+  name: string;
+  email: string;
+  phone: string;
+  sector: string;
+  institution: string;
+  subTimeline: string;
+}
 
 const AddUser = () => {
   const [open, setOpen] = React.useState(false);
   const {
     register,
     handleSubmit,
-    watch,
     reset,
+    setValue,
     formState: { isSubmitting, errors },
-  } = useForm<ICreatePartner>({
+  } = useForm<ICreateUser>({
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
+      userType: "",
       name: "",
       email: "",
       phone: "",
-      password: "",
-      confirmPassword: "",
+      sector: "",
+      institution: "",
+      subTimeline: "",
     },
   });
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const password = watch("password");
-  const { createPartnerMutation } = usePartner();
-
-  const onSubmit = async (data: ICreatePartner) => {
+  const onSubmit = async (data: ICreateUser) => {
     if (isSubmitting) return;
     try {
-      await createPartnerMutation.mutateAsync(data);
       reset();
       setOpen(false);
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -80,27 +82,36 @@ const AddUser = () => {
             </DialogTitle>
           </DialogHeader>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="name" className="text-[14px] font-medium">
+            <Label htmlFor="userType" className="text-[14px] font-medium">
               User Type
             </Label>
-            <Select>
+            <Select onValueChange={(value) => setValue("userType", value)}>
               <SelectTrigger className="w-full text-light-gray">
                 <SelectValue placeholder="Select User Type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem className="text-sm text-light-gray" value="desc">
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="countryAdmin"
+                >
                   Country Admin
                 </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
+                <SelectItem className="text-sm text-light-gray" value="partner">
                   Partner
                 </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
+                <SelectItem className="text-sm text-light-gray" value="company">
                   Company
                 </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="superAgents"
+                >
                   Super Agents
                 </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="subAgents"
+                >
                   Sub Agents
                 </SelectItem>
               </SelectContent>
@@ -139,75 +150,89 @@ const AddUser = () => {
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="email" className="text-[14px] font-medium">
+            <Label htmlFor="phone" className="text-[14px] font-medium">
               Phone
             </Label>
             <InternationalPhoneSelect />
 
-            {errors.email && (
-              <p className="text-red-500 text-xs">{errors.email.message}</p>
-            )}
-          </div>
-          <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="name" className="text-[14px] font-medium">
-              Sector
-            </Label>
-            <Select>
-              <SelectTrigger className="w-full text-light-gray">
-                <SelectValue placeholder="Select Sector" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem className="text-sm text-light-gray" value="desc">
-                  Country Admin
-                </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
-                  Partner
-                </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
-                  Company
-                </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
-                  Super Agents
-                </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
-                  Sub Agents
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="phone" className="text-[14px] font-medium">
-              Institution
-            </Label>
-            <Input
-              id="phone"
-              {...register("phone", {
-                required: "Phone number is required",
-              })}
-              className={`border ${
-                errors.phone ? "border-red-500" : "border-verido-border"
-              } px-3 py-2 focus:outline-none`}
-            />
             {errors.phone && (
               <p className="text-red-500 text-xs">{errors.phone.message}</p>
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="name" className="text-[14px] font-medium">
+            <Label htmlFor="sector" className="text-[14px] font-medium">
+              Sector
+            </Label>
+            <Select onValueChange={(value) => setValue("sector", value)}>
+              <SelectTrigger className="w-full text-light-gray">
+                <SelectValue placeholder="Select Sector" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="entertainment"
+                >
+                  Entertainment
+                </SelectItem>
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="business"
+                >
+                  Business
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="minning">
+                  Minning
+                </SelectItem>
+                <SelectItem className="text-sm text-light-gray" value="IT">
+                  IT
+                </SelectItem>
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="politics"
+                >
+                  Politics
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-1 items-start">
+            <Label htmlFor="institution" className="text-[14px] font-medium">
+              Institution
+            </Label>
+            <Input
+              id="institution"
+              {...register("institution", {
+                required: "Phone number is required",
+              })}
+              className={`border ${
+                errors.institution ? "border-red-500" : "border-verido-border"
+              } px-3 py-2 focus:outline-none`}
+            />
+            {errors.institution && (
+              <p className="text-red-500 text-xs">
+                {errors.institution.message}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col gap-1 items-start">
+            <Label htmlFor="subTimeline" className="text-[14px] font-medium">
               Subscription Timeline
             </Label>
-            <Select>
+            <Select onValueChange={(value) => setValue("subTimeline", value)}>
               <SelectTrigger className="w-full text-light-gray">
                 <SelectValue placeholder="Select Timeline" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem className="text-sm text-light-gray" value="desc">
+                <SelectItem className="text-sm text-light-gray" value="yearly">
                   Yearly
                 </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="quarterly"
+                >
                   Quartely
                 </SelectItem>
-                <SelectItem className="text-sm text-light-gray" value="asc">
+                <SelectItem className="text-sm text-light-gray" value="monthly">
                   Monthly
                 </SelectItem>
               </SelectContent>
