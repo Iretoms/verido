@@ -7,6 +7,11 @@ export const login = async (payload: IUsers) => {
 
   return data;
 };
+export const logout = async () => {
+  const { data } = await VeridoAPI.post("/logout");
+
+  return data;
+};
 export const register = async (payload: IUsersReg) => {
   const { data } = await VeridoAPI.post("/consultant/register", payload);
 

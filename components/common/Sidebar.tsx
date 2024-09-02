@@ -11,10 +11,11 @@ import useAuth from "@/lib/react-query/mutations/useAuth";
 const Sidebar: React.FC = () => {
   const { currentUser, isLoading } = useAuthenticatedUser();
   const pathName = usePathname();
-  const { logout } = useAuth();
+  const {  logoutMutation } = useAuth();
+  const isLoggingOut = logoutMutation.status ==="pending";
 
   const handleLogout = () => {
-    logout();
+    logoutMutation.mutate();
   };
 
   const isActive = (href: string) => {
@@ -33,55 +34,55 @@ const Sidebar: React.FC = () => {
       path: "/",
       label: "Dashboard",
       icon: "/assets/icons/dashboard.svg",
-      roles: ["super_admin", "partner", "consultant"],
+      roles: ["master_admin", "partner", "consultant"],
     },
     {
       path: "/country-admin",
       label: "Country Admin",
       icon: "/assets/icons/user-star.svg",
-      roles: ["super_admin", "partner", "consultant"],
+      roles: ["master_admin", "partner", "consultant"],
     },
     {
       path: "/partners",
       label: "Partners",
       icon: "/assets/icons/user-multiple.svg",
-      roles: ["super_admin", "partner", "consultant"],
+      roles: ["master_admin"],
     },
     {
       path: "/companies",
       label: "Companies",
       icon: "/assets/icons/city.svg",
-      roles: ["super_admin"],
+      roles: ["master_admin", "partner"],
     },
     {
       path: "/superagents",
       label: "Super Agents",
       icon: "/assets/icons/person.svg",
-      roles: ["super_admin", "partner"],
+      roles: ["master_admin", "partner"],
     },
     {
       path: "/sub-agents",
       label: "Sub Agents",
       icon: "/assets/icons/user-square.svg",
-      roles: ["super_admin", "partner", "consultant"],
+      roles: ["master_admin", "partner", "consultant"],
     },
     {
       path: "/experts",
       label: "Expert",
       icon: "/assets/icons/user-check.svg",
-      roles: ["super_admin", "partner", "consultant"],
+      roles: ["master_admin", "partner", "consultant"],
     },
     {
       path: "/chats",
       label: "Chats",
       icon: "/assets/icons/chat.svg",
-      roles: ["super_admin", "partner", "consultant"],
+      roles: ["master_admin", "partner", "consultant"],
     },
     {
       path: "/marketplace",
       label: "Marketplace",
       icon: "/assets/icons/marketplace.svg",
-      roles: ["super_admin", "partner", "consultant"],
+      roles: ["master_admin", "partner", "consultant"],
     },
   ];
 
@@ -154,7 +155,7 @@ const Sidebar: React.FC = () => {
             height={20}
             alt="Logout"
           />
-          <LogoutModal logout={handleLogout} />
+          <LogoutModal isLoggingOut={isLoggingOut} logout={handleLogout} />
         </div>
       </div>
     </div>

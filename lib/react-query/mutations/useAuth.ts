@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { login, recoverPassword, register } from "@/lib/api/auth.api";
+import { login, recoverPassword, register, logout } from "@/lib/api/auth.api";
 import { IRecoverPassword, IUsers, IUsersReg } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import useCustomToast from "@/lib/hooks/useCustomToast";
@@ -13,8 +13,6 @@ const isLoggedIn = () => {
     Cookies.get("access_token") !== undefined
   );
 };
-const expires = new Date(Date.now() + 1 * 60 * 60 * 1000);
-
 
 const useAuth = () => {
   const queryClient = useQueryClient();
@@ -24,16 +22,19 @@ const useAuth = () => {
   const loginMutation = useMutation({
     mutationFn: async (payload: IUsers) => {
       const response = await login(payload);
-      return response.response;
+      return {
+        response: response.response,
+        token: response.token,
+      };
     },
     onSuccess: (data) => {
-       const { token, role } = data;
-       localStorage.setItem("access_token", token);
-       localStorage.setItem("user_role", role);
-       Cookies.set("access_token", token , {expires:expires});
-       Cookies.set("user_role", role); 
-       router.push("/");
-       showToast("Success!", "Sign in Successful.", "success");
+      const { token, response } = data;
+      localStorage.setItem("access_token", token.accessToken);
+      localStorage.setItem("user_role", response.role);
+      Cookies.set("access_token", token.accessToken);
+      Cookies.set("user_role", response.role);
+      router.push("/");
+      showToast("Success!", "Sign in Successful.", "success");
     },
     onError: (error) => {
       let errDetail = error.message;
@@ -55,7 +56,7 @@ const useAuth = () => {
     onSuccess: (data) => {
       const { token } = data;
       localStorage.setItem("access_token", token);
-      Cookies.set("access_token", token, { expires:expires });
+      Cookies.set("access_token", token);
       showToast("Success!", "Password recovery is Successful.", "success");
 
       router.push("/signin");
@@ -89,22 +90,36 @@ const useAuth = () => {
           errDetail = errDetail[0];
         }
       }
-       showToast("Something went wrong", errDetail, "error");
+      showToast("Something went wrong", errDetail, "error");
+    },
+  });
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await logout();
+    },
+    onSuccess: (data) => {
+      showToast("Success!", "Logout.", "success");
+      router.push("/signin");
+    },
+    onError: (error) => {
+      let errDetail = error.message;
+      if (error instanceof AxiosError) {
+        errDetail = error?.response?.data?.message;
+        if (Array.isArray(errDetail)) {
+          errDetail = errDetail[0];
+        }
+      }
+      showToast("Something went wrong", errDetail, "error");
     },
   });
 
-  const logout = () => {
-    localStorage.removeItem("access_token");
-    Cookies.remove("access_token");
-    queryClient.invalidateQueries();
-    router.push("/signin");
-  };
+
 
   return {
     loginMutation,
     registerMutation,
     recoverPasswordMutation,
-    logout,
+    logoutMutation,
   };
 };
 

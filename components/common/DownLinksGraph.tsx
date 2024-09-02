@@ -66,7 +66,7 @@ export function DownLinksGraph() {
       },
     ];
 
-    if (userRole === "super_admin") {
+    if (userRole === "master_admin") {
       return data;
     } else if (userRole === "partner") {
       return data.filter((item) => item.browser !== "Partners");
@@ -145,7 +145,7 @@ export function DownLinksGraph() {
               <span className="text-[12px]">Monthly</span>
             </div>
           )}
-          {userRole === "super_admin" && (
+          {userRole === "master_admin" && (
             <div className="flex items-center">
               <div className="w-3 h-3 rounded-sm bg-[#FF8CB1] mr-2"></div>
               <span className="text-[12px]">Quarterly</span>

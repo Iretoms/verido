@@ -15,11 +15,11 @@ import { LoadingSpinner } from "../ui/loading-spinner";
 
 interface AlertDialog {
   logout: () => void;
+  isLoggingOut: boolean;
 }
 
-const LogoutModal = ({ logout }: AlertDialog) => {
-  const [isLoading, setIsLoading] = useState(false);
-
+const LogoutModal = ({ logout, isLoggingOut }: AlertDialog) => {
+  // const isLoggingOutNow = true
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -42,11 +42,13 @@ const LogoutModal = ({ logout }: AlertDialog) => {
             No
           </AlertDialogCancel>
           <Button
-            className="text-white bg-verido-red w-[10rem]"
-            disabled={isLoading}
+            className={`text-white ${
+              isLoggingOut ? "bg-verido-card-red" : "bg-verido-red"
+            }  w-[10rem]`}
+            disabled={isLoggingOut}
             onClick={logout}
           >
-            {isLoading ? <LoadingSpinner/> : "Yes"}
+            {isLoggingOut ? <LoadingSpinner /> : "Yes"}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

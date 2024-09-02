@@ -299,7 +299,7 @@ export interface IChangeConsultant {
 export interface ICreatePartner {
   name: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   password: string;
   confirmPassword: string;
 }
@@ -351,7 +351,7 @@ export interface MoneyInVsMoneyOut {
 }
 
 export interface MoneyTransaction {
-  month: string;
+  month: string
   totalAmount: number;
 }
 

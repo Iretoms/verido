@@ -21,6 +21,8 @@ export function middleware(request: NextRequest) {
   const superAdminRoutes = [
     ...consultantRoutes,
     ...partnerRoutes,
+    "/country-admin",
+    "/country-admin/:id",
     "/allUsers",
     "/experts",
     "/superagents",

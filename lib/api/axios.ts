@@ -1,7 +1,7 @@
 import axios from "axios";
 import { redirect } from "next/navigation";
 
-export const BASE_URL = "https://bknd.verido.app";
+export const BASE_URL = "https://verido-server.onrender.com";
 
 export const VeridoAPI = axios.create({
   baseURL: BASE_URL,
