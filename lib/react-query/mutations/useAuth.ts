@@ -99,6 +99,10 @@ const useAuth = () => {
     },
     onSuccess: (data) => {
       showToast("Success!", "Logout.", "success");
+      localStorage.removeItem('access_Token')
+      localStorage.removeItem('user_role')
+      Cookies.remove("access_token");
+      Cookies.remove("user_role");
       router.push("/signin");
     },
     onError: (error) => {
