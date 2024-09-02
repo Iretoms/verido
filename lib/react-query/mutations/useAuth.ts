@@ -113,6 +113,13 @@ const useAuth = () => {
     },
   });
 
+  const logout = () => {
+    window.localStorage.removeItem("access_token");
+    window.localStorage.removeItem("user_role");
+    window.Cookies.remove("access_token");
+    window.Cookies.remove("user_role");
+  }
+
 
 
   return {
@@ -120,6 +127,7 @@ const useAuth = () => {
     registerMutation,
     recoverPasswordMutation,
     logoutMutation,
+    logout
   };
 };
 
