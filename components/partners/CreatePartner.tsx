@@ -32,7 +32,7 @@ const CreatePartner = () => {
     defaultValues: {
       name: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       password: "",
       confirmPassword: "",
     },
@@ -104,20 +104,20 @@ const CreatePartner = () => {
             )}
           </div>
           <div className="flex flex-col gap-1 items-start">
-            <Label htmlFor="phone" className="text-[11px]">
+            <Label htmlFor="phoneNumber" className="text-[11px]">
               Phone Number:
             </Label>
             <Input
-              id="phone"
-              {...register("phone", {
+              id="phoneNumber"
+              {...register("phoneNumber", {
                 required: "Phone number is required",
               })}
               className={`border ${
-                errors.phone ? "border-red-500" : "border-verido-border"
+                errors.phoneNumber ? "border-red-500" : "border-verido-border"
               } px-3 py-2 focus:outline-none`}
             />
-            {errors.phone && (
-              <p className="text-red-500 text-xs">{errors.phone.message}</p>
+            {errors.phoneNumber && (
+              <p className="text-red-500 text-xs">{errors.phoneNumber.message}</p>
             )}
           </div>
           <div className="flex flex-col gap-1 items-start relative">
