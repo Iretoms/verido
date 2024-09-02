@@ -35,14 +35,27 @@ export interface ICreateUser {
   countryName: string;
 }
 
+
+const roleHierarchy: { [key: string]: string[] } = {
+  master_admin: ["countryAdmin", "partner", "company", "superAgents"],
+  country_admin: ["partner", "company", "superAgents"],
+  partner: ["company", "superAgents"],
+  companies: ["superAgents"],
+  superagents: [],
+};
+
 const AddUser = () => {
   const [open, setOpen] = React.useState(false);
   const [userType, setUserType] = React.useState("");
-  const {currentUser} = useAuthenticatedUser()
+  const { currentUser } = useAuthenticatedUser();
 
   const resetModal = () => {
     setUserType("");
   };
+
+  const selectableRoles = currentUser?.role
+    ? roleHierarchy[currentUser.role]
+    : [];
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -51,7 +64,7 @@ const AddUser = () => {
           Add User
         </Button>
       </DialogTrigger>
-      <DialogContent className=" flex flex-col sm:max-w-[425px] lg:min-h-[500px]">
+      <DialogContent className="flex flex-col sm:max-w-[425px] lg:min-h-[500px]">
         <DialogHeader>
           <DialogTitle className="text-[20px] font-semibold">
             Add User
@@ -66,7 +79,7 @@ const AddUser = () => {
               <SelectValue placeholder="Select User Type" />
             </SelectTrigger>
             <SelectContent>
-              {currentUser?.role === "master_admin" && (
+              {selectableRoles.includes("countryAdmin") && (
                 <SelectItem
                   className="text-sm text-light-gray"
                   value="countryAdmin"
@@ -74,25 +87,30 @@ const AddUser = () => {
                   Country Admin
                 </SelectItem>
               )}
-              <SelectItem className="text-sm text-light-gray" value="partner">
-                Partner
-              </SelectItem>
-              <SelectItem className="text-sm text-light-gray" value="company">
-                Company
-              </SelectItem>
-              <SelectItem
-                className="text-sm text-light-gray"
-                value="superAgents"
-              >
-                Super Agents
-              </SelectItem>
+              {selectableRoles.includes("partner") && (
+                <SelectItem className="text-sm text-light-gray" value="partner">
+                  Partner
+                </SelectItem>
+              )}
+              {selectableRoles.includes("company") && (
+                <SelectItem className="text-sm text-light-gray" value="company">
+                  Company
+                </SelectItem>
+              )}
+              {selectableRoles.includes("superAgents") && (
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="superAgents"
+                >
+                  Super Agents
+                </SelectItem>
+              )}
             </SelectContent>
           </Select>
         </div>
-        {userType === "countryAdmin" &&
-          currentUser?.role === "master_admin" && (
-            <CountryAdminForm closeModal={resetModal} />
-          )}
+        {userType === "countryAdmin" && (
+          <CountryAdminForm closeModal={resetModal} />
+        )}
         {userType === "company" && <CompanyForm closeModal={resetModal} />}
         {userType === "partner" && <PartnerForm closeModal={resetModal} />}
         {userType === "superAgents" && (
