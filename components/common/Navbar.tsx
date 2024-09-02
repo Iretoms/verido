@@ -15,12 +15,8 @@ import LogoutModal from "../auth/LogoutModal";
 import { useAuthenticatedUser } from "@/context/AuthContext";
 
 const Navbar = () => {
-  const { logout } = useAuth();
   const { currentUser } = useAuthenticatedUser();
 
-  const handleLogout = () => {
-    logout();
-  };
 
   return (
     <header className="bg-white rounded-lg hidden lg:flex items-center justify-between p-1 md:p-5">
