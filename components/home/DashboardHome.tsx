@@ -8,7 +8,7 @@ import SubscriptionCashMovementChart from "../../components/charts/SubscriptionC
 import { VideoTable } from "../../components/video/VideoTable";
 import { useVideos } from "../../lib/react-query/query/useVideo";
 import { CountryTable } from "../../components/countries/CountryTable";
-import { countryData } from "../../constant/index";
+import { cardData, countryData } from "../../constant/index";
 import { useAuthenticatedUser } from "../../context/AuthContext";
 import { useDashboardStats } from "@/lib/react-query/query/useStats";
 import { DashboardMultipleLineChart } from "@/components/charts/DashboardMultipleLineChart";
@@ -37,14 +37,14 @@ import RevenueCard from "./RevenueCard";
 import DashboardSkeleton from "./DashboardSkeleton";
 
 const DashboardHome = () => {
-    // const isLoading = true
-  const { currentUser , isLoading } = useAuthenticatedUser();
+  // const isLoading = true
+  const { currentUser, isLoading } = useAuthenticatedUser();
   const { data: videData } = useVideos();
   const videos = videData || [];
   const isSuperAdmin = currentUser?.role === "super_admin";
   const isPartner = currentUser?.role === "partner";
   const isConsultant = currentUser?.role === "consultant";
-  const { data: dashboardStats , isPending } = useDashboardStats();
+  const { data: dashboardStats, isPending } = useDashboardStats();
   const totalSubscription = React.useMemo(() => {
     const total =
       dashboardStats?.money_in_v_money_out.subscription?.reduce(
@@ -81,9 +81,7 @@ const DashboardHome = () => {
   }, [dashboardStats]);
 
   if (isLoading || isPending) {
-    return (
-      <DashboardSkeleton />
-    );
+    return <DashboardSkeleton />;
   }
 
   return (
@@ -134,55 +132,21 @@ const DashboardHome = () => {
                 <h1 className="font-medium text-[20px]">
                   Performance Overview
                 </h1>
+                {/* Come Back to this most likely wont work for real data */}
                 <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-2 lg:gap-5">
-                  <DashboardCard
-                    title="Total Users"
-                    value={536}
-                    bgColor="bg-verido-card-green"
-                    percentage={2.5}
-                    trend="up"
-                    icon="/assets/icons/green-trend.svg"
-                  />
-                  <DashboardCard
-                    title="Country Admin"
-                    value={3}
-                    bgColor="bg-verido-card-purple"
-                    percentage={2.5}
-                    trend="down"
-                    icon="/assets/icons/purple-trend.svg"
-                  />
-                  <DashboardCard
-                    title="Partners"
-                    value={9}
-                    bgColor="bg-verido-card-orange"
-                    percentage={2.5}
-                    trend="up"
-                    icon="/assets/icons/orange-trend.svg"
-                  />
-                  <DashboardCard
-                    title="Companies"
-                    value={24}
-                    bgColor="bg-verido-card-red"
-                    percentage={2.5}
-                    trend="up"
-                    icon="/assets/icons/red-trend.svg"
-                  />
-                  <DashboardCard
-                    title="Super Agents"
-                    value={100}
-                    bgColor="bg-verido-card-blue"
-                    percentage={2.5}
-                    trend="down"
-                    icon="/assets/icons/blue-trend.svg"
-                  />
-                  <DashboardCard
-                    title="Sub Agents"
-                    value={400}
-                    bgColor="bg-verido-card-teal"
-                    percentage={2.5}
-                    trend="up"
-                    icon="/assets/icons/teal-trend.svg"
-                  />
+                  {cardData
+                    .filter((card) => card.roles.includes(currentUser.role))
+                    .map((card:any, index) => (
+                      <DashboardCard
+                        key={index}
+                        title={card.title}
+                        value={card.value}
+                        bgColor={card.bgColor}
+                        percentage={card.percentage}
+                        trend={card.trend}
+                        icon={card.icon}
+                      />
+                    ))}
                 </div>
                 <div>
                   <Image
