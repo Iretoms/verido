@@ -19,10 +19,12 @@ import { Button } from "../ui/button";
 const MobileNav = () => {
   const router = useRouter();
   const { data: currentUser } = useCurrentUser();
-  const { logout } = useAuth();
+  
+  const {logoutMutation} = useAuth()
+  
 
   const handleLogout = () => {
-    logout();
+    logoutMutation.mutate();
   };
 
   const allItems = [

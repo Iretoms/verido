@@ -23,6 +23,7 @@ import CountryAdminForm from "./CountryAdminForm";
 import CompanyForm from "./CompanyForm";
 import PartnerForm from "./PartnerForm";
 import SuperAgentForm from "./SuperAgentForm";
+import { useAuthenticatedUser } from "@/context/AuthContext";
 
 export interface ICreateUser {
   email: string;
@@ -37,6 +38,7 @@ export interface ICreateUser {
 const AddUser = () => {
   const [open, setOpen] = React.useState(false);
   const [userType, setUserType] = React.useState("");
+  const {currentUser} = useAuthenticatedUser()
 
   const resetModal = () => {
     setUserType("");
@@ -64,12 +66,14 @@ const AddUser = () => {
               <SelectValue placeholder="Select User Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem
-                className="text-sm text-light-gray"
-                value="countryAdmin"
-              >
-                Country Admin
-              </SelectItem>
+              {currentUser?.role === "master_admin" && (
+                <SelectItem
+                  className="text-sm text-light-gray"
+                  value="countryAdmin"
+                >
+                  Country Admin
+                </SelectItem>
+              )}
               <SelectItem className="text-sm text-light-gray" value="partner">
                 Partner
               </SelectItem>
@@ -85,9 +89,10 @@ const AddUser = () => {
             </SelectContent>
           </Select>
         </div>
-        {userType === "countryAdmin" && (
-          <CountryAdminForm closeModal={resetModal} />
-        )}
+        {userType === "countryAdmin" &&
+          currentUser?.role === "master_admin" && (
+            <CountryAdminForm closeModal={resetModal} />
+          )}
         {userType === "company" && <CompanyForm closeModal={resetModal} />}
         {userType === "partner" && <PartnerForm closeModal={resetModal} />}
         {userType === "superAgents" && (
