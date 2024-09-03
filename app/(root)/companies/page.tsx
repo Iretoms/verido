@@ -1,13 +1,13 @@
 import React from "react";
 import type { Metadata } from "next";
-import PartnersPage from "./PartnersPage";
+import CompanyPage from "./CompanyPage";
 export const metadata: Metadata = {
-  title: "Partners - Verido",
-  description: "Manage your consultants in Verido",
+  title: "company - Verido",
+  description: "Manage your Company in Verido",
 };
 
-const PartnersComponent = () => {
-  return <PartnersPage />;
+const CompanyComponent = () => {
+  return <CompanyPage />;
 };
 
-export default PartnersComponent;
+export default CompanyComponent;

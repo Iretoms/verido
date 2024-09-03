@@ -33,7 +33,6 @@ import {
 } from "../../components/ui/select";
 
 import { Partner } from "../../types/index";
-import CreatePartner from "./CreatePartner";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -41,7 +40,7 @@ interface DataTableProps<TData, TValue> {
   isFetching: boolean;
 }
 
-export function PartnersTable<TData extends Partner, TValue>({
+export function CountryAdminTable<TData extends Partner, TValue>({
   columns,
   data,
   isFetching,
@@ -53,7 +52,7 @@ export function PartnersTable<TData extends Partner, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const handleRowSelection = (id: string) => {
-    router.push(`/partners/${id}`);
+    router.push(`/companies/${id}`);
   };
   const { currentUser } = useAuthenticatedUser();
 
@@ -79,22 +78,9 @@ export function PartnersTable<TData extends Partner, TValue>({
     <div className="rounded-md">
       <div className="flex flex-col md:flex-row  gap-3 md:gap-0 justify-between mb-6">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="text-[24px] font-bold">Partners</h2>
+          <h2 className="text-[24px] font-bold">Country Admin</h2>
         </div>
         <div className="flex gap-2">
-          <Select onValueChange={handleSortChange}>
-            <SelectTrigger className="w-[100px] text-light-gray">
-              <SelectValue placeholder="Filter" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem className="text-sm text-light-gray" value="desc">
-                Descending
-              </SelectItem>
-              <SelectItem className="text-sm text-light-gray" value="asc">
-                Asecending
-              </SelectItem>
-            </SelectContent>
-          </Select>
           <div className="flex items-center p-2 justify-between border border-text-gray rounded-lg h-[2.5rem]">
             <Image
               className="object-contain"
@@ -114,6 +100,20 @@ export function PartnersTable<TData extends Partner, TValue>({
               className="max-w-sm h-full outline-none"
             />
           </div>
+          <Select onValueChange={handleSortChange}>
+            <SelectTrigger className="w-[100px] text-light-gray">
+              <SelectValue placeholder="Filter" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem className="text-sm text-light-gray" value="desc">
+                Descending
+              </SelectItem>
+              <SelectItem className="text-sm text-light-gray" value="asc">
+                Asecending
+              </SelectItem>
+            </SelectContent>
+          </Select>
+
           <div
             className={`flex justify-between ${
               currentUser?.role !== "super_admin" &&
@@ -121,15 +121,7 @@ export function PartnersTable<TData extends Partner, TValue>({
                 ? "hidden"
                 : "flex"
             }`}
-          >
-            <Button
-              size={"sm"}
-              className="text-verido-white bg-verido-green rounded-lg text-sm w-[10rem]"
-            >
-              Add
-              <CreatePartner />
-            </Button>
-          </div>
+          ></div>
         </div>
       </div>
       <Table className="border-0">
@@ -156,7 +148,7 @@ export function PartnersTable<TData extends Partner, TValue>({
                 colSpan={columns.length}
                 className="font-bold text-sm h-24 text-center"
               >
-                Loading Partners...
+                Loading Country Admin...
               </TableCell>
             </TableRow>
           ) : table.getRowModel().rows?.length ? (

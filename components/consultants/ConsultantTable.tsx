@@ -140,7 +140,7 @@ export function ConsultantTable<TData extends Consultant, TValue>({
           {isFetching ? (
             <TableRow className="text-sm font-bold text-gray-text">
               <TableCell colSpan={columns.length} className="h-24 text-center font-bold text-sm">
-                Loading Consultants...
+                Loading Superagents...
               </TableCell>
             </TableRow>
           ) : table.getRowModel().rows?.length ? (

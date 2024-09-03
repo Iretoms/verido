@@ -371,3 +371,6 @@ export interface Expenses {
   otherMoneyOut: MoneyTransaction[];
   installments: MoneyTransaction[];
 }
+
+
+

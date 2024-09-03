@@ -1,22 +1,13 @@
-"use client";
-import { usePathname } from "next/navigation";
 import React from "react";
-
-const PartnerPage = () => {
-  const pathname = usePathname();
-  return (
-    <div>
-      <div className="flex flex-col gap-6">
-        <div className="text-sm  text-verido-green">
-          Home <span>/</span>{" "}
-          <span className="text-gray-text">{pathname.substring(1)}</span>
-        </div>
-        <div className="bg-verido-white p-6 rounded-lg flex flex-col gap-6 min-h-[42rem]">
-          Partners
-        </div>
-      </div>
-    </div>
-  );
+import type { Metadata } from "next";
+import PartnersPage from "./PartnersPage";
+export const metadata: Metadata = {
+  title: "Partners - Verido",
+  description: "Manage your consultants in Verido",
 };
 
-export default PartnerPage;
+const PartnersComponent = () => {
+  return <PartnersPage />;
+};
+
+export default PartnersComponent;

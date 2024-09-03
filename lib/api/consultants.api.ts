@@ -7,7 +7,7 @@ export const fetchConsultants = async () => {
   return data;
 };
 export const createConsultants = async (payload: ICreateConsultantCreate) => {
-  const { data } = await VeridoAPI.post("/consultant/create" , payload);
+  const { data } = await VeridoAPI.post("/superagent/create" , payload);
 
   return data;
 };
@@ -17,17 +17,17 @@ export const changeConsultant = async (payload: IChangeConsultant) => {
   return data;
 };
 export const suspendConsultant = async (id:string) => {
-  const { data } = await VeridoAPI.get(`/consultant/suspend/${id}`);
+  const { data } = await VeridoAPI.get(`/superagnet/suspend/${id}`);
 
   return data;
 };
 export const activateConsultant = async (id:string) => {
-  const { data } = await VeridoAPI.get(`/consultant/activate/${id}`);
+  const { data } = await VeridoAPI.get(`/superagent/activate/${id}`);
 
   return data;
 };
 
 export const fetchConsultantById = async (id: string) => {
-  const { data } = await VeridoAPI.get(`/admin/consultants/${id}`);
+  const { data } = await VeridoAPI.get(`/fetch-superagent/${id}`);
   return data;
 };
