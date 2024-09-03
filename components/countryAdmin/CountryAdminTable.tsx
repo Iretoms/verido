@@ -52,7 +52,7 @@ export function CountryAdminTable<TData extends Partner, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const handleRowSelection = (id: string) => {
-    router.push(`/companies/${id}`);
+    router.push(`/country-admin/${id}`);
   };
   const { currentUser } = useAuthenticatedUser();
 

@@ -10,3 +10,10 @@ export const fetchCountryAdmin = async () => {
 
   return data;
 };
+export const fetchCountryAdminById = async (id: string) => {
+  const { data } = await VeridoAPI.get(
+    `/admin/fetch-single-country-admin/${id}`
+  );
+  return data;
+};
+

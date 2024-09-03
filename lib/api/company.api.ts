@@ -11,3 +11,7 @@ export const fetchCompany = async () => {
 
   return data;
 };
+export const fetchCompanyById = async (id: string) => {
+  const { data } = await VeridoAPI.get(`/partner/fetch-single-company/${id}`);
+  return data;
+};

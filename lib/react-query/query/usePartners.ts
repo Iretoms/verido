@@ -11,6 +11,7 @@ export const usePartners = () => {
     },
   });
 };
+
 export const usePartnerById = (id: string) => {
   return useQuery<{ response: Partner; data: PartnerStatData }, Error>({
     queryKey: ["partner"],
