@@ -17,7 +17,7 @@ const StatisticsCard: React.FC<StatisticsCardProps> = ({
   percentage,
 }) => {
   return (
-    <div className={`bg-${bgColor} rounded-lg flex flex-col gap-2  pl-3 pr-11 py-3`}>
+    <div style={{backgroundColor: bgColor}} className={` rounded-lg flex flex-col gap-2  pl-3 pr-11 py-3`}>
       <p className="text-[12px] font-medium text-gray-text">{label}</p>
       <div className="flex items-center gap-2">
         <p className="text-[15px] lg:text-[20px] font-bold">{value}</p>

@@ -2,7 +2,7 @@ import { IChangeConsultant, ICreateConsultantCreate } from "@/types";
 import { VeridoAPI } from "./axios";
 
 export const fetchConsultants = async () => {
-  const { data } = await VeridoAPI.get("/admin/consultants");
+  const { data } = await VeridoAPI.get("/admin/super-agent");
 
   return data;
 };

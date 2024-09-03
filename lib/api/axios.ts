@@ -26,8 +26,8 @@ VeridoAPI.interceptors.response.use(
       error?.response?.status === 401 &&
       !String(error?.response?.config?.url).includes("/signin")
     ) {
-      // localStorage.removeItem("access_token");
-      // redirect('/signin')
+      localStorage.removeItem("access_token");
+      redirect('/signin')
     }
     return Promise.reject(error);
   },

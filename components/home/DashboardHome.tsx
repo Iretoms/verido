@@ -147,7 +147,7 @@ const DashboardHome = () => {
                       />
                     ))}
                 </div>
-         
+
                 <div>
                   <Image
                     className="object-contain w-full"
@@ -162,14 +162,14 @@ const DashboardHome = () => {
                   <div className="flex w-full justify-between  flex-wrap lg:flex-nowrap gap-1 lg:gap-2 items-center">
                     <StatisticsCard
                       value={`$72,000`}
-                      bgColor="verido-card-green"
+                      bgColor="#E6F2FF"
                       label="Total"
                       percentage={2.5}
                       trend="up"
                     />
                     <StatisticsCard
                       value={`$27,000`}
-                      bgColor="verido-card-purple"
+                      bgColor="#FFF4E6"
                       label="Subscription"
                       percentage={2.5}
                       trend="up"
@@ -177,12 +177,12 @@ const DashboardHome = () => {
                     <StatisticsCard
                       value={`$5,000`}
                       label="Adverts"
-                      bgColor="verido-card-red"
+                      bgColor="#E6F6EA"
                       percentage={2.5}
                       trend="down"
                     />
                     <StatisticsCard
-                      bgColor="verido-card-orange"
+                      bgColor="#FFE8E5"
                       value={`$40,000`}
                       label="Partnerships"
                       percentage={2.5}
