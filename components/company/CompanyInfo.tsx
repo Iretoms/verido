@@ -12,10 +12,7 @@ import CompanyInfoCard from "./CompanyInfoCard";
 
 const CompanyInfo = () => {
   const { id } = useParams() as { id: string };
-  const { data, isFetching } = useCompanyById(id); 
-  const companyDetails = data?.response;
-  console.log(companyDetails)
-  const partnerStats = data?.data;
+  const { data:companyDetails, isFetching } = useCompanyById(id); 
   const consultantsData = companyDetails?.consultants || [];
   const businessData = companyDetails?.businesses || [];
 

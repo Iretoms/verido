@@ -16,10 +16,7 @@ export const useCompanyById = (id: string) => {
     queryKey: ["companies"],
     queryFn: async () => {
       const response = await fetchCompanyById(id);
-      return {
-        response: response.response,
-        data: response.data,
-      };
+      return response;
     },
   });
 };
