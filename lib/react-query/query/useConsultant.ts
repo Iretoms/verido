@@ -19,10 +19,7 @@ export const useConsultantById = (id: string) => {
     queryKey: ["consultant"],
     queryFn: async () => {
       const response = await fetchConsultantById(id);
-      return {
-        response: response.response,
-        data: response.data,
-      };
+      return response;
     },
   });
 };

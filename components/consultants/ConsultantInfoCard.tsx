@@ -7,7 +7,7 @@ import SuspendConsultant from "./SuspendConsultant";
 import ActivateConsultant from "./ActivateConsultant";
 
 interface ConsultantInfoCardProps {
-  consultant: Consultant;
+  consultant: any;
 }
 
 const ConsultantInfoCard: React.FC<ConsultantInfoCardProps> = ({
