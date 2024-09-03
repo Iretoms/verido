@@ -132,22 +132,22 @@ const DashboardHome = () => {
                 <h1 className="font-medium text-[20px]">
                   Performance Overview
                 </h1>
-                {/* Come Back to this most likely wont work for real data */}
                 <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-2 lg:gap-5">
                   {cardData
                     .filter((card) => card.roles.includes(currentUser.role))
-                    .map((card:any, index) => (
+                    .map((card: any, index) => (
                       <DashboardCard
                         key={index}
                         title={card.title}
                         value={card.value}
-                        bgColor={card.bgColor}
+                        background={card.background}
                         percentage={card.percentage}
                         trend={card.trend}
                         icon={card.icon}
                       />
                     ))}
                 </div>
+         
                 <div>
                   <Image
                     className="object-contain w-full"

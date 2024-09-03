@@ -72,7 +72,14 @@ export function DownLinksGraph() {
       return data.filter((item) => item.browser !== "Partners");
     } else if (userRole === "consultant") {
       return data.filter((item) => item.browser === "Business Owners");
-    } else {
+    } 
+    else if (userRole === "companies") {
+      return data.filter((item) => item.browser === "Business Owners");
+    } 
+    else if (userRole === "country_admin") {
+      return data.filter((item) => item.browser === "Business Owners");
+    } 
+    else {
       return [];
     }
   }, [dashboardStats, userRole]);

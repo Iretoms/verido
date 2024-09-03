@@ -9,20 +9,21 @@ type IDashboardCard = {
   percentage: number;
   trend: "up" | "down";
   icon: string;
-  bgColor: string;
+  background: string;
 };
 
 const DashboardCard = ({
   title,
   icon,
   value,
-  bgColor,
+  background,
   trend,
   percentage,
 }: IDashboardCard) => {
   return (
     <div
-      className={`rounded-lg flex justify-between items-center p-3 ${bgColor}`}
+      style={{ backgroundColor: background }}
+      className={`rounded-lg flex justify-between items-center p-3`}
     >
       <div>
         <p className="font-medium text-gray-700 text-[14px] mb-4">{title}</p>
