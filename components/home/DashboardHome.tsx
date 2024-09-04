@@ -41,7 +41,7 @@ const DashboardHome = () => {
   const { currentUser, isLoading } = useAuthenticatedUser();
   const { data: videData } = useVideos();
   const videos = videData || [];
-  const isSuperAdmin = currentUser?.role === "super_admin";
+  const isSuperAdmin = currentUser?.role === "master_admin";
   const isPartner = currentUser?.role === "partner";
   const isConsultant = currentUser?.role === "consultant";
   const { data: dashboardStats, isPending } = useDashboardStats();
