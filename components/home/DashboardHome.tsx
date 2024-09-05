@@ -244,6 +244,16 @@ const DashboardHome = () => {
                   />
                 </div>
                 <div>
+                  <Image
+                    className="object-contain w-full"
+                    src="/assets/icons/POP.svg"
+                    width={100}
+                    height={100}
+                    alt="number of users"
+                  />
+                </div>
+
+                <div>
                   {(isSuperAdmin || isPartner) && (
                     <div className="flex justify-between flex-col rounded-md max-h-[30rem] overflow-y-auto">
                       <VideoTable columns={columnsVideo} data={videos} />
